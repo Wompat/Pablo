@@ -1,0 +1,66 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>&Eacute;dition &eacute;l&egrave;ve</h2>
+    </div>
+    <form class="form form-horizontal" action="{{ path('pablo_student_update', {'id': student.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.lastName)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.lastName) }}</label>
+            <div class="controls">
+                {{ form_widget(form.lastName) }}
+                <span class="help-inline">{{ form_errors(form.lastName) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.firstName)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.firstName) }}</label>
+            <div class="controls">
+                {{ form_widget(form.firstName) }}
+                <span class="help-inline">{{ form_errors(form.firstName) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.nationality)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.nationality) }}</label>
+            <div class="controls">
+                {{ form_widget(form.nationality) }}
+                <span class="help-inline">{{ form_errors(form.nationality) }}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ form_label(form.sex) }}</label>
+            <div class="controls">
+                <label class="radio">
+                    {{ form_widget(form.sex) }}
+                </label>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.dateOfBirth)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.dateOfBirth) }}</label>
+            <div class="controls">
+                {{ form_widget(form.dateOfBirth) }}
+                <span class="help-inline">{{ form_errors(form.dateOfBirth) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.placeOfBirth)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.placeOfBirth) }}</label>
+            <div class="controls">
+                {{ form_widget(form.placeOfBirth) }}
+                <span class="help-inline">{{ form_errors(form.placeOfBirth) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ path('pablo_student_show', {'id': student.id}) }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            autosuggest('{{ path('pablo_country_json') }}', '.country-selector');
+        })
+    </script>
+{% endblock %}

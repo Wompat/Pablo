@@ -1,0 +1,13 @@
+pablo_user_login:
+    path:     /login
+    defaults: { _controller: PabloUserBundle:Security:login }
+
+pablo_user_login_check:
+    path:     /login_check
+
+pablo_user_logout:
+    path:     /logout
+
+pablo_user_homepage:
+    path:     /
+    defaults: { _controller: PabloUserBundle:Home:index }

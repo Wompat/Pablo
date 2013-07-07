@@ -1,0 +1,64 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+   <div class="page-header">
+       <h2>Fiche &eacute;l&egrave;ve</h2>
+   </div>
+    <div class="row">
+        <div class="span4">
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="span7 offset1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#addresses" data-toggle="tab">Adresses</a></li>
+                <li><a href="#minerval" data-toggle="tab">Minerval</a></li>
+                <li><a href="#paiements" data-toggle="tab">Paiements</a></li>
+                {#<li><a href="#inscriptions" data-toggle="tab">Inscriptions</a></li>#}
+                {#<li><a href="#historique" data-toggle="tab">Historique</a></li>#}
+                <li><a href="#remarques" data-toggle="tab">Remarques&nbsp;<span class="badge badge-info">{{ (student.comments|length > 0) ? student.comments|length}}</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <div class="well well-small">
+                <h4>{{ student.firstname|title ~ ' ' ~ student.lastname|upper }}</h4>
+                <p>
+                    Nationalit&eacute;&nbsp;:&nbsp;<strong>{{ (student.nationality) ? student.nationality.name }}</strong><br>
+                    Sexe&nbsp;:&nbsp;<strong>{{ (student.sex =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
+                    Date de naissance&nbsp;:&nbsp;<strong>{{ (student.dateofbirth) ? student.dateofbirth|date('d/m/Y') }}</strong><br>
+                    Lieu de naissance&nbsp;:&nbsp;<strong>{{ student.placeofbirth }}</strong><br>
+                </p>
+                <div class="text-right">
+                    <a class="btn btn-mini" href="{{ path('pablo_student_edit', {'id': student.id}) }}"><i class="icon-pencil"></i></a>
+                </div>
+            </div>
+        </div>
+         <div class="span7 offset1">
+             <div class="tab-content">
+                 <div class="tab-pane active" id="addresses">
+                     {% include('PabloPeopleBundle:Student:_addresses.html.twig') %}
+                 </div>
+                 <div class="tab-pane" id="minerval">
+                     <h4>Minerval</h4>
+                 </div>
+                 <div class="tab-pane" id="paiements">
+                     <h4>Paiements</h4>
+                 </div>
+                 {#<div class="tab-pane" id="inscriptions">#}
+                     {#<h4>Inscriptions</h4>#}
+                 {#</div>#}
+                 {#<div class="tab-pane" id="historique">#}
+                     {#<h4>Historique</h4>#}
+                 {#</div>#}
+                 <div class="tab-pane" id="remarques">
+                     {% include('PabloPeopleBundle:Student:_comments.html.twig') %}
+                 </div>
+             </div>
+         </div>
+    </div>
+{% endblock content %}

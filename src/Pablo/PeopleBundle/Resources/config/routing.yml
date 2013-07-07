@@ -1,0 +1,106 @@
+pablo_student_list:
+    path:     /student/
+    defaults: { _controller: PabloPeopleBundle:Student:list }
+
+pablo_student_show:
+    path:     /student/show/{id}
+    defaults: { _controller: PabloPeopleBundle:Student:show }
+    requirements:
+        id: \d+
+
+pablo_student_edit:
+    path:     /student/edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Student:edit }
+    requirements:
+        id: \d+
+
+pablo_student_update:
+    path:     /student/update/{id}
+    defaults: { _controller: PabloPeopleBundle:Student:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_address_list:
+    path:     /address/
+    defaults: { _controller: PabloPeopleBundle:Address:list }
+
+pablo_address_add:
+    path:     /address/add/{id}
+    defaults: { _controller: PabloPeopleBundle:Address:add }
+    requirements:
+        id: \d+
+
+pablo_address_create:
+    path:     /address/create/{id}
+    defaults: { _controller: PabloPeopleBundle:Address:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_address_edit:
+    path:     /address/edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Address:edit }
+    requirements:
+        id: \d+
+
+pablo_address_update:
+    path:     /address/update/{id}
+    defaults: { _controller: PabloPeopleBundle:Address:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_address_delete:
+    path:     /address/delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Address:delete }
+    requirements:
+        id: \d+
+
+pablo_comment_add:
+    path:     /comment/add/{id}
+    defaults: { _controller: PabloPeopleBundle:Comment:add }
+    requirements:
+        id: \d+
+
+pablo_comment_create:
+    path:     /comment/create/{id}
+    defaults: { _controller: PabloPeopleBundle:Comment:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_comment_edit:
+    path:     /comment/edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Comment:edit }
+    requirements:
+        id: \d+
+
+pablo_comment_update:
+    path:     /comment/update/{id}
+    defaults: { _controller: PabloPeopleBundle:Comment:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_comment_delete:
+    path:     /comment/delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Comment:delete }
+    requirements:
+        id: \d+
+
+pablo_city_list:
+    path:     /city/
+    defaults: { _controller: PabloPeopleBundle:City:list }
+
+pablo_city_json:
+    path:     /city/json
+    defaults: { _controller: PabloPeopleBundle:City:json }
+
+pablo_country_list:
+    path:     /country/
+    defaults: { _controller: PabloPeopleBundle:Country:json }
+
+pablo_country_json:
+    path:     /country/json
+    defaults: { _controller: PabloPeopleBundle:Country:json }

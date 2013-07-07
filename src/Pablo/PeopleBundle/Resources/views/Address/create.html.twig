@@ -1,0 +1,51 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter une adresse</h2>
+    </div>
+    <form class="form-horizontal" action="{{ path('pablo_address_create', {'id': address.person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.street) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.street) }}</label>
+            <div class="controls">
+                {{ form_widget(form.street) }}
+                <span class="help-inline">{{ form_errors(form.street) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.number) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.number) }}</label>
+            <div class="controls">
+                {{ form_widget(form.number) }}
+                <span class="help-inline">{{ form_errors(form.number) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.flat) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.flat) }}</label>
+            <div class="controls">
+                {{ form_widget(form.flat) }}
+                <span class="help-inline">{{ form_errors(form.flat) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.city) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.city) }}</label>
+            <div class="controls">
+                {{ form_widget(form.city) }}
+                <span class="help-inline">{{ form_errors(form.city) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ path('pablo_student_show', {'id': address.person.id}) }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            autosuggest('{{ path('pablo_city_json') }}', '.city-selector');
+        })
+    </script>
+{% endblock %}

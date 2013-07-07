@@ -1,0 +1,19 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Supprimer une adresse</h2>
+    </div>
+    <form action="{{ path('pablo_address_delete', {'id': address.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <p class="lead">
+            {{ address.person.firstName|title ~ ' ' ~ address.person.lastName }}<br>
+            {{ address.street ~ ', ' ~ address.number }}{{ (address.flat) ? '/' ~ address.flat }}{{' à ' ~ address.city }}<br><br>
+            Voulez-vous supprimer cette adresse ?
+        </p>
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="oui">
+            <a class="btn" href="{{ path('pablo_student_show', {'id': address.person.id}) }}">non</a>
+        </div>
+    </form>
+{% endblock content %}

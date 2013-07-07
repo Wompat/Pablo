@@ -1,0 +1,8 @@
+pablo_people:
+    resource: "@PabloPeopleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+pablo_user:
+    resource: "@PabloUserBundle/Resources/config/routing.yml"
+    prefix:   /
+

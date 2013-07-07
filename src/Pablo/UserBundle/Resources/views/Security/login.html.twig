@@ -1,0 +1,62 @@
+{% extends('::base.html.twig') %}
+
+{% block stylesheets %}
+    <!-- Le styles -->
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+
+    </style>
+    <link href="{{ asset('assets/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
+    <![endif]-->
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form class="form-signin" action="{{ path('pablo_user_login_check') }}" method="post">
+            <h2 class="form-signin-heading">Pablo!</h2>
+            <input type="text" class="input-block-level" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Identifiant">
+            <input type="password"  id="password" name="_password" class="input-block-level" required="required" placeholder="Mot de passe">
+            <label class="checkbox">
+                <input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
+            </label>
+            <input class="btn btn-large btn-primary" type="submit" value="Connexion">
+        </form>
+        {% if error %}
+            <div class="alert alert-error" style="max-width: 300px; margin: auto;">{{ error.message }}</div>
+        {% endif %}
+    </div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter une remarque</h2>
+    </div>
+    <form action="{{ path('pablo_comment_create', {'id': comment.person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ path('pablo_student_show', {'id': comment.person.id}) }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}

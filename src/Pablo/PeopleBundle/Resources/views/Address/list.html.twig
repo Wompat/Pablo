@@ -1,0 +1,38 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Liste des adresses</h2>
+    </div>
+    {% if (not addresses) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun r&eacute;sultat</h4>
+            <p>
+                Il n&apos;y aucune adresse enregistr&eacute; dans la base de donn&eacute;es.
+            </p>
+        </div>
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Rue</th>
+                <th>Num&eacute;ro</th>
+                <th>Bo&icirc;te</th>
+                <th>CP et localit&eacute;</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td>{{ address.person.firstName|title ~ ' ' ~ address.person.lastName|upper }}</td>
+                    <td>{{ address.street }}</td>
+                    <td>{{ address.number }}</td>
+                    <td>{{ address.flat }}</td>
+                    <td>{{ address.city }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock content %}

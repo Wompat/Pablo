@@ -1,0 +1,9 @@
+parameters:
+#    pablo_people.example.class: Pablo\PeopleBundle\Example
+
+services:
+    pablo_people.type.country_selector:
+        class: Pablo\PeopleBundle\Form\Type\CountrySelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: country_selector }
