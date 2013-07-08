@@ -42,9 +42,8 @@ class CommentController extends Controller
                 'content' => 'Le commentaire a été enregistré.',
             ));
 
-            return $this->redirect($this->generateUrl('pablo_student_show', array(
-                'id' => $student->getId(),
-            )));
+            $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Comment:create.html.twig', array(
@@ -74,12 +73,11 @@ class CommentController extends Controller
 
             $this->get('session')->getFlashBag()->Add('notice', array(
                 'type' => 'success',
-                'content' => 'La remarque a été modifiée.',
+                'content' => 'Le commentaire a été modifié.',
             ));
 
-            return $this->redirect($this->generateUrl('pablo_student_show', array(
-                'id' => $comment->getPerson()->getId(),
-            )));
+            $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Comment:edit.html.twig', array(
@@ -96,11 +94,10 @@ class CommentController extends Controller
 
         $this->get('session')->getFlashBag()->Add('notice', array(
             'type' => null,
-            'content' => 'La remarque a été supprimée.'
+            'content' => 'Le commentaire a été supprimé.'
         ));
 
-        return $this->redirect($this->generateUrl('pablo_student_show', array(
-            'id' => $comment->getPerson()->getId(),
-        )));
+        $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+        return $this->redirect($url);
     }
 }

@@ -5,26 +5,7 @@
        <h2>Fiche &eacute;l&egrave;ve</h2>
    </div>
     <div class="row">
-        <div class="span4">
-            {% for message in app.session.flashbag.get('notice') %}
-                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
-                    {{ message.content }}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="span7 offset1">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#addresses" data-toggle="tab">Adresses</a></li>
-                <li><a href="#minerval" data-toggle="tab">Minerval</a></li>
-                <li><a href="#paiements" data-toggle="tab">Paiements</a></li>
-                {#<li><a href="#inscriptions" data-toggle="tab">Inscriptions</a></li>#}
-                {#<li><a href="#historique" data-toggle="tab">Historique</a></li>#}
-                <li><a href="#remarques" data-toggle="tab">Remarques&nbsp;<span class="badge badge-info">{{ (student.comments|length > 0) ? student.comments|length}}</span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="span4">
+        <div class="span6">
             <div class="well well-small">
                 <h4>{{ student.firstname|title ~ ' ' ~ student.lastname|upper }}</h4>
                 <p>
@@ -38,27 +19,82 @@
                 </div>
             </div>
         </div>
-         <div class="span7 offset1">
-             <div class="tab-content">
-                 <div class="tab-pane active" id="addresses">
-                     {% include('PabloPeopleBundle:Student:_addresses.html.twig') %}
-                 </div>
-                 <div class="tab-pane" id="minerval">
-                     <h4>Minerval</h4>
-                 </div>
-                 <div class="tab-pane" id="paiements">
-                     <h4>Paiements</h4>
-                 </div>
-                 {#<div class="tab-pane" id="inscriptions">#}
-                     {#<h4>Inscriptions</h4>#}
-                 {#</div>#}
-                 {#<div class="tab-pane" id="historique">#}
-                     {#<h4>Historique</h4>#}
-                 {#</div>#}
-                 <div class="tab-pane" id="remarques">
-                     {% include('PabloPeopleBundle:Student:_comments.html.twig') %}
-                 </div>
-             </div>
-         </div>
+        <div class="span6">
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li><a href="#addresses" data-toggle="tab">Adresses</a></li>
+                <li><a href="#phone" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
+                <li><a href="#email" data-toggle="tab">Emails</a></li>
+                <li><a href="#minerval" data-toggle="tab">Minerval</a></li>
+                <li><a href="#paiements" data-toggle="tab">Paiements</a></li>
+                <li><a href="#inscriptions" data-toggle="tab">Inscriptions</a></li>
+                <li><a href="#historique" data-toggle="tab">Historique</a></li>
+                <li><a href="#comments" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (student.comments|length > 0) ? student.comments|length}}</span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="addresses">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Student:_addresses.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="phone">
+                    <h4>T&eacute;l&eacute;phone</h4>
+                </div>
+                <div class="tab-pane" id="emails">
+                    <h4>Emails</h4>
+                </div>
+                <div class="tab-pane" id="minerval">
+                    <h4>Minerval</h4>
+                </div>
+                <div class="tab-pane" id="paiements">
+                    <h4>Paiements</h4>
+                </div>
+                <div class="tab-pane" id="inscriptions">
+                    <h4>Inscriptions</h4>
+                </div>
+                <div class="tab-pane" id="historique">
+                    <h4>Historique</h4>
+                </div>
+                <div class="tab-pane" id="comments">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Student:_comments.html.twig') %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include('PabloPeopleBundle:Student:_modal.html.twig') %}
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if ($(location).attr('hash')) {
+                $('.nav-tabs a[href="' + $(location).attr('hash') + '"]').tab('show');
+            } else {
+                $('.nav-tabs a[href="#addresses"]').tab('show');
+            }
+
+            $('a.btn-danger').click(function(event) {
+                event.preventDefault();
+
+                $('.modal').modal('show');
+
+                url = $(this).attr('href');
+                $('div.modal-footer button.btn-primary').click(function() {
+                    $(location).attr('href', url);
+                })
+            });
+        })
+    </script>
+{% endblock javascripts %}

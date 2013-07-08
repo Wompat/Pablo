@@ -2,13 +2,20 @@
 
 {% block content %}
     <div class="page-header">
-        <h2>Ajouter une remarque</h2>
+        <h2>Ajouter un commentaire</h2>
     </div>
     <form action="{{ path('pablo_comment_create', {'id': comment.person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
-        {{ form_widget(form) }}
+        <div class="control-group {{ (form_errors(form.content) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.content) }}</label>
+            <div class="controls">
+                {{ form_widget(form.content) }}
+                <span class="help-inline">{{ form_errors(form.content) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="valider">
-            <a class="btn" href="{{ path('pablo_student_show', {'id': comment.person.id}) }}">annuler</a>
+            <a class="btn" href="{{ path('pablo_student_show', {'id': comment.person.id}) }}#comments">annuler</a>
         </div>
     </form>
 {% endblock content %}

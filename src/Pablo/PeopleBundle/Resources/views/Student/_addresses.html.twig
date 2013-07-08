@@ -1,37 +1,34 @@
-<p>
-    <a class="btn btn-link" href="{{ path('pablo_address_add', {'id': student.id}) }}">ajouter une adresse</a>
-</p>
-{% if (student.addresses|length == 0) %}
-    <div class="alert alert-info">
-        <h4 class="alert-heading">Aucun résulat</h4>
-        <p>
-            Il n&apos;y a actuellement aucune adresse enregistr&eacute;e pour cet &eacute;l&egrave;ve.
-        </p>
-    </div>
-{% else %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Rue</th>
-            <th>Num&eacute;ro</th>
-            <th>Bo&icirc;te</th>
-            <th>CP et localit&eacute;</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for address in student.addresses %}
+<div class="span6">
+    <h4>Adresses</h4>
+    {% if (student.addresses|length == 0) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune adresse enregistr&eacute;e pour cet &eacute;l&egrave;ve.
+            </p>
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{ address.street }}</td>
-                <td>{{ address.number }}</td>
-                <td>{{ address.flat }}</td>
-                <td>{{ address.city }}</td>
-                <td>
-                    <a class="btn btn-mini" href="{{ path('pablo_address_edit', {'id' : address.id}) }}"><i class="icon-pencil"></i></a>
-                    <a class="btn btn-mini btn-danger" href="{{ path('pablo_address_delete', {'id': address.id}) }}"><i class="icon-white icon-remove"></i></a>
-                </td>
+                <th>Rue</th>
+                <th>Localit&eacute;</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+            </thead>
+            <tbody>
+            {% for address in student.addresses %}
+                <tr>
+                    <td>{{ address.street ~ ', ' ~ address.number }}{{ (address.flat) ? '/' ~ address.flat }}</td>
+                    <td>{{ address.city }}</td>
+                    <td style="text-align: right">
+                        <a class="btn btn-mini" href="{{ path('pablo_address_edit', {'id' : address.id}) }}"><i class="icon-pencil"></i></a>
+                        <a class="btn btn-mini btn-danger" href="{{ path('pablo_address_delete', {'id': address.id}) }}"><i class="icon-white icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a class="btn" href="{{ path('pablo_address_add', {'id': student.id}) }}">ajouter une adresse</a>
+</div>

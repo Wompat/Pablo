@@ -1,21 +1,24 @@
-<p>
-    <a class="btn btn-link" href="{{ path('pablo_comment_add', {'id': student.id}) }}">ajouter une remarque</a>
-</p>
-{% for comment in student.comments %}
-    <blockquote>
-        <div class="pull-right">
-            <a class="btn btn-mini" href="{{ path('pablo_comment_edit', {'id': comment.id}) }}"><i class="icon-pencil"></i></a>
-            <a class="btn btn-mini btn-danger" href="{{ path('pablo_comment_delete', {'id': comment.id}) }}"><i class="icon-white icon-remove"></i></a>
+<div class="span6">
+    <h4>Commentaires</h4>
+    {% for comment in student.comments %}
+        <blockquote>
+            <div class="pull-right">
+                <a class="btn btn-mini" href="{{ path('pablo_comment_edit', {'id': comment.id}) }}"><i class="icon-pencil"></i></a>
+                <a class="btn btn-mini btn-danger" href="{{ path('pablo_comment_delete', {'id': comment.id}) }}"><i class="icon-white icon-remove"></i></a>
+            </div>
+            <p>{{ comment.content }}</p>
+            <small>{{ 'modifié par ' ~ comment.user ~ ', le ' ~ comment.updated|date('d/m/Y') ~ ' à ' ~ comment.updated|date('H:i:s') }}</small>
+        </blockquote>
+        {{ (not loop.last) ? '<hr>' }}
+    {% else %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune remarque enregistr&eacute;e pour cet &eacute;l&egrave;ve.
+            </p>
         </div>
-        <p>{{ comment.content }}</p>
-        <small>{{ 'modifiée par ' ~ comment.user ~ ', le ' ~ comment.updated|date('d/m/Y') ~ ' à ' ~ comment.updated|date('H:i:s') }}</small>
-    </blockquote>
-    {{ (not loop.last) ? '<hr>' }}
-{% else %}
-    <div class="alert alert-info">
-        <h4 class="alert-heading">Aucun résulat</h4>
-        <p>
-            Il n&apos;y a actuellement aucune remarque enregistr&eacute;e pour cet &eacute;l&egrave;ve.
-        </p>
-    </div>
-{% endfor %}
+    {% endfor %}
+    <p>
+        <a class="btn" href="{{ path('pablo_comment_add', {'id': student.id}) }}">ajouter un commentaire</a>
+    </p>
+</div>

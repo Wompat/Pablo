@@ -85,6 +85,13 @@ class Student
     /**
      * @var array
      *
+     * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\PhoneNumber", mappedBy="person")
+     */
+    private $phoneNumbers;
+
+    /**
+     * @var array
+     *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Comment", mappedBy="person")
      */
     private $comments;
@@ -94,6 +101,7 @@ class Student
         $this->sex = 'F';
         $this->addresses = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->phoneNumbers = new ArrayCollection();
     }
 
     public function __toString()
@@ -313,5 +321,38 @@ class Student
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add phoneNumbers
+     *
+     * @param \Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers
+     * @return Student
+     */
+    public function addPhoneNumber(\Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers)
+    {
+        $this->phoneNumbers[] = $phoneNumbers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove phoneNumbers
+     *
+     * @param \Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers
+     */
+    public function removePhoneNumber(\Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers)
+    {
+        $this->phoneNumbers->removeElement($phoneNumbers);
+    }
+
+    /**
+     * Get phoneNumbers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhoneNumbers()
+    {
+        return $this->phoneNumbers;
     }
 }

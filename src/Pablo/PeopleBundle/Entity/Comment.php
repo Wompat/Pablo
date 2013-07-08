@@ -3,6 +3,7 @@
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Comment
@@ -27,6 +28,9 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4)
      */
     private $content;
 

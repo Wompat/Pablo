@@ -51,9 +51,8 @@ class AddressController extends Controller
             ));
 
             // TODO: adapter la redirection selon qu'il s'agit de l'adresse d'un élève ou d'un prof !
-            return $this->redirect($this->generateUrl('pablo_student_show', array(
-                'id' => $student->getId(),
-            )));
+            $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Address:create.html.twig', array(
@@ -100,10 +99,8 @@ class AddressController extends Controller
                 'content' => 'L\'adresse a été modifiée.'
             ));
 
-            // TODO: adapter la redirection selon qu'il s'agit de l'adresse d'un élève ou d'un prof !
-            return $this->redirect($this->generateUrl('pablo_student_show', array(
-                'id' => $address->getPerson()->getId(),
-            )));
+            $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Address:edit.html.twig', array(
@@ -114,28 +111,16 @@ class AddressController extends Controller
 
     public function deleteAction($id, Address $address)
     {
-        $form = $this->createFormBuilder()->getForm();
-        $form->handleRequest($this->getRequest());
+        $em =$this->getDoctrine()->getManager();
+        $em->remove($address);
+        $em->flush();
 
-        if ($form->isValid()) {
-            $em =$this->getDoctrine()->getManager();
-            $em->remove($address);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('notice', array(
-                'type' => null,
-                'content' => 'L\'adresse a été supprimée.'
-            ));
-
-            // TODO: adapter la redirection selon qu'il s'agit de l'adresse d'un élève ou d'un prof !
-            return $this->redirect($this->generateUrl('pablo_student_show', array(
-                'id' => $address->getPerson()->getId(),
-            )));
-        }
-
-        return $this->render('PabloPeopleBundle:Address:delete.html.twig', array(
-            'address' => $address,
-            'form' => $form->createView(),
+        $this->get('session')->getFlashBag()->add('notice', array(
+            'type' => null,
+            'content' => 'L\'adresse a été supprimée.'
         ));
+
+        $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+        return $this->redirect($url);
     }
 }

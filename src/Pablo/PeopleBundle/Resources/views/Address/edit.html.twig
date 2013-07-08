@@ -36,7 +36,7 @@
         {{ form_rest(form) }}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="valider">
-            <a class="btn" href="{{ path('pablo_student_show', {'id': address.person.id}) }}">annuler</a>
+            <a class="btn" href="{{ path('pablo_student_show', {'id': address.person.id}) }}#addresses">annuler</a>
         </div>
     </form>
 {% endblock content %}
