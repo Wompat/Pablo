@@ -1,0 +1,22 @@
+pablo_teacher_list:
+    path:     /
+    defaults: { _controller: PabloPeopleBundle:Teacher:list }
+
+pablo_teacher_show:
+    path:     /show/{id}
+    defaults: { _controller: PabloPeopleBundle:Teacher:show }
+    requirements:
+        id: \d+
+
+pablo_teacher_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Teacher:edit }
+    requirements:
+        id: \d+
+
+pablo_teacher_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Teacher:update }
+    requirements:
+        id: \d+
+        _method: post

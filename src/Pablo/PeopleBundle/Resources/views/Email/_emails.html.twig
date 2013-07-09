@@ -1,10 +1,10 @@
 <div class="span6">
-    <h4>Emails</h4>
-    {% if (student.emails|length == 0) %}
+    <h4>E-mails</h4>
+    {% if (person.emails|length == 0) %}
         <div class="alert alert-info">
             <h4 class="alert-heading">Aucun résulat</h4>
             <p>
-                Il n&apos;y a actuellement aucune adresse e-mail enregistr&eacute; pour cet &eacute;l&egrave;ve.
+                Il n&apos;y a actuellement aucune adresse e-mail enregistr&eacute;e.
             </p>
         </div>
     {% else %}
@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for email in student.emails %}
+            {% for email in person.emails %}
                 <tr>
                     <td>{{ email.address }}</td>
                     <td>{{ email.info }}</td>
@@ -30,5 +30,5 @@
             </tbody>
         </table>
     {% endif %}
-    <a class="btn" href="{{ path('pablo_email_add', {'id': student.id}) }}">ajouter une adresse e-mail</a>
+    <a class="btn" href="{{ path('pablo_email_add', {'id': person.id}) }}">ajouter une adresse e-mail</a>
 </div>

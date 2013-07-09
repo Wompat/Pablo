@@ -5,7 +5,7 @@ namespace Pablo\PeopleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class EMail
+ * Class Email
  * @package Pablo\PeopleBundle\Entity
  *
  * @ORM\Table(name="email")
@@ -39,7 +39,7 @@ class Email
     /**
      * @var \Pablo\PeopleBundle\Entity\Student
      *
-     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="emails", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="emails")
      * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
      */
     private $person;

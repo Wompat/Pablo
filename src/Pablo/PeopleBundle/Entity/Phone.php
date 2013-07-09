@@ -52,7 +52,7 @@ class Phone
     /**
      * @var \Pablo\PeopleBundle\Entity\Student
      *
-     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="phoneNumbers", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="phoneNumbers")
      * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
      */
     private $person;

@@ -4,6 +4,7 @@ namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Phone;
 use Pablo\PeopleBundle\Entity\Student;
+use Pablo\PeopleBundle\Entity\Teacher;
 use Pablo\PeopleBundle\Form\PhoneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -40,7 +41,12 @@ class PhoneController extends Controller
                 'content' => 'Le numéro a été enregistré.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            if ($phone->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            }
+
             return $this->redirect($url);
         }
 
@@ -74,7 +80,12 @@ class PhoneController extends Controller
                 'content' => 'Le numéro a été modifié.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            if ($phone->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+            }
+
             return $this->redirect($url);
         }
 
@@ -95,7 +106,12 @@ class PhoneController extends Controller
             'content' => 'Le numéro a été supprimé.',
         ));
 
-        $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+        if ($phone->getPerson() instanceof Teacher) {
+            $url = $this->generateUrl('pablo_teacher_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+        } else {
+            $url = $this->generateUrl('pablo_student_show', array('id' => $phone->getPerson()->getId())) . '#phones';
+        }
+
         return $this->redirect($url);
     }
 }

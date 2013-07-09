@@ -1,0 +1,31 @@
+pablo_phone_add:
+    path:     /add/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:add }
+    requirements:
+        id: \d+
+
+pablo_phone_create:
+    path:     /create/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_phone_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:edit }
+    requirements:
+        id: \d+
+
+pablo_phone_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_phone_delete:
+    path:     /delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:delete }
+    requirements:
+        id: \d+

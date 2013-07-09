@@ -18,10 +18,10 @@ class StudentController extends Controller
         ));
     }
 
-    public function showAction($id, Student $student)
+    public function showAction($id, Student $person)
     {
         return $this->render('PabloPeopleBundle:Student:show.html.twig', array(
-            'student' => $student,
+            'person' => $person,
         ));
     }
 
@@ -31,7 +31,7 @@ class StudentController extends Controller
         $form->handleRequest($this->getRequest());
 
         return $this->render('PabloPeopleBundle:Student:edit.html.twig', array(
-            'student' => $student,
+            'person' => $student,
             'form' => $form->createView(),
         ));
     }
@@ -51,12 +51,12 @@ class StudentController extends Controller
             ));
 
             return $this->render('PabloPeopleBundle:Student:show.html.twig', array(
-                'student' => $student,
+                'person' => $student,
             ));
         }
 
         return $this->render('PabloPeopleBundle:Student:edit.html.twig', array(
-            'student' => $student,
+            'person' => $student,
             'form' => $form->createView(),
         ));
     }

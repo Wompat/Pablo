@@ -1,10 +1,10 @@
 <div class="span6">
     <h4>Adresses</h4>
-    {% if (student.addresses|length == 0) %}
+    {% if (person.addresses|length == 0) %}
         <div class="alert alert-info">
             <h4 class="alert-heading">Aucun résulat</h4>
             <p>
-                Il n&apos;y a actuellement aucune adresse enregistr&eacute;e pour cet &eacute;l&egrave;ve.
+                Il n&apos;y a actuellement aucune adresse enregistr&eacute;e.
             </p>
         </div>
     {% else %}
@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for address in student.addresses %}
+            {% for address in person.addresses %}
                 <tr>
                     <td>{{ address.street ~ ', ' ~ address.number }}{{ (address.flat) ? '/' ~ address.flat }}</td>
                     <td>{{ address.city }}</td>
@@ -30,5 +30,5 @@
             </tbody>
         </table>
     {% endif %}
-    <a class="btn" href="{{ path('pablo_address_add', {'id': student.id}) }}">ajouter une adresse</a>
+    <a class="btn" href="{{ path('pablo_address_add', {'id': person.id}) }}">ajouter une adresse</a>
 </div>

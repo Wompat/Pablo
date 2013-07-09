@@ -4,6 +4,7 @@ namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Email;
 use Pablo\PeopleBundle\Entity\Student;
+use Pablo\PeopleBundle\Entity\Teacher;
 use Pablo\PeopleBundle\Form\EmailType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -40,7 +41,12 @@ class EmailController extends Controller
                 'content' => 'L\'adresse e-mail a été enregistrée.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            if ($email->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            }
+
             return $this->redirect($url);
         }
 
@@ -74,7 +80,12 @@ class EmailController extends Controller
                 'content' => 'L\'adresse e-mail a été modifiée.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            if ($email->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            }
+
             return $this->redirect($url);
         }
 
@@ -95,7 +106,12 @@ class EmailController extends Controller
             'content' => 'L\'adresse e-mail a été supprimée.',
         ));
 
-        $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+        if ($email->getPerson() instanceof Teacher) {
+            $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
+        } else {
+            $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+        }
+
         return $this->redirect($url);
     }
 }

@@ -1,10 +1,10 @@
 <div class="span6">
     <h4>T&eacute;l&eacute;phones</h4>
-    {% if (student.phoneNumbers|length == 0) %}
+    {% if (person.phoneNumbers|length == 0) %}
     <div class="alert alert-info">
         <h4 class="alert-heading">Aucun résulat</h4>
         <p>
-            Il n&apos;y a actuellement aucune num&eacute;ro enregistr&eacute; pour cet &eacute;l&egrave;ve.
+            Il n&apos;y a actuellement aucune num&eacute;ro enregistr&eacute;.
         </p>
     </div>
     {% else %}
@@ -18,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for phone in student.phoneNumbers %}
+            {% for phone in person.phoneNumbers %}
                 <tr>
                     <td>{{ phone.number }}</td>
                     <td>{{ phone.info }}</td>
@@ -32,5 +32,5 @@
             </tbody>
         </table>
     {% endif %}
-    <a class="btn" href="{{ path('pablo_phone_add', {'id': student.id}) }}">ajouter un num&eacute;ro</a>
+    <a class="btn" href="{{ path('pablo_phone_add', {'id': person.id}) }}">ajouter un num&eacute;ro</a>
 </div>

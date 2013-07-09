@@ -4,7 +4,7 @@
     <div class="page-header">
         <h2>Donn&eacute;es personnelles</h2>
     </div>
-    <form class="form form-horizontal" action="{{ path('pablo_student_update', {'id': person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+    <form class="form form-horizontal" action="{{ path('pablo_teacher_update', {'id': person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
         <div class="control-group {{ (form_errors(form.lastName)) ? 'error' }}">
             <label class="control-label">{{ form_label(form.lastName) }}</label>
             <div class="controls">
@@ -48,10 +48,17 @@
                 <span class="help-inline">{{ form_errors(form.placeOfBirth) }}</span>
             </div>
         </div>
+        <div class="control-group {{ (form_errors(form.matricule)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.matricule) }}</label>
+            <div class="controls">
+                {{ form_widget(form.matricule) }}
+                <span class="help-inline">{{ form_errors(form.matricule) }}</span>
+            </div>
+        </div>
         {{ form_rest(form) }}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="valider">
-            <a class="btn" href="{{ path('pablo_student_show', {'id': person.id}) }}">annuler</a>
+            <a class="btn" href="{{ path('pablo_teacher_show', {'id': person.id}) }}">annuler</a>
         </div>
     </form>
 {% endblock content %}

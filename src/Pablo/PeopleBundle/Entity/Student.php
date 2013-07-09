@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="person")
  * @ORM\Entity()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"student" = "Student", "teacher" = "Teacher"})
  */
 class Student
 {
@@ -76,28 +79,28 @@ class Student
     private $placeOfBirth;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Address", mappedBy="person")
      */
     private $addresses;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Phone", mappedBy="person")
      */
     private $phoneNumbers;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Email", mappedBy="person")
      */
     private $emails;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Comment", mappedBy="person")
      */

@@ -1,0 +1,31 @@
+pablo_email_add:
+    path:     /add/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:add }
+    requirements:
+        id: \d+
+
+pablo_email_create:
+    path:     /create/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_email_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:edit }
+    requirements:
+        id: \d+
+
+pablo_email_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_email_delete:
+    path:     /delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:delete }
+    requirements:
+        id: \d+

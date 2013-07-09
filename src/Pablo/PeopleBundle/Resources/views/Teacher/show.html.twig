@@ -2,7 +2,7 @@
 
 {% block content %}
    <div class="page-header">
-       <h2>Fiche &eacute;l&egrave;ve</h2>
+       <h2>Fiche Professeur</h2>
    </div>
     <div class="row">
         <div class="span6">
@@ -13,9 +13,10 @@
                     Sexe&nbsp;:&nbsp;<strong>{{ (person.sex =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
                     Date de naissance&nbsp;:&nbsp;<strong>{{ (person.dateofbirth) ? person.dateofbirth|date('d/m/Y') }}</strong><br>
                     Lieu de naissance&nbsp;:&nbsp;<strong>{{ person.placeofbirth }}</strong><br>
+                    Matricule : <strong>{{ person.matricule }}</strong>
                 </p>
                 <div class="text-right">
-                    <a class="btn btn-mini" href="{{ path('pablo_student_edit', {'id': person.id}) }}"><i class="icon-pencil"></i></a>
+                    <a class="btn btn-mini" href="{{ path('pablo_teacher_edit', {'id': person.id}) }}"><i class="icon-pencil"></i></a>
                 </div>
             </div>
         </div>
@@ -33,7 +34,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="#addresses" data-toggle="tab">Adresses</a></li>
                 <li><a href="#phones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
-                <li><a href="#emails" data-toggle="tab">E-mails</a></li>
+                <li><a href="#emails" data-toggle="tab">Emails</a></li>
                 {#<li><a href="#minerval" data-toggle="tab">Minerval</a></li>#}
                 {#<li><a href="#paiements" data-toggle="tab">Paiements</a></li>#}
                 {#<li><a href="#registrations" data-toggle="tab">Inscriptions</a></li>#}

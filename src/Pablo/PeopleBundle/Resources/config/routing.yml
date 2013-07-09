@@ -1,157 +1,26 @@
-pablo_student_list:
-    path:     /student/
-    defaults: { _controller: PabloPeopleBundle:Student:list }
+pablo_people_student:
+    resource: "@PabloPeopleBundle/Resources/config/routing/student.yml"
+    prefix:   /student
 
-pablo_student_show:
-    path:     /student/show/{id}
-    defaults: { _controller: PabloPeopleBundle:Student:show }
-    requirements:
-        id: \d+
+pablo_people_teacher:
+    resource: "@PabloPeopleBundle/Resources/config/routing/teacher.yml"
+    prefix:   /teacher
 
-pablo_student_edit:
-    path:     /student/edit/{id}
-    defaults: { _controller: PabloPeopleBundle:Student:edit }
-    requirements:
-        id: \d+
+pablo_people_address:
+    resource: "@PabloPeopleBundle/Resources/config/routing/address.yml"
+    prefix:   /address
 
-pablo_student_update:
-    path:     /student/update/{id}
-    defaults: { _controller: PabloPeopleBundle:Student:update }
-    requirements:
-        id: \d+
-        _method: post
+pablo_people_phone:
+    resource: "@PabloPeopleBundle/Resources/config/routing/phone.yml"
+    prefix:   /phone
 
-pablo_address_list:
-    path:     /address/
-    defaults: { _controller: PabloPeopleBundle:Address:list }
+pablo_people_email:
+    resource: "@PabloPeopleBundle/Resources/config/routing/email.yml"
+    prefix:   /email
 
-pablo_address_add:
-    path:     /address/add/{id}
-    defaults: { _controller: PabloPeopleBundle:Address:add }
-    requirements:
-        id: \d+
-
-pablo_address_create:
-    path:     /address/create/{id}
-    defaults: { _controller: PabloPeopleBundle:Address:create }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_address_edit:
-    path:     /address/edit/{id}
-    defaults: { _controller: PabloPeopleBundle:Address:edit }
-    requirements:
-        id: \d+
-
-pablo_address_update:
-    path:     /address/update/{id}
-    defaults: { _controller: PabloPeopleBundle:Address:update }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_address_delete:
-    path:     /address/delete/{id}
-    defaults: { _controller: PabloPeopleBundle:Address:delete }
-    requirements:
-        id: \d+
-
-pablo_phone_add:
-    path:     /phone/add/{id}
-    defaults: { _controller: PabloPeopleBundle:Phone:add }
-    requirements:
-        id: \d+
-
-pablo_phone_create:
-    path:     /phone/create/{id}
-    defaults: { _controller: PabloPeopleBundle:Phone:create }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_phone_edit:
-    path:     /phone/edit/{id}
-    defaults: { _controller: PabloPeopleBundle:Phone:edit }
-    requirements:
-        id: \d+
-
-pablo_phone_update:
-    path:     /phone/update/{id}
-    defaults: { _controller: PabloPeopleBundle:Phone:update }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_phone_delete:
-    path:     /phone/delete/{id}
-    defaults: { _controller: PabloPeopleBundle:Phone:delete }
-    requirements:
-        id: \d+
-
-pablo_email_add:
-    path:     /email/add/{id}
-    defaults: { _controller: PabloPeopleBundle:Email:add }
-    requirements:
-        id: \d+
-
-pablo_email_create:
-    path:     /email/create/{id}
-    defaults: { _controller: PabloPeopleBundle:Email:create }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_email_edit:
-    path:     /email/edit/{id}
-    defaults: { _controller: PabloPeopleBundle:Email:edit }
-    requirements:
-        id: \d+
-
-pablo_email_update:
-    path:     /email/update/{id}
-    defaults: { _controller: PabloPeopleBundle:Email:update }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_email_delete:
-    path:     /email/delete/{id}
-    defaults: { _controller: PabloPeopleBundle:Email:delete }
-    requirements:
-        id: \d+
-
-pablo_comment_add:
-    path:     /comment/add/{id}
-    defaults: { _controller: PabloPeopleBundle:Comment:add }
-    requirements:
-        id: \d+
-
-pablo_comment_create:
-    path:     /comment/create/{id}
-    defaults: { _controller: PabloPeopleBundle:Comment:create }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_comment_edit:
-    path:     /comment/edit/{id}
-    defaults: { _controller: PabloPeopleBundle:Comment:edit }
-    requirements:
-        id: \d+
-
-pablo_comment_update:
-    path:     /comment/update/{id}
-    defaults: { _controller: PabloPeopleBundle:Comment:update }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_comment_delete:
-    path:     /comment/delete/{id}
-    defaults: { _controller: PabloPeopleBundle:Comment:delete }
-    requirements:
-        id: \d+
+pablo_people_comment:
+    resource: "@PabloPeopleBundle/Resources/config/routing/comment.yml"
+    prefix:   /comment
 
 pablo_city_list:
     path:     /city/

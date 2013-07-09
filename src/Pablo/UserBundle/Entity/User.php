@@ -67,6 +67,14 @@ class User implements AdvancedUserInterface, \Serializable
     private $groups;
 
     /**
+     * @var \Pablo\PeopleBundle\Entity\Teacher
+     *
+     * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher", mappedBy="user")
+     * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
+     */
+    private $teacher;
+
+    /**
      * Plain password. Must not be persisted.
      *
      * @var string
@@ -383,5 +391,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function __toString()
     {
         return $this->username;
+    }
+
+    /**
+     * Set teacher
+     *
+     * @param \Pablo\PeopleBundle\Entity\Teacher $teacher
+     * @return User
+     */
+    public function setTeacher(\Pablo\PeopleBundle\Entity\Teacher $teacher)
+    {
+        $this->teacher = $teacher;
+    
+        return $this;
+    }
+
+    /**
+     * Get teacher
+     *
+     * @return \Pablo\PeopleBundle\Entity\Teacher 
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
     }
 }

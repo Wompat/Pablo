@@ -4,6 +4,7 @@ namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Address;
 use Pablo\PeopleBundle\Entity\Student;
+use Pablo\PeopleBundle\Entity\Teacher;
 use Pablo\PeopleBundle\Form\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -50,8 +51,12 @@ class AddressController extends Controller
                 'content' => 'L\'adresse a été enregistrée.'
             ));
 
-            // TODO: adapter la redirection selon qu'il s'agit de l'adresse d'un élève ou d'un prof !
-            $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            if ($address->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            }
+
             return $this->redirect($url);
         }
 
@@ -99,7 +104,12 @@ class AddressController extends Controller
                 'content' => 'L\'adresse a été modifiée.'
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            if ($address->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+            }
+
             return $this->redirect($url);
         }
 
@@ -120,7 +130,12 @@ class AddressController extends Controller
             'content' => 'L\'adresse a été supprimée.'
         ));
 
-        $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+        if ($address->getPerson() instanceof Teacher) {
+            $url = $this->generateUrl('pablo_teacher_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+        } else {
+            $url = $this->generateUrl('pablo_student_show', array('id' => $address->getPerson()->getId())) . '#addresses';
+        }
+
         return $this->redirect($url);
     }
 }

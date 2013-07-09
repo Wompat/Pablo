@@ -4,6 +4,7 @@ namespace Pablo\PeopleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pablo\PeopleBundle\Entity\Student;
+use Pablo\PeopleBundle\Entity\Teacher;
 use Pablo\PeopleBundle\Entity\Comment;
 use Pablo\PeopleBundle\Form\CommentType;
 
@@ -42,7 +43,12 @@ class CommentController extends Controller
                 'content' => 'Le commentaire a été enregistré.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            if ($comment->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            }
+
             return $this->redirect($url);
         }
 
@@ -76,7 +82,12 @@ class CommentController extends Controller
                 'content' => 'Le commentaire a été modifié.',
             ));
 
-            $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            if ($comment->getPerson() instanceof Teacher) {
+                $url = $this->generateUrl('pablo_teacher_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            } else {
+                $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+            }
+
             return $this->redirect($url);
         }
 
@@ -97,7 +108,12 @@ class CommentController extends Controller
             'content' => 'Le commentaire a été supprimé.'
         ));
 
-        $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+        if ($comment->getPerson() instanceof Teacher) {
+            $url = $this->generateUrl('pablo_teacher_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+        } else {
+            $url = $this->generateUrl('pablo_student_show', array('id' => $comment->getPerson()->getId())) . '#comments';
+        }
+
         return $this->redirect($url);
     }
 }
