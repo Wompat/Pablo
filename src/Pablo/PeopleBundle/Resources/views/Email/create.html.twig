@@ -1,0 +1,29 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter une adresse e-mail</h2>
+    </div>
+    <form class="form-horizontal" action="{{ path('pablo_email_create', {'id': email.person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.address)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.address) }}</label>
+            <div class="controls">
+                {{ form_widget(form.address) }}
+                <span class="help-inline">{{ form_errors(form.address) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.info)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.info) }}</label>
+            <div class="controls">
+                {{ form_widget(form.info) }}
+                <span class="help-inline">{{ form_errors(form.info) }}</span>
+                <span class="help-block">Ex.: "parents", "bureau" etc - 24 caract&egrave;res max.</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ path('pablo_student_show', {'id': email.person.id}) ~ '#emails' }}">annuler</a>
+        </div>
+    </form>
+{% endblock %}

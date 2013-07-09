@@ -57,6 +57,70 @@ pablo_address_delete:
     requirements:
         id: \d+
 
+pablo_phone_add:
+    path:     /phone/add/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:add }
+    requirements:
+        id: \d+
+
+pablo_phone_create:
+    path:     /phone/create/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_phone_edit:
+    path:     /phone/edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:edit }
+    requirements:
+        id: \d+
+
+pablo_phone_update:
+    path:     /phone/update/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_phone_delete:
+    path:     /phone/delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Phone:delete }
+    requirements:
+        id: \d+
+
+pablo_email_add:
+    path:     /email/add/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:add }
+    requirements:
+        id: \d+
+
+pablo_email_create:
+    path:     /email/create/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_email_edit:
+    path:     /email/edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:edit }
+    requirements:
+        id: \d+
+
+pablo_email_update:
+    path:     /email/update/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_email_delete:
+    path:     /email/delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Email:delete }
+    requirements:
+        id: \d+
+
 pablo_comment_add:
     path:     /comment/add/{id}
     defaults: { _controller: PabloPeopleBundle:Comment:add }

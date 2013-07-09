@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="phonenumber")
  * @ORM\Entity()
  */
-class PhoneNumber
+class Phone
 {
     /**
      * @var integer
@@ -26,12 +26,12 @@ class PhoneNumber
     /**
      * @var string
      *
-     * @ORM\Column(name="phonenumber", type="string", length=18)
+     * @ORM\Column(name="number", type="string", length=18)
      *
      * @Assert\NotBlank
      * @Assert\Length(min=9)
      */
-    private $phoneNumber;
+    private $number;
 
     /**
      * @var boolean
@@ -43,17 +43,24 @@ class PhoneNumber
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=18, nullable=false)
+     * @ORM\Column(name="info", type="string", length=24, nullable=true)
+     *
+     * @Assert\Length(min=3)
      */
-    private $comment;
+    private $info;
 
     /**
      * @var \Pablo\PeopleBundle\Entity\Student
      *
-     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="phoneNumbers", cascade={"all"}, fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="phoneNumbers", fetch="EAGER")
      * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
      */
     private $person;
+
+    public function __construct()
+    {
+        $this->isMobile = false;
+    }
 
     /**
      * Get id
@@ -66,33 +73,33 @@ class PhoneNumber
     }
 
     /**
-     * Set phoneNumber
+     * Set number
      *
-     * @param string $phoneNumber
-     * @return PhoneNumber
+     * @param string $number
+     * @return Phone
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setNumber($number)
     {
-        $this->phoneNumber = $phoneNumber;
-    
+        $this->number = $number;
+
         return $this;
     }
 
     /**
-     * Get phoneNumber
+     * Get number
      *
-     * @return string 
+     * @return string
      */
-    public function getPhoneNumber()
+    public function getNumber()
     {
-        return $this->phoneNumber;
+        return $this->number;
     }
 
     /**
      * Set isMobile
      *
      * @param boolean $isMobile
-     * @return PhoneNumber
+     * @return Phone
      */
     public function setIsMobile($isMobile)
     {
@@ -114,12 +121,12 @@ class PhoneNumber
     /**
      * Set comment
      *
-     * @param string $comment
-     * @return PhoneNumber
+     * @param string $info
+     * @return Phone
      */
-    public function setComment($comment)
+    public function setInfo($info)
     {
-        $this->comment = $comment;
+        $this->info = $info;
     
         return $this;
     }
@@ -129,16 +136,16 @@ class PhoneNumber
      *
      * @return string 
      */
-    public function getComment()
+    public function getInfo()
     {
-        return $this->comment;
+        return $this->info;
     }
 
     /**
      * Set person
      *
      * @param \Pablo\PeopleBundle\Entity\Student $person
-     * @return PhoneNumber
+     * @return Phone
      */
     public function setPerson(\Pablo\PeopleBundle\Entity\Student $person = null)
     {

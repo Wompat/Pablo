@@ -85,9 +85,16 @@ class Student
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\PhoneNumber", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Phone", mappedBy="person")
      */
     private $phoneNumbers;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Email", mappedBy="person")
+     */
+    private $emails;
 
     /**
      * @var array
@@ -102,6 +109,7 @@ class Student
         $this->addresses = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->phoneNumbers = new ArrayCollection();
+        $this->emails = new ArrayCollection();
     }
 
     public function __toString()
@@ -291,6 +299,72 @@ class Student
     }
 
     /**
+     * Add phoneNumbers
+     *
+     * @param \Pablo\PeopleBundle\Entity\Phone $phoneNumbers
+     * @return Student
+     */
+    public function addPhoneNumber(\Pablo\PeopleBundle\Entity\Phone $phoneNumbers)
+    {
+        $this->phoneNumbers[] = $phoneNumbers;
+
+        return $this;
+    }
+
+    /**
+     * Remove phoneNumbers
+     *
+     * @param \Pablo\PeopleBundle\Entity\Phone $phoneNumbers
+     */
+    public function removePhoneNumber(\Pablo\PeopleBundle\Entity\Phone $phoneNumbers)
+    {
+        $this->phoneNumbers->removeElement($phoneNumbers);
+    }
+
+    /**
+     * Get phoneNumbers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhoneNumbers()
+    {
+        return $this->phoneNumbers;
+    }
+
+    /**
+     * Add emails
+     *
+     * @param \Pablo\PeopleBundle\Entity\Email $emails
+     * @return Student
+     */
+    public function addEmail(\Pablo\PeopleBundle\Entity\Email $emails)
+    {
+        $this->emails[] = $emails;
+
+        return $this;
+    }
+
+    /**
+     * Remove emails
+     *
+     * @param \Pablo\PeopleBundle\Entity\Email $emails
+     */
+    public function removeEmail(\Pablo\PeopleBundle\Entity\Email $emails)
+    {
+        $this->emails->removeElement($emails);
+    }
+
+    /**
+     * Get emails
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
      * Add comments
      *
      * @param \Pablo\PeopleBundle\Entity\Comment $comments
@@ -321,38 +395,5 @@ class Student
     public function getComments()
     {
         return $this->comments;
-    }
-
-    /**
-     * Add phoneNumbers
-     *
-     * @param \Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers
-     * @return Student
-     */
-    public function addPhoneNumber(\Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers)
-    {
-        $this->phoneNumbers[] = $phoneNumbers;
-    
-        return $this;
-    }
-
-    /**
-     * Remove phoneNumbers
-     *
-     * @param \Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers
-     */
-    public function removePhoneNumber(\Pablo\PeopleBundle\Entity\PhoneNumber $phoneNumbers)
-    {
-        $this->phoneNumbers->removeElement($phoneNumbers);
-    }
-
-    /**
-     * Get phoneNumbers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPhoneNumbers()
-    {
-        return $this->phoneNumbers;
     }
 }

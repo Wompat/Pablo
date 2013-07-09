@@ -79,7 +79,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Valide le formulaire et persiste une adresse
+     * Valide le formulaire et met l'adresse à jour
      *
      * @param $id
      * @param \Pablo\PeopleBundle\Entity\Address $address
@@ -111,7 +111,7 @@ class AddressController extends Controller
 
     public function deleteAction($id, Address $address)
     {
-        $em =$this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($address);
         $em->flush();
 

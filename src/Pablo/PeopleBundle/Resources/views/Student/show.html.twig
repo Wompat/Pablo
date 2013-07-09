@@ -32,12 +32,12 @@
         <div class="span12">
             <ul class="nav nav-tabs">
                 <li><a href="#addresses" data-toggle="tab">Adresses</a></li>
-                <li><a href="#phone" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
-                <li><a href="#email" data-toggle="tab">Emails</a></li>
+                <li><a href="#phones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
+                <li><a href="#emails" data-toggle="tab">Emails</a></li>
                 <li><a href="#minerval" data-toggle="tab">Minerval</a></li>
                 <li><a href="#paiements" data-toggle="tab">Paiements</a></li>
-                <li><a href="#inscriptions" data-toggle="tab">Inscriptions</a></li>
-                <li><a href="#historique" data-toggle="tab">Historique</a></li>
+                <li><a href="#registrations" data-toggle="tab">Inscriptions</a></li>
+                <li><a href="#historic" data-toggle="tab">Historique</a></li>
                 <li><a href="#comments" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (student.comments|length > 0) ? student.comments|length}}</span></a></li>
             </ul>
             <div class="tab-content">
@@ -46,11 +46,15 @@
                         {% include('PabloPeopleBundle:Student:_addresses.html.twig') %}
                     </div>
                 </div>
-                <div class="tab-pane" id="phone">
-                    <h4>T&eacute;l&eacute;phone</h4>
+                <div class="tab-pane" id="phones">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Student:_phones.html.twig') %}
+                    </div>
                 </div>
                 <div class="tab-pane" id="emails">
-                    <h4>Emails</h4>
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Student:_emails.html.twig') %}
+                    </div>
                 </div>
                 <div class="tab-pane" id="minerval">
                     <h4>Minerval</h4>
@@ -58,10 +62,10 @@
                 <div class="tab-pane" id="paiements">
                     <h4>Paiements</h4>
                 </div>
-                <div class="tab-pane" id="inscriptions">
+                <div class="tab-pane" id="registrations">
                     <h4>Inscriptions</h4>
                 </div>
-                <div class="tab-pane" id="historique">
+                <div class="tab-pane" id="historic">
                     <h4>Historique</h4>
                 </div>
                 <div class="tab-pane" id="comments">
@@ -91,6 +95,7 @@
                 $('.modal').modal('show');
 
                 url = $(this).attr('href');
+                console.log(url);
                 $('div.modal-footer button.btn-primary').click(function() {
                     $(location).attr('href', url);
                 })

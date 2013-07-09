@@ -1,0 +1,34 @@
+<div class="span6">
+    <h4>Emails</h4>
+    {% if (student.emails|length == 0) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune adresse e-mail enregistr&eacute; pour cet &eacute;l&egrave;ve.
+            </p>
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Adresse e-mail</th>
+                <th>Info</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for email in student.emails %}
+                <tr>
+                    <td>{{ email.address }}</td>
+                    <td>{{ email.info }}</td>
+                    <td style="text-align: right">
+                        <a class="btn btn-mini" href="{{ path('pablo_email_edit', {'id' : email.id}) }}"><i class="icon-pencil"></i></a>
+                        <a class="btn btn-mini btn-danger" href="{{ path('pablo_email_delete', {'id': email.id}) }}"><i class="icon-white icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a class="btn" href="{{ path('pablo_email_add', {'id': student.id}) }}">ajouter une adresse e-mail</a>
+</div>
