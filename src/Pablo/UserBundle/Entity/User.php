@@ -69,7 +69,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var \Pablo\PeopleBundle\Entity\Teacher
      *
-     * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher", inversedBy="user")
      * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
      */
     private $teacher;
