@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="page-header">
-        <h2>Liste des professeurs</h2>
+        <h2>R&eacute;sultats de la recherche</h2>
     </div>
     <div class="row">
         <div class="span12">
@@ -49,13 +49,5 @@
             {% endfor %}
             </tbody>
         </table>
-        <ul class="pager">
-            <li class="previous {{ (page == 1) ? 'disabled' }}">
-                <a href="{{ (page == 1) ? '#' : path('pablo_teacher_list', {'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>
-            </li>
-            <li class="next {{ (page == pages) ? 'disabled' }}">
-                <a href="{{ (page == pages) ? '#' : path('pablo_teacher_list', {'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>
-            </li>
-        </ul>
     {% endif %}
 {% endblock content %}

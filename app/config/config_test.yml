@@ -18,3 +18,4 @@ swiftmailer:
 atoum:
     bundles:
         PabloUserBundle: ~
+        PabloPeopleBundle: ~

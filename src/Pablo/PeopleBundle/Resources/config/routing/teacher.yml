@@ -1,6 +1,14 @@
 pablo_teacher_list:
-    path:     /
-    defaults: { _controller: PabloPeopleBundle:Teacher:list }
+    path:     /{page}
+    defaults: { _controller: PabloPeopleBundle:Teacher:list, page: 1 }
+    requirements:
+        page: \d+
+
+pablo_teacher_search:
+    path:     /search
+    defaults: { _controller: PabloPeopleBundle:Teacher:search }
+    requirements:
+        _methode: post
 
 pablo_teacher_show:
     path:     /show/{id}

@@ -28,6 +28,43 @@ class User extends Units\Test
         ;
     }
 
+    public function testGetSalt()
+    {
+        $this
+            ->if($user = new \Pablo\UserBundle\Entity\User())
+            ->then
+                ->string($user->getSalt())
+                    ->hasLengthGreaterThan(30)
+                    ->hasLengthLessThan(40)
+        ;
+    }
+
+    public function testGetEnabled()
+    {
+        $this
+            ->if($user = new \Pablo\UserBundle\Entity\User())
+            ->then
+                ->boolean($user->getEnabled())
+                ->isTrue()
+            ->if($user->setEnabled(false))
+            ->then
+                ->boolean($user->getEnabled())
+                ->isFalse()
+        ;
+    }
+
+    public function testGetTeacher()
+    {
+        $this
+            ->if($user = new \Pablo\UserBundle\Entity\User())
+            ->and($teacher = new \Pablo\PeopleBundle\Entity\Teacher())
+            ->and($user->setTeacher($teacher))
+            ->then
+                ->object($user->getTeacher())
+                ->isInstanceOf('\Pablo\PeopleBundle\Entity\Teacher')
+        ;
+    }
+
     public function testGetPlainPassword()
     {
         $this
@@ -40,6 +77,36 @@ class User extends Units\Test
         ;
     }
 
+    public function testIsEnabled()
+    {
+        $this
+            ->if($user = new \Pablo\UserBundle\Entity\User())
+            ->then
+                ->boolean($user->isEnabled())
+                    ->isTrue
+            ->if($user->setEnabled(false))
+            ->then
+                ->boolean($user->isEnabled())
+                    ->isFalse()
+        ;
+    }
+
+    public function testGetRoles()
+    {
+        $groupMock = new \mock\Pablo\UserBundle\Entity\Group;
+
+        $this
+            ->if($user = new \Pablo\UserBundle\Entity\User())
+            ->then
+                ->array($user->getRoles())
+                    ->strictlyContainsValues(array('ROLE_USER'))
+            ->if($user->addGroup($groupMock))
+            ->then
+                ->array($user->getRoles())
+                    ->strictlyContainsValues(array($groupMock))
+        ;
+    }
+
     public function testEraseCredentials()
     {
         $this
@@ -49,18 +116,6 @@ class User extends Units\Test
             ->then
                 ->variable($user->getPlainPassword())
                     ->isNull()
-        ;
-    }
-
-    public function testGetTeacher()
-    {
-        $this
-            ->if($user = new \Pablo\UserBundle\Entity\User())
-            ->and($teacher = new \Pablo\PeopleBundle\Entity\Teacher())
-            ->and($user->setTeacher($teacher))
-            ->then
-                ->object($user->getTeacher())
-                    ->isInstanceOf('\Pablo\PeopleBundle\Entity\Teacher')
         ;
     }
 }

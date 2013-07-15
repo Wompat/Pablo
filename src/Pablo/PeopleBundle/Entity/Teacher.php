@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Teacher
  * @package Pablo\PeopleBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pablo\PeopleBundle\Entity\TeacherRepository")
  */
 class Teacher extends Student
 {

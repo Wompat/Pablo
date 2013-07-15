@@ -31,33 +31,24 @@
                 <th>Sexe</th>
                 <th>Date de naissance</th>
                 <th>Lieu de naissance</th>
-                <th>Actions</th>
+                <th>Fiche</th>
             </tr>
             </thead>
             <tbody>
             {% for student in students %}
-            <tr>
-                <td>{{ student.id }}</td>
-                <td>{{ student.lastname|upper }}</td>
-                <td>{{ student.firstname|title }}</td>
-                <td>{{ (student.nationality) ? student.nationality.code }}</td>
-                <td>{{ student.sex }}</td>
-                <td>{{ (student.dateofbirth) ? student.dateofbirth|date('d/m/Y') }}</td>
-                <td>{{ student.placeofbirth }}</td>
-                <td><a class="btn btn-mini" href="{{ path('pablo_student_show', {'id': student.id}) }}"><i class="icon-file"></i></a></td>
-            </tr>
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.lastname|upper }}</td>
+                    <td>{{ student.firstname|title }}</td>
+                    <td>{{ (student.nationality) ? student.nationality.code }}</td>
+                    <td>{{ student.sex }}</td>
+                    <td>{{ (student.dateofbirth) ? student.dateofbirth|date('d/m/Y') }}</td>
+                    <td>{{ student.placeofbirth }}</td>
+                    <td style="text-align: right;">
+                    <td><a class="btn btn-mini" href="{{ path('pablo_student_show', {'id': student.id}) }}"><i class="icon-file"></i></a></td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
-        <ul class="pager">
-            <li class="previous {{ (page == 1) ? 'disabled' }}">
-                {#<a href="{{ (page == 1) ? '#' : path('pablo_student_list', {'letter': letter, 'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>#}
-                <a href="{{ (page == 1) ? '#' : path('pablo_student_list', {'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>
-            </li>
-            <li class="next {{ (page == pages) ? 'disabled' }}">
-                {#<a href="{{ (page == pages) ? '#' : path('pablo_student_list', {'letter': letter, 'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>#}
-                <a href="{{ (page == pages) ? '#' : path('pablo_student_list', {'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>
-            </li>
-        </ul>
     {% endif %}
 {% endblock content %}

@@ -8,13 +8,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StudentController extends Controller
 {
-    public function listAction()
+    public function listAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-        $students = $em->getRepository('PabloPeopleBundle:Student')->findAll();
+        $students = $em->getRepository('PabloPeopleBundle:Student')->getPagedList(50, $page);
 
         return $this->render('PabloPeopleBundle:Student:list.html.twig', array(
+            'page' => $page,
+            'pages' => ceil(count($students)/50),
             'students' => $students,
+        ));
+    }
+
+    public function searchAction()
+    {
+        $data = $this->getRequest()->request->all();
+
+        $em = $this->getDoctrine()->getManager();
+        $students = $em->getRepository('PabloPeopleBundle:Student')->getByName($data['lastName'], $data['firstName']);
+
+        return $this->render('PabloPeopleBundle:Student:search.html.twig', array(
+            'students' => $students
         ));
     }
 

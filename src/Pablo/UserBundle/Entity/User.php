@@ -191,6 +191,29 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * Set teacher
+     *
+     * @param \Pablo\PeopleBundle\Entity\Teacher $teacher
+     * @return User
+     */
+    public function setTeacher(\Pablo\PeopleBundle\Entity\Teacher $teacher)
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get teacher
+     *
+     * @return \Pablo\PeopleBundle\Entity\Teacher
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
+    }
+
+    /**
      * Set plain password
      *
      * @param string $password
@@ -391,28 +414,5 @@ class User implements AdvancedUserInterface, \Serializable
     public function __toString()
     {
         return $this->username;
-    }
-
-    /**
-     * Set teacher
-     *
-     * @param \Pablo\PeopleBundle\Entity\Teacher $teacher
-     * @return User
-     */
-    public function setTeacher(\Pablo\PeopleBundle\Entity\Teacher $teacher)
-    {
-        $this->teacher = $teacher;
-    
-        return $this;
-    }
-
-    /**
-     * Get teacher
-     *
-     * @return \Pablo\PeopleBundle\Entity\Teacher 
-     */
-    public function getTeacher()
-    {
-        return $this->teacher;
     }
 }
