@@ -1,0 +1,66 @@
+{% extends('PabloUserBundle::layout.html.twig') %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/bootstrap-switch.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter un utilisateur</h2>
+    </div>
+    <form class="form-horizontal" action="{{ path('pablo_user_create', {'id': user.teacher.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="row">
+            <div class="span10">
+                <div class="control-group {{ form_errors(form.username) ? 'error' }}">
+                    <label class="control-label">{{ form_label(form.username) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.username) }}
+                        <span class="help-inline">{{ form_errors(form.username) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="span2">
+                <div class="control-group pull-right">
+                    <label class="control-label">{{ form_label(form.enabled) }}</label>
+                    <div class="controls">
+                        <div class="switch">{{ form_widget(form.enabled) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="control-group {{ (form_errors(form.plainPassword.first) ? 'error') }}">
+                    <label class="control-label">{{ form_label(form.plainPassword.first) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.plainPassword.first) }}
+                        <span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+                    </div>
+                </div>
+                <div class="control-group {{ (form_errors(form.plainPassword.first) ? 'error') }}">
+                    <label class="control-label">{{ form_label(form.plainPassword.second) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.plainPassword.second) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.groups) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.groups) }}
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit"  value="valider">
+                    <a class="btn" href="{{ path('pablo_teacher_show', {'id': user.teacher.id}) }}">annuler</a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/bootstrap-switch.js') }}" type="text/javascript"></script>
+{% endblock javascripts %}

@@ -8,6 +8,19 @@ pablo_user_login_check:
 pablo_user_logout:
     path:     /logout
 
-pablo_user_homepage:
+pablo_user_home:
     path:     /
-    defaults: { _controller: PabloUserBundle:Home:index }
+    defaults: { _controller: PabloUserBundle:User:home }
+
+pablo_user_add:
+    path:     /add/{id}
+    defaults: { _controller: PabloUserBundle:User:add }
+    requirements:
+        id: \d+
+
+pablo_user_create:
+    path:     /create/{id}
+    defaults: { _controller: PabloUserBundle:User:create }
+    requirements:
+        id: \d+
+        _method: post

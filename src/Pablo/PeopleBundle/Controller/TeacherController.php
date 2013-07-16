@@ -27,7 +27,7 @@ class TeacherController extends Controller
         $em = $this->getDoctrine()->getManager();
         $teachers = $em->getRepository('PabloPeopleBundle:Teacher')->getByName($data['lastName'], $data['firstName']);
 
-        return $this->render('PabloPeopleBundle:Teacher:search.html.twig', array(
+        return $this->render('PabloPeopleBundle:Teacher:result.html.twig', array(
             'teachers' => $teachers
         ));
     }

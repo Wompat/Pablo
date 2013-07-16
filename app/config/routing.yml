@@ -1,3 +1,7 @@
+pablo_organisation:
+    resource: "@PabloOrganisationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 pablo_people:
     resource: "@PabloPeopleBundle/Resources/config/routing.yml"
     prefix:   /

@@ -66,6 +66,8 @@ class Student
      * @var \DateTime
      *
      * @ORM\Column(name="dateofbirth", type="date", nullable=true)
+     *
+     * @Assert\Date()
      */
     private $dateOfBirth;
 

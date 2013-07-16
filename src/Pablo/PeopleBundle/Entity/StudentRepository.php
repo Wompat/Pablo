@@ -36,7 +36,7 @@ class StudentRepository extends EntityRepository
             ->setParameters(array(
                 'lastName' => $lastName . '%', 'firstName' => $firstName . '%'
             ))
-            ->setMaxResults(100)
+            ->setMaxResults(50)
             ->getQuery()
         ;
 

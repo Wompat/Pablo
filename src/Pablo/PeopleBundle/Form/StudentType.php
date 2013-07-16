@@ -24,9 +24,12 @@ class StudentType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ))
-            ->add('dateOfBirth', null, array(
+            ->add('dateOfBirth', 'date', array(
                 'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'input' => 'datetime',
                 'label' => 'Date de naissance',
+                'attr' => array('class' => 'date-selector'),
             ))
             ->add('placeOfBirth', null, array('label' => 'Lieu de naissance'))
         ;

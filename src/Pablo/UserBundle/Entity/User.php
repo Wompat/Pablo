@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\Role;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -31,6 +32,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=90, unique=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4, max=90)
      */
     private $username;
 
@@ -78,6 +82,9 @@ class User implements AdvancedUserInterface, \Serializable
      * Plain password. Must not be persisted.
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4, max=90)
      */
     private $plainPassword;
 

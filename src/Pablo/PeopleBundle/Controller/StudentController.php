@@ -27,7 +27,11 @@ class StudentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $students = $em->getRepository('PabloPeopleBundle:Student')->getByName($data['lastName'], $data['firstName']);
 
-        return $this->render('PabloPeopleBundle:Student:search.html.twig', array(
+//        return $this->render('PabloPeopleBundle::debug.html.twig', array(
+//            'var' => $data,
+//        ));
+
+        return $this->render('PabloPeopleBundle:Student:result.html.twig', array(
             'students' => $students
         ));
     }

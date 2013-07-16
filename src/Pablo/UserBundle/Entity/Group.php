@@ -134,8 +134,8 @@ class Group extends Role
         return $this->users;
     }
 
-//    public function __toString()
-//    {
-//        return $this->name;
-//    }
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

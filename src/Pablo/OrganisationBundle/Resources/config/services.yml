@@ -1,0 +1,7 @@
+parameters:
+#    pablo_organisation.example.class: Pablo\OrganisationBundle\Example
+
+services:
+#    pablo_organisation.example:
+#        class: %pablo_organisation.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

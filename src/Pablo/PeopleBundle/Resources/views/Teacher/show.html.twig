@@ -9,18 +9,32 @@
             <div class="well well-small">
                 <h4>{{ person.firstname|title ~ ' ' ~ person.lastname|upper }}</h4>
                 <p>
-                    Nationalit&eacute;&nbsp;:&nbsp;<strong>{{ (person.nationality) ? person.nationality.name }}</strong><br>
-                    Sexe&nbsp;:&nbsp;<strong>{{ (person.sex =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
-                    Date de naissance&nbsp;:&nbsp;<strong>{{ (person.dateofbirth) ? person.dateofbirth|date('d/m/Y') }}</strong><br>
-                    Lieu de naissance&nbsp;:&nbsp;<strong>{{ person.placeofbirth }}</strong><br>
+                    Nationalit&eacute;&nbsp;&colon;&nbsp;<strong>{{ (person.nationality) ? person.nationality.name }}</strong><br>
+                    Sexe&nbsp;&colon;&nbsp;<strong>{{ (person.sex =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
+                    Date de naissance&nbsp;&colon;&nbsp;<strong>{{ (person.dateofbirth) ? person.dateofbirth|date('d/m/Y') }}</strong><br>
+                    Lieu de naissance&nbsp;&colon;&nbsp;<strong>{{ person.placeofbirth }}</strong><br>
                     Matricule : <strong>{{ person.matricule }}</strong>
                 </p>
+                {% if (person.user) %}
+                    <p>
+                        Utilisateur&nbsp;&colon;&nbsp;<strong>{{ person.user.username|lower }}</strong><br>
+                        Groupe{{ (person.user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;
+                        <strong>{% for group in person.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong>
+                    </p>
+                {% endif %}
                 <div class="text-right">
                     <a class="btn btn-mini" href="{{ path('pablo_teacher_edit', {'id': person.id}) }}"><i class="icon-pencil"></i></a>
                 </div>
             </div>
         </div>
         <div class="span6">
+            <div class="text-right">
+                {% if person.user %}
+                    <a class="btn" href="#"><i class="icon-user"></i>&nbsp;&eacute;diter le compte</a>
+                {% else %}
+                    <a class="btn" href="{{ path('pablo_user_add', {'id': person.id}) }}"><i class="icon-user"></i>&nbsp;cr&eacute;er un compte</a>
+                {% endif %}
+            </div>
             {% for message in app.session.flashbag.get('notice') %}
                 <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
                     {{ message.content }}
@@ -35,10 +49,6 @@
                 <li><a href="#addresses" data-toggle="tab">Adresses</a></li>
                 <li><a href="#phones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
                 <li><a href="#emails" data-toggle="tab">Emails</a></li>
-                {#<li><a href="#minerval" data-toggle="tab">Minerval</a></li>#}
-                {#<li><a href="#paiements" data-toggle="tab">Paiements</a></li>#}
-                {#<li><a href="#registrations" data-toggle="tab">Inscriptions</a></li>#}
-                {#<li><a href="#historic" data-toggle="tab">Historique</a></li>#}
                 <li><a href="#comments" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (person.comments|length > 0) ? person.comments|length}}</span></a></li>
             </ul>
             <div class="tab-content">
@@ -57,18 +67,6 @@
                         {% include('PabloPeopleBundle:Email:_emails.html.twig') %}
                     </div>
                 </div>
-                {#<div class="tab-pane" id="minerval">#}
-                    {#<h4>Minerval</h4>#}
-                {#</div>#}
-                {#<div class="tab-pane" id="paiements">#}
-                    {#<h4>Paiements</h4>#}
-                {#</div>#}
-                {#<div class="tab-pane" id="registrations">#}
-                    {#<h4>Inscriptions</h4>#}
-                {#</div>#}
-                {#<div class="tab-pane" id="historic">#}
-                    {#<h4>Historique</h4>#}
-                {#</div>#}
                 <div class="tab-pane" id="comments">
                     <div class="row">
                         {% include('PabloPeopleBundle:Comment:_comments.html.twig') %}
