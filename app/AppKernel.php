@@ -18,14 +18,12 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Pablo\UserBundle\PabloUserBundle(),
             new Pablo\PeopleBundle\PabloPeopleBundle(),
-            new Pablo\OrganisationBundle\PabloOrganisationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new atoum\AtoumBundle\AtoumAtoumBundle();
         }
 
         return $bundles;
