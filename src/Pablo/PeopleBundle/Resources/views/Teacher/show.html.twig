@@ -17,9 +17,10 @@
                 </p>
                 {% if (person.user) %}
                     <p>
-                        Utilisateur&nbsp;&colon;&nbsp;<strong>{{ person.user.username|lower }}</strong><br>
+                        Nom&nbsp;&colon;&nbsp;<strong>{{ person.user.username|lower }}</strong><br>
                         Groupe{{ (person.user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;
-                        <strong>{% for group in person.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong>
+                        <strong>{% for group in person.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong><br>
+                        Activ&eacute;&nbsp;&colon;&nbsp;<strong>{{ (person.user.enabled) ? 'oui' : 'non' }}</strong>
                     </p>
                 {% endif %}
                 <div class="text-right">
@@ -28,15 +29,9 @@
             </div>
         </div>
         <div class="span6">
-            <div class="text-right">
-                {% if person.user %}
-                    <a class="btn" href="#"><i class="icon-user"></i>&nbsp;&eacute;diter le compte</a>
-                {% else %}
-                    <a class="btn" href="{{ path('pablo_user_add', {'id': person.id}) }}"><i class="icon-user"></i>&nbsp;cr&eacute;er un compte</a>
-                {% endif %}
-            </div>
+            {% include('PabloPeopleBundle:Teacher:_buttons.html.twig') %}
             {% for message in app.session.flashbag.get('notice') %}
-                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}" style="margin-top: 20px;">
                     {{ message.content }}
                 </div>
             {% endfor %}
@@ -88,13 +83,12 @@
                 $('.nav-tabs a[href="#addresses"]').tab('show');
             }
 
-            $('a.btn-danger').click(function(event) {
+            $('a.danger, a.btn-danger').click(function(event) {
                 event.preventDefault();
 
                 $('.modal').modal('show');
 
                 url = $(this).attr('href');
-                console.log(url);
                 $('div.modal-footer button.btn-primary').click(function() {
                     $(location).attr('href', url);
                 })
