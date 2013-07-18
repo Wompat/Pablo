@@ -13,14 +13,39 @@ pablo_user_home:
     defaults: { _controller: PabloUserBundle:User:home }
 
 pablo_user_add:
-    path:     /add/{id}
+    path:     /user/add/{id}
     defaults: { _controller: PabloUserBundle:User:add }
     requirements:
         id: \d+
 
 pablo_user_create:
-    path:     /create/{id}
+    path:     /user/create/{id}
     defaults: { _controller: PabloUserBundle:User:create }
     requirements:
         id: \d+
         _method: post
+
+pablo_user_edit:
+    path:     /user/edit/{id}
+    defaults: { _controller: PabloUserBundle:User:edit }
+    requirements:
+        id: \d+
+
+pablo_user_update:
+    path:     /user/update/{id}
+    defaults: { _controller: PabloUserBundle:User:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_user_enable:
+    path:     /user/enable/{id}
+    defaults: { _controller: PabloUserBundle:User:enable }
+    requirements:
+        id: \d+
+
+pablo_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: PabloUserBundle:User:delete }
+    requirements:
+        id: \d+

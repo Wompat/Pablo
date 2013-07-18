@@ -393,8 +393,10 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function addGroup(Group $group)
     {
-        $this->groups[] = $group;
-    
+        if (!$this->groups->contains($group)) {
+            $this->groups->add($group);
+        }
+
         return $this;
     }
 
@@ -402,10 +404,15 @@ class User implements AdvancedUserInterface, \Serializable
      * Remove group
      *
      * @param \Pablo\UserBundle\Entity\Group $group
+     * @return User
      */
     public function removeGroup(Group $group)
     {
-        $this->groups->removeElement($group);
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+        }
+
+        return $this;
     }
 
     /**
@@ -416,6 +423,11 @@ class User implements AdvancedUserInterface, \Serializable
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    public function setGroups(Group $group)
+    {
+        $this->addGroup($group);
     }
 
     public function __toString()

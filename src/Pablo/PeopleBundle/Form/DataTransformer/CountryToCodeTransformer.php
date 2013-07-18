@@ -87,7 +87,7 @@ class CountryToCodeTransformer implements DataTransformerInterface
         ;
 
         if (null === $country) {
-            throw new TransformationFailedException('Aucun pays trouvé avec le nom : ' . $name);
+            throw new TransformationFailedException('Le pays indiqué n\'existe pas.');
         }
 
         return $country;

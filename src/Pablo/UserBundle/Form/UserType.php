@@ -14,13 +14,14 @@ class UserType extends AbstractType
             ->add('username', null, array('label' => 'Nom d\'utilisateur'))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'first_options' => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Confirmation'),
             ))
             ->add('enabled', null, array('label' => 'Activé'))
             ->add('groups', null, array(
                 'label' => 'Groupe',
-//                'multiple' => false,
+                'multiple' => false,
             ))
         ;
     }
