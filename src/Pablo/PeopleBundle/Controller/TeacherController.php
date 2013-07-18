@@ -3,6 +3,7 @@
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Teacher;
+use Pablo\PeopleBundle\Form\SearchType;
 use Pablo\PeopleBundle\Form\TeacherType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,7 +14,10 @@ class TeacherController extends Controller
         $em = $this->getDoctrine()->getManager();
         $teachers = $em->getRepository('PabloPeopleBundle:Teacher')->getPagedList(50, $page);
 
+        $form = $this->createForm(new SearchType(), new Teacher());
+
         return $this->render('PabloPeopleBundle:Teacher:list.html.twig', array(
+            'form' => $form->createView(),
             'page' => $page,
             'pages' => ceil(count($teachers)/50),
             'teachers' => $teachers,
@@ -22,14 +26,18 @@ class TeacherController extends Controller
 
     public function searchAction()
     {
-        $data = $this->getRequest()->request->all();
+        $teacher = new Teacher();
+        $form = $this->createForm(new SearchType(), $teacher);
+        $form->handleRequest($this->getRequest());
 
         $em = $this->getDoctrine()->getManager();
-        $teachers = $em->getRepository('PabloPeopleBundle:Teacher')->getByName($data['lastName'], $data['firstName']);
+        $teachers = $em->getRepository('PabloPeopleBundle:Teacher')->search($teacher);
 
         return $this->render('PabloPeopleBundle:Teacher:result.html.twig', array(
+            'form' => $form->createView(),
             'teachers' => $teachers
-        ));
+            ));
+//        return $this->render('PabloPeopleBundle::debug.html.twig', array('var' => $data['dateOfBirth']));
     }
 
     public function showAction($id, Teacher $teacher)

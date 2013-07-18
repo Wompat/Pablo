@@ -1,11 +1,9 @@
 <div class="span12">
     <form class="form-inline" action="{{ path('pablo_student_search') }}" method="post">
-        <input class="span3" type="text" name="lastName" placeholder="Nom">
-        <input class="span3" type="text" name="firstName" placeholder="Pr&eacute;nom">
-        <input class="span3 date-selector" type="text" name="dateOfBirth" placeholder="Date de naisance" disabled="disabled">
-        <label class="checkbox">
-            <input type="checkbox" name="allYears" disabled="disabled">dans toutes les ann&eacute;es
-        </label>
-        <button class="btn pull-right" type="submit"><i class="icon-search"></i>&nbsp;Chercher</button>
+        {{ form_widget(form.lastName) }}
+        {{ form_widget(form.firstName) }}
+        {{ form_widget(form.dateOfBirth) }}
+        {{ form_rest(form) }}
+        <button class="btn pull-right" type="submit"><i class="icon-search"></i>&nbsp;chercher</button>
     </form>
 </div>

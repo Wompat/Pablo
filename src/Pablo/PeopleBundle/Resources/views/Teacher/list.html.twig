@@ -53,3 +53,16 @@
         </ul>
     {% endif %}
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.date-selector').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-90:-6",
+            minDate: "-90y",
+            maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
+        });
+    </script>
+{% endblock javascripts %}

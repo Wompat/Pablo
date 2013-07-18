@@ -3,6 +3,7 @@
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Student;
+use Pablo\PeopleBundle\Form\SearchType;
 use Pablo\PeopleBundle\Form\StudentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,7 +14,10 @@ class StudentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $students = $em->getRepository('PabloPeopleBundle:Student')->getPagedList(50, $page);
 
+        $form = $this->createForm(new SearchType(), new Student());
+
         return $this->render('PabloPeopleBundle:Student:list.html.twig', array(
+            'form' => $form->createView(),
             'page' => $page,
             'pages' => ceil(count($students)/50),
             'students' => $students,
@@ -22,18 +26,18 @@ class StudentController extends Controller
 
     public function searchAction()
     {
-        $data = $this->getRequest()->request->all();
+        $student = new Student();
+        $form = $this->createForm(new SearchType(), $student);
+        $form->handleRequest($this->getRequest());
 
         $em = $this->getDoctrine()->getManager();
-        $students = $em->getRepository('PabloPeopleBundle:Student')->getByName($data['lastName'], $data['firstName']);
-
-//        return $this->render('PabloPeopleBundle::debug.html.twig', array(
-//            'var' => $data,
-//        ));
+        $students = $em->getRepository('PabloPeopleBundle:Student')->search($student);
 
         return $this->render('PabloPeopleBundle:Student:result.html.twig', array(
+            'form' => $form->createView(),
             'students' => $students
         ));
+//        return $this->render('PabloPeopleBundle::debug.html.twig', array('var' => $data['dateOfBirth']));
     }
 
     public function showAction($id, Student $person)

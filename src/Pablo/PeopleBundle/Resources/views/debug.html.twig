@@ -4,5 +4,7 @@
     <div class="page-header">
         <h2>Debug</h2>
     </div>
-    {{ dump(var) }}
+    {{ form_widget(form.lastName) }}
+    {{ form_errors(form.lastName) }}
+    {{ form_rest(form) }}
 {% endblock content %}

@@ -14,6 +14,8 @@ class TeacherRepository extends EntityRepository
         }
 
         $query = $this->createQueryBuilder('t')
+            ->select('t, u')
+            ->leftJoin('t.user', 'u')
             ->orderBy('t.lastName')
             ->addOrderBy('t.firstName')
             ->setFirstResult(($offset - 1) * $limit)
@@ -24,18 +26,23 @@ class TeacherRepository extends EntityRepository
         return new Paginator($query);
     }
     
-    public function getByName($lastName, $firstName)
+    public function search(Teacher $teacher)
     {
+        $parameters = array(
+            'lastName' => ($teacher->getLastName() !== null) ? $teacher->getLastName() . '%' : '%',
+            'firstName' => ($teacher->getFirstName() !== null) ? $teacher->getFirstName() . '%' : '%',
+            'dateOfBirth' => ($teacher->getDateOfBirth() !== null) ? $teacher->getDateOfBirth() : '1900-01-01',
+        );
+
         $qb = $this->createQueryBuilder('t');
 
         $query = $qb
             ->where($qb->expr()->like('t.lastName', ':lastName'))
             ->andWhere($qb->expr()->like('t.firstName', ':firstName'))
+            ->andWhere($qb->expr()->gte('t.dateOfBirth', ':dateOfBirth'))
             ->orderBy('t.lastName')
             ->addOrderBy('t.firstName')
-            ->setParameters(array(
-                'lastName' => $lastName . '%', 'firstName' => $firstName . '%'
-            ))
+            ->setParameters($parameters)
             ->setMaxResults(50)
             ->getQuery()
         ;

@@ -24,18 +24,23 @@ class StudentRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getByName($lastName, $firstName)
+    public function search(Student $student)
     {
+        $parameters = array(
+            'lastName' => ($student->getLastName() !== null) ? $student->getLastName() . '%' : '%',
+            'firstName' => ($student->getFirstName() !== null) ? $student->getFirstName() . '%' : '%',
+            'dateOfBirth' => ($student->getDateOfBirth() !== null) ? $student->getDateOfBirth() : '1900-01-01',
+        );
+
         $qb = $this->createQueryBuilder('s');
 
         $query = $qb
             ->where($qb->expr()->like('s.lastName', ':lastName'))
             ->andWhere($qb->expr()->like('s.firstName', ':firstName'))
+            ->andWhere($qb->expr()->gte('s.dateOfBirth', ':dateOfBirth'))
             ->orderBy('s.lastName')
             ->addOrderBy('s.firstName')
-            ->setParameters(array(
-                'lastName' => $lastName . '%', 'firstName' => $firstName . '%'
-            ))
+            ->setParameters($parameters)
             ->setMaxResults(50)
             ->getQuery()
         ;
