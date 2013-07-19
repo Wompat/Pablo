@@ -1,14 +1,14 @@
 <?php
 
-namespace Pablo\PeopleBundle\Form\Type;
+namespace Pablo\OrganisationBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Pablo\OrganisationBundle\Form\DataTransformer\TitleToNumberTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface as FormBuilderInterface;
-use Pablo\PeopleBundle\Form\DataTransformer\CountryToCodeTransformer;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CountrySelectorType extends AbstractType
+class CourseSelectorType extends AbstractType
 {
     /**
      * @var \Doctrine\Common\Persistence\ObjectManager
@@ -33,7 +33,7 @@ class CountrySelectorType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new CountryToCodeTransformer($this->om);
+        $transformer = new TitleToNumberTransformer($this->om);
         $builder->addModelTransformer($transformer);
     }
 
@@ -45,7 +45,11 @@ class CountrySelectorType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'invalid_message' => 'Le pays indiqué n\'existe pas.'
+            'choices' => array(
+                'Sculpture' => 'Sculpture',
+                136 => 'Peinture'
+            ),
+            'invalid_message' => 'Le cours indiqué n\'existe pas.'
         ));
     }
 
@@ -60,7 +64,7 @@ class CountrySelectorType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
+        return 'choice';
     }
 
     /**
@@ -70,6 +74,6 @@ class CountrySelectorType extends AbstractType
      */
     public function getName()
     {
-        return 'country_selector';
+        return 'course_selector';
     }
 }

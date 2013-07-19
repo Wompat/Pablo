@@ -35,9 +35,8 @@ class TeacherController extends Controller
 
         return $this->render('PabloPeopleBundle:Teacher:result.html.twig', array(
             'form' => $form->createView(),
-            'teachers' => $teachers
+            'teachers' => $teachers,
             ));
-//        return $this->render('PabloPeopleBundle::debug.html.twig', array('var' => $data['dateOfBirth']));
     }
 
     public function showAction($id, Teacher $teacher)

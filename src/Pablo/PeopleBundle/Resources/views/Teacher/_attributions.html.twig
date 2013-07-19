@@ -1,0 +1,38 @@
+<div class="span6">
+    <h4>Attributions</h4>
+    {% if (person.attributions|length == 0) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune attributions enregistr&eacute;e.
+            </p>
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ann&eacute;e</th>
+                <th>Intitul&eacute;</th>
+                <th>Sp&eacute;cialit&eacute;</th>
+                <th>P&eacute;riodes</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for attribution in person.attributions %}
+                <tr>
+                    <td>{{ attribution.year }}</td>
+                    <td>{{ attribution.course }}</td>
+                    <td>{{ attribution.specialty }}</td>
+                    <td>{{ attribution.periods }}</td>
+                    <td style="text-align: right">
+                        <a class="btn btn-mini" href="#"><i class="icon-pencil"></i></a>
+                        <a class="btn btn-mini btn-danger" href="#"><i class="icon-white icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a class="btn" href="{{ path('pablo_attribution_add', {'id': person.id}) }}">ajouter une attribution</a>
+</div>

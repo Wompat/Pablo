@@ -2,6 +2,7 @@
 
 namespace Pablo\PeopleBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,6 +29,20 @@ class Teacher extends Student
      * @ORM\OneToOne(targetEntity="Pablo\UserBundle\Entity\User", mappedBy="teacher")
      */
     private $user;
+
+    /**
+     * @var \Pablo\OrganisationBundle\Entity\Attribution
+     *
+     * @ORM\OneToMany(targetEntity="Pablo\OrganisationBundle\Entity\Attribution", mappedBy="teacher")
+     */
+    private $attributions;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->attributions = new ArrayCollection();
+    }
+
 
     /**
      * Set matricule
@@ -73,5 +88,38 @@ class Teacher extends Student
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add attributions
+     *
+     * @param \Pablo\OrganisationBundle\Entity\Attribution $attributions
+     * @return Teacher
+     */
+    public function addAttribution(\Pablo\OrganisationBundle\Entity\Attribution $attributions)
+    {
+        $this->attributions[] = $attributions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove attributions
+     *
+     * @param \Pablo\OrganisationBundle\Entity\Attribution $attributions
+     */
+    public function removeAttribution(\Pablo\OrganisationBundle\Entity\Attribution $attributions)
+    {
+        $this->attributions->removeElement($attributions);
+    }
+
+    /**
+     * Get attributions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttributions()
+    {
+        return $this->attributions;
     }
 }

@@ -29,7 +29,7 @@ class StudentRepository extends EntityRepository
         $parameters = array(
             'lastName' => ($student->getLastName() !== null) ? $student->getLastName() . '%' : '%',
             'firstName' => ($student->getFirstName() !== null) ? $student->getFirstName() . '%' : '%',
-            'dateOfBirth' => ($student->getDateOfBirth() !== null) ? $student->getDateOfBirth() : '1900-01-01',
+            'dateOfBirth' => ($student->getDateOfBirth() !== null) ? $student->getDateOfBirth() : '',
         );
 
         $qb = $this->createQueryBuilder('s');

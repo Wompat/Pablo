@@ -23,16 +23,16 @@ class Attribution
     private $id;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ayear", type="date")
+     * @ORM\Column(name="historic", type="integer")
      */
     private $year;
 
     /**
      * @var \Pablo\PeopleBundle\Entity\Teacher
      *
-     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher")
+     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher", inversedBy="attributions")
      * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
      */
     private $teacher;

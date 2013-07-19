@@ -31,7 +31,7 @@ class TeacherRepository extends EntityRepository
         $parameters = array(
             'lastName' => ($teacher->getLastName() !== null) ? $teacher->getLastName() . '%' : '%',
             'firstName' => ($teacher->getFirstName() !== null) ? $teacher->getFirstName() . '%' : '%',
-            'dateOfBirth' => ($teacher->getDateOfBirth() !== null) ? $teacher->getDateOfBirth() : '1900-01-01',
+            'dateOfBirth' => ($teacher->getDateOfBirth() !== null) ? $teacher->getDateOfBirth() : '',
         );
 
         $qb = $this->createQueryBuilder('t');

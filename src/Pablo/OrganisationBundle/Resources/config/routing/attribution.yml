@@ -1,0 +1,16 @@
+pablo_attribution_list:
+    path:     /
+    defaults: { _controller: PabloOrganisationBundle:Attribution:list }
+
+pablo_attribution_add:
+    path:     /add/{id}
+    defaults: { _controller: PabloOrganisationBundle:Attribution:add }
+    requirements:
+        id: \d+
+
+pablo_attribution_create:
+    path:     /create/{id}
+    defaults: { _controller: PabloOrganisationBundle:Attribution:create }
+    requirements:
+        id: \d+
+        _method: post

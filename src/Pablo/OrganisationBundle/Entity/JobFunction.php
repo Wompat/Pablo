@@ -19,7 +19,7 @@ class JobFunction
      * @ORM\Column(name="codefunction", type="string", length=2)
      * @ORM\Id
      */
-    private $codefunction;
+    private $code;
 
     /**
      * @var string
@@ -34,9 +34,9 @@ class JobFunction
      * @param string $codefunction
      * @return JobFunction
      */
-    public function setCodefunction($codefunction)
+    public function setCode($codefunction)
     {
-        $this->codefunction = $codefunction;
+        $this->code = $codefunction;
     
         return $this;
     }
@@ -46,9 +46,9 @@ class JobFunction
      *
      * @return string 
      */
-    public function getCodefunction()
+    public function getCode()
     {
-        return $this->codefunction;
+        return $this->code;
     }
 
     /**
@@ -72,5 +72,10 @@ class JobFunction
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function __toString()
+    {
+        return $this->code;
     }
 }

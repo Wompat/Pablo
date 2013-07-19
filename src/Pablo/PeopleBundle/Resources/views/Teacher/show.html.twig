@@ -44,6 +44,7 @@
                 <li><a href="#addresses" data-toggle="tab">Adresses</a></li>
                 <li><a href="#phones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
                 <li><a href="#emails" data-toggle="tab">Emails</a></li>
+                <li><a href="#attributions" data-toggle="tab">Attributions</a></li>
                 <li><a href="#comments" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (person.comments|length > 0) ? person.comments|length}}</span></a></li>
             </ul>
             <div class="tab-content">
@@ -60,6 +61,11 @@
                 <div class="tab-pane" id="emails">
                     <div class="row">
                         {% include('PabloPeopleBundle:Email:_emails.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="attributions">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Teacher:_attributions.html.twig') %}
                     </div>
                 </div>
                 <div class="tab-pane" id="comments">

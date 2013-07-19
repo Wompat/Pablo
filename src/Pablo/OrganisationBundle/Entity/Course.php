@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package Pablo\OrganisationBundle\Entity
  *
  * @ORM\Table(name="course")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Pablo\OrganisationBundle\Entity\CourseRepository")
  */
 class Course
 {
@@ -153,4 +153,9 @@ class Course
     {
         return $this->domain;
     }
+
+    public function __toString()
+{
+return $this->title;
+}
 }

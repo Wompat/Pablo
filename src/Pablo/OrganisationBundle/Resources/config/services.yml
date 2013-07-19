@@ -2,6 +2,8 @@ parameters:
 #    pablo_organisation.example.class: Pablo\OrganisationBundle\Example
 
 services:
-#    pablo_organisation.example:
-#        class: %pablo_organisation.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    pablo_organisation.type.course_selector:
+        class: Pablo\OrganisationBundle\Form\Type\CourseSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: course_selector }

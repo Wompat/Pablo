@@ -25,7 +25,7 @@
                 <th>Sexe</th>
                 <th>Date de naissance</th>
                 <th>Lieu de naissance</th>
-                <th>Actions</th>
+                <th>Fiche</th>
             </tr>
             </thead>
             <tbody>
@@ -45,11 +45,9 @@
         </table>
         <ul class="pager">
             <li class="previous {{ (page == 1) ? 'disabled' }}">
-                {#<a href="{{ (page == 1) ? '#' : path('pablo_student_list', {'letter': letter, 'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>#}
                 <a href="{{ (page == 1) ? '#' : path('pablo_student_list', {'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>
             </li>
             <li class="next {{ (page == pages) ? 'disabled' }}">
-                {#<a href="{{ (page == pages) ? '#' : path('pablo_student_list', {'letter': letter, 'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>#}
                 <a href="{{ (page == pages) ? '#' : path('pablo_student_list', {'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>
             </li>
         </ul>
@@ -59,12 +57,14 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.date-selector').datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-90:-6",
-            minDate: "-90y",
-            maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
-        });
+        $(document).ready(function() {
+            $('.date-selector').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-90:-6",
+                minDate: "-90y",
+                maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
+            });
+        })
     </script>
 {% endblock javascripts %}
