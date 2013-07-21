@@ -1,4 +1,4 @@
-<div class="span6">
+<div class="span12">
     <h4>Attributions</h4>
     {% if (person.attributions|length == 0) %}
         <div class="alert alert-info">
@@ -12,6 +12,10 @@
             <thead>
             <tr>
                 <th>Ann&eacute;e</th>
+                <th>D&eacute;but</th>
+                <th>Fin</th>
+                <th>Fonction</th>
+                <th>Statut</th>
                 <th>Intitul&eacute;</th>
                 <th>Sp&eacute;cialit&eacute;</th>
                 <th>P&eacute;riodes</th>
@@ -22,6 +26,10 @@
             {% for attribution in person.attributions %}
                 <tr>
                     <td>{{ attribution.year }}</td>
+                    <td>{{ attribution.startDate|date('d/m/Y') }}</td>
+                    <td>{{ attribution.endDate|date('d/m/Y') }}</td>
+                    <td>{{ attribution.jobFunction }}</td>
+                    <td>{{ attribution.status }}</td>
                     <td>{{ attribution.course }}</td>
                     <td>{{ attribution.specialty }}</td>
                     <td>{{ attribution.periods }}</td>
