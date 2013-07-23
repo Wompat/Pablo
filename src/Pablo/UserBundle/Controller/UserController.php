@@ -2,20 +2,20 @@
 
 namespace Pablo\UserBundle\Controller;
 
-use Pablo\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Pablo\UserBundle\Entity\User;
+//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Pablo\PeopleBundle\Entity\Teacher;
+use Pablo\UserBundle\Entity\User;
+use Pablo\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    public function homeAction()
-    {
-        return $this->render('PabloUserBundle:User:home.html.twig');
-    }
-
     public function addAction($id, Teacher $teacher)
     {
+//        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//            throw new AccessDeniedException();
+//        }
+
         $user = new User();
         $user->setTeacher($teacher);
 

@@ -1,51 +1,15 @@
-pablo_user_login:
-    path:     /login
-    defaults: { _controller: PabloUserBundle:Security:login }
-
-pablo_user_login_check:
-    path:     /login_check
-
-pablo_user_logout:
-    path:     /logout
+pablo_user_security:
+    resource: "@PabloUserBundle/Resources/config/routing/security.yml"
+    prefix:   /
 
 pablo_user_home:
-    path:     /
-    defaults: { _controller: PabloUserBundle:User:home }
+    resource: "@PabloUserBundle/Resources/config/routing/home.yml"
+    prefix:   /
 
-pablo_user_add:
-    path:     /user/add/{id}
-    defaults: { _controller: PabloUserBundle:User:add }
-    requirements:
-        id: \d+
+pablo_user_profile:
+    resource: "@PabloUserBundle/Resources/config/routing/profile.yml"
+    prefix:   /profile
 
-pablo_user_create:
-    path:     /user/create/{id}
-    defaults: { _controller: PabloUserBundle:User:create }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_user_edit:
-    path:     /user/edit/{id}
-    defaults: { _controller: PabloUserBundle:User:edit }
-    requirements:
-        id: \d+
-
-pablo_user_update:
-    path:     /user/update/{id}
-    defaults: { _controller: PabloUserBundle:User:update }
-    requirements:
-        id: \d+
-        _method: post
-
-pablo_user_enable:
-    path:     /user/enable/{id}
-    defaults: { _controller: PabloUserBundle:User:enable }
-    requirements:
-        id: \d+
-
-pablo_user_delete:
-    path:     /user/delete/{id}
-    defaults: { _controller: PabloUserBundle:User:delete }
-    requirements:
-        id: \d+
+pablo_user_management:
+    resource: "@PabloUserBundle/Resources/config/routing/user.yml"
+    prefix:   /user
