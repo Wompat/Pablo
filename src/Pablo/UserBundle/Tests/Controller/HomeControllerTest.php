@@ -15,16 +15,16 @@ class HomeControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testIndex()
+    public function testWelcome()
     {
         $this->logIn();
         $this->client->followRedirects();
 
         $crawler = $this->client->request('GET', '/');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Header status should be <200>');
 
-        $this->assertTrue($crawler->filter('h2:contains("Bienvenue !")')->count() > 0);
+        $this->assertTrue($crawler->filter('div.page-header h2:contains("Bienvenue !")')->count() > 0, 'Should be redirected to the <welcome page>');
     }
 
     private function logIn()
