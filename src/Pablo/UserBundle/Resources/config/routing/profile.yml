@@ -1,0 +1,9 @@
+pablo_profile_edit:
+    path:     /edit
+    defaults: { _controller: PabloUserBundle:Profile:edit }
+
+pablo_profile_update:
+    path:     /update
+    defaults: { _controller: PabloUserBundle:Profile:update }
+    requirements:
+        _method: post

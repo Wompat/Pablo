@@ -1,0 +1,3 @@
+pablo_user_welcome:
+    path:     /
+    defaults: { _controller: PabloUserBundle:Home:welcome }

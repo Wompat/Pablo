@@ -1,0 +1,34 @@
+{% extends('PabloUserBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Modifier mon profil</h2>
+    </div>
+    <form class="form-horizontal" action="{{ path('pablo_profile_update', {'id': app.user.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ form_errors(form.username) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.username) }}</label>
+            <div class="controls">
+                {{ form_widget(form.username) }}
+                <span class="help-inline">{{ form_errors(form.username) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.plainPassword.first) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.plainPassword.first) }}</label>
+            <div class="controls">
+                {{ form_widget(form.plainPassword.first) }}
+                <span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.plainPassword.first) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.plainPassword.second) }}</label>
+            <div class="controls">
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit"  value="valider">
+            <a class="btn" href="{{ path('pablo_user_welcome') }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}
