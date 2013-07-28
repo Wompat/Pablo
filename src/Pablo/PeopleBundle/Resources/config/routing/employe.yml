@@ -1,0 +1,30 @@
+pablo_employe_list:
+    path:     /{page}
+    defaults: { _controller: PabloPeopleBundle:Employe:list, page: 1 }
+    requirements:
+        page: \d+
+
+pablo_employe_search:
+    path:     /search
+    defaults: { _controller: PabloPeopleBundle:Employe:search }
+    requirements:
+        _methode: post
+
+pablo_employe_show:
+    path:     /show/{id}
+    defaults: { _controller: PabloPeopleBundle:Employe:show }
+    requirements:
+        id: \d+
+
+pablo_employe_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Employe:edit }
+    requirements:
+        id: \d+
+
+pablo_employe_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Employe:update }
+    requirements:
+        id: \d+
+        _method: post

@@ -1,0 +1,30 @@
+pablo_personne_list:
+    path:     /{page}
+    defaults: { _controller: PabloPeopleBundle:Personne:list, page: 1 }
+    requirements:
+        page: \d+
+
+pablo_personne_search:
+    path:     /search
+    defaults: { _controller: PabloPeopleBundle:Personne:search }
+    requirements:
+        _methode: post
+
+pablo_personne_show:
+    path:     /show/{id}
+    defaults: { _controller: PabloPeopleBundle:Personne:show }
+    requirements:
+        id: \d+
+
+pablo_personne_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Personne:edit }
+    requirements:
+        id: \d+
+
+pablo_personne_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Personne:update }
+    requirements:
+        id: \d+
+        _method: post

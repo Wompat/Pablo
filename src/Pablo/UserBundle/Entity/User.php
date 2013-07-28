@@ -71,12 +71,12 @@ class User implements AdvancedUserInterface, \Serializable
     private $groups;
 
     /**
-     * @var \Pablo\PeopleBundle\Entity\Teacher
+     * @var \Pablo\PeopleBundle\Entity\Employe
      *
-     * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Teacher", inversedBy="user")
-     * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
+     * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Employe", inversedBy="user")
+     * @ORM\JoinColumn(name="idpersonne", referencedColumnName="idpersonne", nullable=false)
      */
-    private $teacher;
+    private $employe;
 
     /**
      * Plain password. Must not be persisted.
@@ -198,26 +198,26 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set teacher
+     * Set employe
      *
-     * @param \Pablo\PeopleBundle\Entity\Teacher $teacher
+     * @param \Pablo\PeopleBundle\Entity\Employe $employe
      * @return User
      */
-    public function setTeacher(\Pablo\PeopleBundle\Entity\Teacher $teacher)
+    public function setEmploye(\Pablo\PeopleBundle\Entity\Employe $employe)
     {
-        $this->teacher = $teacher;
+        $this->employe = $employe;
 
         return $this;
     }
 
     /**
-     * Get teacher
+     * Get employe
      *
-     * @return \Pablo\PeopleBundle\Entity\Teacher
+     * @return \Pablo\PeopleBundle\Entity\Employe
      */
-    public function getTeacher()
+    public function getEmploye()
     {
-        return $this->teacher;
+        return $this->employe;
     }
 
     /**

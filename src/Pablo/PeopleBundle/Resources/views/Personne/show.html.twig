@@ -1,0 +1,105 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+   <div class="page-header">
+       <h2>Fiche &eacute;l&egrave;ve</h2>
+   </div>
+    <div class="row">
+        <div class="span6">
+            <div class="well well-small">
+                <h4>{{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}</h4>
+                <p>
+                    Nationalit&eacute;&nbsp;:&nbsp;<strong>{{ (personne.pays) ? personne.pays.nom }}</strong><br>
+                    Sexe&nbsp;:&nbsp;<strong>{{ (personne.sexe =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
+                    Date de naissance&nbsp;:&nbsp;<strong>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</strong><br>
+                    Lieu de naissance&nbsp;:&nbsp;<strong>{{ personne.lieunaissance }}</strong><br>
+                </p>
+                <div class="text-right">
+                    <a class="btn btn-mini" href="{{ path('pablo_personne_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li><a href="#adresses" data-toggle="tab">Adresses</a></li>
+                <li><a href="#telephones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
+                <li><a href="#emails" data-toggle="tab">E-mails</a></li>
+                {#<li><a href="#minerval" data-toggle="tab">Minerval</a></li>#}
+                {#<li><a href="#paiements" data-toggle="tab">Paiements</a></li>#}
+                {#<li><a href="#registrations" data-toggle="tab">Inscriptions</a></li>#}
+                {#<li><a href="#historic" data-toggle="tab">Historique</a></li>#}
+                <li><a href="#commentaires" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (personne.commentaires|length > 0) ? personne.commentaires|length}}</span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="adresses">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Adresse:_adresses.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="telephones">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Telephone:_telephones.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="emails">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Email:_emails.html.twig') %}
+                    </div>
+                </div>
+                {#<div class="tab-pane" id="minerval">#}
+                    {#<h4>Minerval</h4>#}
+                {#</div>#}
+                {#<div class="tab-pane" id="paiements">#}
+                    {#<h4>Paiements</h4>#}
+                {#</div>#}
+                {#<div class="tab-pane" id="registrations">#}
+                    {#<h4>Inscriptions</h4>#}
+                {#</div>#}
+                {#<div class="tab-pane" id="historic">#}
+                    {#<h4>Historique</h4>#}
+                {#</div>#}
+                <div class="tab-pane" id="commentaires">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Commentaire:_commentaires.html.twig') %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include('PabloPeopleBundle::_modal.html.twig') %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if ($(location).attr('hash')) {
+                $('.nav-tabs a[href="' + $(location).attr('hash') + '"]').tab('show');
+            } else {
+                $('.nav-tabs a[href="#adresses"]').tab('show');
+            }
+
+            $('a.btn-danger').click(function(event) {
+                event.preventDefault();
+
+                $('.modal').modal('show');
+
+                url = $(this).attr('href');
+                console.log(url);
+                $('div.modal-footer button.btn-primary').click(function() {
+                    $(location).attr('href', url);
+                })
+            });
+        })
+    </script>
+{% endblock javascripts %}

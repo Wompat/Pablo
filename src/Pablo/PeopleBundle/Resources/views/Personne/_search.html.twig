@@ -1,0 +1,9 @@
+<div class="span12">
+    <form class="form-inline" action="{{ path('pablo_personne_search') }}" method="post">
+        {{ form_widget(form.nom) }}
+        {{ form_widget(form.prenom) }}
+        {{ form_widget(form.datenaissance) }}
+        {{ form_rest(form) }}
+        <button class="btn pull-right" type="submit"><i class="icon-search"></i>&nbsp;chercher</button>
+    </form>
+</div>

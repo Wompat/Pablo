@@ -1,39 +1,39 @@
-pablo_people_student:
-    resource: "@PabloPeopleBundle/Resources/config/routing/student.yml"
-    prefix:   /student
+pablo_people_personne:
+    resource: "@PabloPeopleBundle/Resources/config/routing/personne.yml"
+    prefix:   /personne
 
-pablo_people_teacher:
-    resource: "@PabloPeopleBundle/Resources/config/routing/teacher.yml"
-    prefix:   /teacher
+pablo_people_employe:
+    resource: "@PabloPeopleBundle/Resources/config/routing/employe.yml"
+    prefix:   /employe
 
-pablo_people_address:
-    resource: "@PabloPeopleBundle/Resources/config/routing/address.yml"
-    prefix:   /address
+pablo_people_adresse:
+    resource: "@PabloPeopleBundle/Resources/config/routing/adresse.yml"
+    prefix:   /adresse
 
-pablo_people_phone:
-    resource: "@PabloPeopleBundle/Resources/config/routing/phone.yml"
-    prefix:   /phone
+pablo_people_telephone:
+    resource: "@PabloPeopleBundle/Resources/config/routing/telephone.yml"
+    prefix:   /telephone
 
 pablo_people_email:
     resource: "@PabloPeopleBundle/Resources/config/routing/email.yml"
     prefix:   /email
 
-pablo_people_comment:
-    resource: "@PabloPeopleBundle/Resources/config/routing/comment.yml"
-    prefix:   /comment
+pablo_people_commentaire:
+    resource: "@PabloPeopleBundle/Resources/config/routing/commentaire.yml"
+    prefix:   /commentaire
 
-pablo_city_list:
-    path:     /city/
-    defaults: { _controller: PabloPeopleBundle:City:list }
+pablo_localite_list:
+    path:     /localite/
+    defaults: { _controller: PabloPeopleBundle:Localite:list }
 
-pablo_city_json:
-    path:     /city/json
-    defaults: { _controller: PabloPeopleBundle:City:json }
+pablo_localite_json:
+    path:     /localite/json
+    defaults: { _controller: PabloPeopleBundle:Localite:json }
 
-pablo_country_list:
-    path:     /country/
-    defaults: { _controller: PabloPeopleBundle:Country:json }
+pablo_pays_list:
+    path:     /pays/
+    defaults: { _controller: PabloPeopleBundle:Pays:json }
 
-pablo_country_json:
-    path:     /country/json
-    defaults: { _controller: PabloPeopleBundle:Country:json }
+pablo_pays_json:
+    path:     /pays/json
+    defaults: { _controller: PabloPeopleBundle:Pays:json }

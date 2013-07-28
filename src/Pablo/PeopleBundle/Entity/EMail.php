@@ -25,9 +25,9 @@ class Email
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=60)
+     * @ORM\Column(name="adresse", type="string", length=60)
      */
-    private $address;
+    private $adresse;
 
     /**
      * @var string
@@ -37,12 +37,12 @@ class Email
     private $info;
 
     /**
-     * @var \Pablo\PeopleBundle\Entity\Student
+     * @var \Pablo\PeopleBundle\Entity\Personne
      *
-     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Student", inversedBy="emails")
-     * @ORM\JoinColumn(name="idperson", referencedColumnName="idperson", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="emails")
+     * @ORM\JoinColumn(name="idpersonne", referencedColumnName="idpersonne", nullable=false)
      */
-    private $person;
+    private $personne;
 
     /**
      * Get id
@@ -55,26 +55,26 @@ class Email
     }
 
     /**
-     * Set address
+     * Set adresse
      *
-     * @param string $address
+     * @param string $adresse
      * @return Email
      */
-    public function setAddress($address)
+    public function setAdresse($adresse)
     {
-        $this->address = $address;
+        $this->adresse = $adresse;
     
         return $this;
     }
 
     /**
-     * Get address
+     * Get adresse
      *
      * @return string 
      */
-    public function getAddress()
+    public function getAdresse()
     {
-        return $this->address;
+        return $this->adresse;
     }
 
     /**
@@ -101,25 +101,25 @@ class Email
     }
 
     /**
-     * Set person
+     * Set personne
      *
-     * @param \Pablo\PeopleBundle\Entity\Student $person
+     * @param \Pablo\PeopleBundle\Entity\Personne $personne
      * @return Email
      */
-    public function setPerson(\Pablo\PeopleBundle\Entity\Student $person)
+    public function setPersonne(\Pablo\PeopleBundle\Entity\Personne $personne)
     {
-        $this->person = $person;
+        $this->personne = $personne;
     
         return $this;
     }
 
     /**
-     * Get person
+     * Get personne
      *
-     * @return \Pablo\PeopleBundle\Entity\Student 
+     * @return \Pablo\PeopleBundle\Entity\Personne 
      */
-    public function getPerson()
+    public function getPersonne()
     {
-        return $this->person;
+        return $this->personne;
     }
 }

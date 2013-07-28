@@ -1,0 +1,34 @@
+<div class="span6">
+    <h4>Adresses</h4>
+    {% if (personne.adresses|length == 0) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune adresse enregistr&eacute;e.
+            </p>
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Rue</th>
+                <th>Localit&eacute;</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for adresse in personne.adresses %}
+                <tr>
+                    <td>{{ adresse.voie ~ ', ' ~ adresse.numero }}{{ (adresse.boite) ? '/' ~ adresse.boite }}</td>
+                    <td>{{ adresse.localite }}</td>
+                    <td style="text-align: right">
+                        <a class="btn btn-mini" href="{{ path('pablo_adresse_edit', {'id' : adresse.id}) }}"><i class="icon-pencil"></i></a>
+                        <a class="btn btn-mini btn-danger" href="{{ path('pablo_adresse_delete', {'id': adresse.id}) }}"><i class="icon-white icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a class="btn" href="{{ path('pablo_adresse_add', {'id': personne.id}) }}">ajouter une adresse</a>
+</div>

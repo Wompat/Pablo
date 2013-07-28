@@ -36,19 +36,19 @@ class CountryToCodeTransformer implements DataTransformerInterface
      * By convention, transform() should return an empty string if NULL is
      * passed.
      *
-     * @param mixed $country The value in the original representation
+     * @param mixed $pays The value in the original representation
      *
      * @return mixed The value in the transformed representation
      *
      * @throws TransformationFailedException When the transformation fails.
      */
-    public function transform($country)
+    public function transform($pays)
     {
-        if (null === $country) {
+        if (null === $pays) {
             return "";
         }
 
-        return $country->getName();
+        return $pays->getNom();
     }
 
     /**
@@ -69,27 +69,27 @@ class CountryToCodeTransformer implements DataTransformerInterface
      * By convention, reverseTransform() should return NULL if an empty string
      * is passed.
      *
-     * @param mixed $name The value in the transformed representation
+     * @param mixed $nom The value in the transformed representation
      *
      * @return mixed The value in the original representation
      *
      * @throws TransformationFailedException When the transformation fails.
      */
-    public function reverseTransform($name)
+    public function reverseTransform($nom)
     {
-        if (!$name) {
+        if (!$nom) {
             return null;
         }
 
-        $country = $this->om
-            ->getRepository('PabloPeopleBundle:Country')
-            ->findOneBy(array('name' => $name))
+        $pays = $this->om
+            ->getRepository('PabloPeopleBundle:Pays')
+            ->findOneBy(array('nom' => $nom))
         ;
 
-        if (null === $country) {
+        if (null === $pays) {
             throw new TransformationFailedException('Le pays indiqué n\'existe pas.');
         }
 
-        return $country;
+        return $pays;
     }
 }

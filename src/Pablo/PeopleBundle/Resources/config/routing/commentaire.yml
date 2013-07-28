@@ -1,0 +1,31 @@
+pablo_commentaire_add:
+    path:     /add/{id}
+    defaults: { _controller: PabloPeopleBundle:Commentaire:add }
+    requirements:
+        id: \d+
+
+pablo_commentaire_create:
+    path:     /create/{id}
+    defaults: { _controller: PabloPeopleBundle:Commentaire:create }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_commentaire_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PabloPeopleBundle:Commentaire:edit }
+    requirements:
+        id: \d+
+
+pablo_commentaire_update:
+    path:     /update/{id}
+    defaults: { _controller: PabloPeopleBundle:Commentaire:update }
+    requirements:
+        id: \d+
+        _method: post
+
+pablo_commentaire_delete:
+    path:     /delete/{id}
+    defaults: { _controller: PabloPeopleBundle:Commentaire:delete }
+    requirements:
+        id: \d+

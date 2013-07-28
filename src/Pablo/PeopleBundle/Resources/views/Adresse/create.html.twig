@@ -1,0 +1,52 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter une adresse</h2>
+    </div>
+    <form class="form-horizontal" action="{{ path('pablo_adresse_create', {'id': adresse.personne.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.voie) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.voie) }}</label>
+            <div class="controls">
+                {{ form_widget(form.voie) }}
+                <span class="help-inline">{{ form_errors(form.voie) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.numero) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.numero) }}</label>
+            <div class="controls">
+                {{ form_widget(form.numero) }}
+                <span class="help-inline">{{ form_errors(form.numero) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.boite) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.boite) }}</label>
+            <div class="controls">
+                {{ form_widget(form.boite) }}
+                <span class="help-inline">{{ form_errors(form.boite) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.localite) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.localite) }}</label>
+            <div class="controls">
+                {{ form_widget(form.localite) }}
+                <span class="help-inline">{{ form_errors(form.localite) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            {#<a class="btn" href="{{ path('pablo_personne_show', {'id': adresse.personne.id}) }}#adresses">annuler</a>#}
+            <a class="btn" href="{{ url }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            autosuggest('{{ path('pablo_localite_json') }}', '.city-selector');
+        })
+    </script>
+{% endblock %}

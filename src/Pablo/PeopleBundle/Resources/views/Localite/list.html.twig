@@ -1,0 +1,36 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Liste des localit&eacute;s</h2>
+    </div>
+    {% if (not localites) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun r&eacute;sultat.</h4>
+            <p>
+                Il n&apos;y a aucune localit&eacute; actuellement enregistr&eacute; dans la base de donn&eacute;es.
+            </p>
+        </div>
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Code postal</th>
+                <th>Localit&eacute;</th>
+                <th>Province</th>
+                <th>Pays</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for localite in localites %}
+                <tr>
+                    <td>{{ localite.nom }}</td>
+                    <td>{{ localite.codepostal }}</td>
+                    <td>{{ localite.province }}</td>
+                    <td>{{ (localite.pays) ? localite.pays.nom }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock content %}

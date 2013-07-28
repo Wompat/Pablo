@@ -1,0 +1,13 @@
+pablo_organisation_attribution:
+    resource: "@PabloOrgBundle/Resources/config/routing/attribution.yml"
+    prefix:   /attribution
+
+pablo_cours_json:
+    path:     /cours/json
+    defaults: { _controller: PabloOrgBundle:Cours:json }
+#    requirements:
+#        id: \d+
+
+pablo_course_list:
+    path:     /cours/list
+    defaults: { _controller: PabloOrgBundle:Cours:list }

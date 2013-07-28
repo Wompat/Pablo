@@ -1,0 +1,36 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Liste des pays</h2>
+    </div>
+    {% if (not pays) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun r&eacute;sultat.</h4>
+            <p>
+                Il n&apos;y a aucun pays actuellement enregistr&eacute; dans la base de donn&eacute;es.
+            </p>
+        </div>
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Continent</th>
+                <th>Code FWB</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in pays %}
+                <tr>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.nom }}</td>
+                    <td>{{ (item.continent) ? item.continent.nom }}</td>
+                    <td>{{ item.codeFWB }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock content %}

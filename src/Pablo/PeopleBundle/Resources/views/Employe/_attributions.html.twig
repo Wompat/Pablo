@@ -1,0 +1,46 @@
+<div class="span12">
+    <h4>Attributions</h4>
+    {% if (personne.attributions|length == 0) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucune attributions enregistr&eacute;e.
+            </p>
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ann&eacute;e</th>
+                <th>D&eacute;but</th>
+                <th>Fin</th>
+                <th>Fonction</th>
+                <th>Statut</th>
+                <th>Intitul&eacute;</th>
+                <th>Sp&eacute;cialit&eacute;</th>
+                <th>P&eacute;riodes</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for attribution in personne.attributions %}
+                <tr>
+                    <td>{{ attribution.year }}</td>
+                    <td>{{ attribution.startDate|date('d/m/Y') }}</td>
+                    <td>{{ attribution.endDate|date('d/m/Y') }}</td>
+                    <td>{{ attribution.jobFunction }}</td>
+                    <td>{{ attribution.status }}</td>
+                    <td>{{ attribution.course }}</td>
+                    <td>{{ attribution.specialty }}</td>
+                    <td>{{ attribution.periods }}</td>
+                    <td style="text-align: right">
+                        <a class="btn btn-mini" href="#"><i class="icon-pencil"></i></a>
+                        <a class="btn btn-mini btn-danger" href="#"><i class="icon-white icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a class="btn" href="{{ path('pablo_attribution_add', {'id': personne.id}) }}">ajouter une attribution</a>
+</div>

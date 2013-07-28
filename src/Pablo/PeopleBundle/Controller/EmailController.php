@@ -3,33 +3,46 @@
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Email;
-use Pablo\PeopleBundle\Entity\Student;
-use Pablo\PeopleBundle\Entity\Teacher;
+use Pablo\PeopleBundle\Entity\Personne;
+use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\PeopleBundle\Form\EmailType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class EmailController extends Controller
 {
-    public function addAction($id, Student $student)
+    public function addAction($id, Personne $personne)
     {
         $email = new Email();
-        $email->setPerson($student);
+        $email->setPersonne($personne);
 
         $form = $this->createForm(new EmailType(), $email);
+
+        if ($email->getPersonne() instanceof Employe) {
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        } else {
+            $url = $this->generateUrl('pablo_personne_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        }
 
         return $this->render('PabloPeopleBundle:Email:create.html.twig', array(
             'email' => $email,
             'form' => $form->createView(),
+            'url' => $url,
         ));
     }
 
-    public function createAction($id, Student $student)
+    public function createAction($id, Personne $personne)
     {
         $email = new Email();
-        $email->setPerson($student);
+        $email->setPersonne($personne);
 
         $form = $this->createForm(new EmailType(), $email);
         $form->handleRequest($this->getRequest());
+
+        if ($email->getPersonne() instanceof Employe) {
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        } else {
+            $url = $this->generateUrl('pablo_personne_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        }
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -41,18 +54,13 @@ class EmailController extends Controller
                 'content' => 'L\'adresse e-mail a été enregistrée.',
             ));
 
-            if ($email->getPerson() instanceof Teacher) {
-                $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
-            } else {
-                $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
-            }
-
             return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Email:create.html.twig', array(
             'email' => $email,
             'form' => $form->createView(),
+            'url' => $url,
         ));
     }
 
@@ -60,9 +68,16 @@ class EmailController extends Controller
     {
         $form = $this->createForm(new EmailType(), $email);
 
+        if ($email->getPersonne() instanceof Employe) {
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        } else {
+            $url = $this->generateUrl('pablo_personne_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        }
+
         return $this->render('PabloPeopleBundle:Email:edit.html.twig', array(
             'email' => $email,
             'form' => $form->createView(),
+            'url' => $url,
         ));
     }
 
@@ -70,6 +85,12 @@ class EmailController extends Controller
     {
         $form = $this->createForm(new EmailType(), $email);
         $form->handleRequest($this->getRequest());
+
+        if ($email->getPersonne() instanceof Employe) {
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        } else {
+            $url = $this->generateUrl('pablo_personne_show', array('id' => $email->getPersonne()->getId())) . '#emails';
+        }
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -80,18 +101,13 @@ class EmailController extends Controller
                 'content' => 'L\'adresse e-mail a été modifiée.',
             ));
 
-            if ($email->getPerson() instanceof Teacher) {
-                $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
-            } else {
-                $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
-            }
-
             return $this->redirect($url);
         }
 
         return $this->render('PabloPeopleBundle:Email:edit.html.twig', array(
             'email' => $email,
             'form' => $form->createView(),
+            'url' => $url,
         ));
     }
 
@@ -106,10 +122,10 @@ class EmailController extends Controller
             'content' => 'L\'adresse e-mail a été supprimée.',
         ));
 
-        if ($email->getPerson() instanceof Teacher) {
-            $url = $this->generateUrl('pablo_teacher_show', array('id' => $email->getPerson()->getId())) . '#emails';
+        if ($email->getPersonne() instanceof Employe) {
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $email->getPersonne()->getId())) . '#emails';
         } else {
-            $url = $this->generateUrl('pablo_student_show', array('id' => $email->getPerson()->getId())) . '#emails';
+            $url = $this->generateUrl('pablo_personne_show', array('id' => $email->getPersonne()->getId())) . '#emails';
         }
 
         return $this->redirect($url);

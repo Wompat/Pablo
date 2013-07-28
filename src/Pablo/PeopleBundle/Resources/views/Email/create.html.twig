@@ -4,12 +4,12 @@
     <div class="page-header">
         <h2>Ajouter une adresse e-mail</h2>
     </div>
-    <form class="form-horizontal" action="{{ path('pablo_email_create', {'id': email.person.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
-        <div class="control-group {{ (form_errors(form.address)) ? 'error' }}">
-            <label class="control-label">{{ form_label(form.address) }}</label>
+    <form class="form-horizontal" action="{{ path('pablo_email_create', {'id': email.personne.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.adresse)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.adresse) }}</label>
             <div class="controls">
-                {{ form_widget(form.address) }}
-                <span class="help-inline">{{ form_errors(form.address) }}</span>
+                {{ form_widget(form.adresse) }}
+                <span class="help-inline">{{ form_errors(form.adresse) }}</span>
             </div>
         </div>
         <div class="control-group {{ (form_errors(form.info)) ? 'error' }}">
@@ -23,7 +23,7 @@
         {{ form_rest(form) }}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="valider">
-            <a class="btn" href="{{ path('pablo_student_show', {'id': email.person.id}) ~ '#emails' }}">annuler</a>
+            <a class="btn" href="{{ url }}">annuler</a>
         </div>
     </form>
 {% endblock %}

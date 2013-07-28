@@ -1,0 +1,74 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Donn&eacute;es personnelles</h2>
+    </div>
+    <form class="form form-horizontal" action="{{ path('pablo_personne_update', {'id': personne.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.nom)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.nom) }}</label>
+            <div class="controls">
+                {{ form_widget(form.nom) }}
+                <span class="help-inline">{{ form_errors(form.nom) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.prenom)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.prenom) }}</label>
+            <div class="controls">
+                {{ form_widget(form.prenom) }}
+                <span class="help-inline">{{ form_errors(form.prenom) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.pays)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.pays) }}</label>
+            <div class="controls">
+                {{ form_widget(form.pays) }}
+                <span class="help-inline">{{ form_errors(form.pays) }}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ form_label(form.sexe) }}</label>
+            <div class="controls">
+                <label class="radio">
+                    {{ form_widget(form.sexe) }}
+                </label>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.datenaissance)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.datenaissance) }}</label>
+            <div class="controls">
+                {{ form_widget(form.datenaissance) }}
+                <span class="help-inline">{{ form_errors(form.datenaissance) }}</span>
+            </div>
+        </div>
+        <div class="control-group {{ (form_errors(form.lieunaissance)) ? 'error' }}">
+            <label class="control-label">{{ form_label(form.lieunaissance) }}</label>
+            <div class="controls">
+                {{ form_widget(form.lieunaissance) }}
+                <span class="help-inline">{{ form_errors(form.lieunaissance) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ path('pablo_personne_show', {'id': personne.id}) }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            autosuggest('{{ path('pablo_pays_json') }}', '.country-selector');
+
+            $('.date-selector').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-90:-6",
+                minDate: "-90y",
+                maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
+            });
+        })
+    </script>
+{% endblock %}

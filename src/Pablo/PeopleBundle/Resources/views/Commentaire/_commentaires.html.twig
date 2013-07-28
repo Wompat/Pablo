@@ -1,0 +1,24 @@
+<div class="span6">
+    <h4>Commentaires</h4>
+    {% for commentaire in personne.commentaires %}
+        <blockquote>
+            <div class="pull-right">
+                <a class="btn btn-mini" href="{{ path('pablo_commentaire_edit', {'id': commentaire.id}) }}"><i class="icon-pencil"></i></a>
+                <a class="btn btn-mini btn-danger" href="{{ path('pablo_commentaire_delete', {'id': commentaire.id}) }}"><i class="icon-white icon-remove"></i></a>
+            </div>
+            <p>{{ commentaire.contenu }}</p>
+            <small>{{ 'modifié par ' ~ commentaire.user ~ ', le ' ~ commentaire.datemodification|date('d/m/Y') ~ ' à ' ~ commentaire.datemodification|date('H:i:s') }}</small>
+        </blockquote>
+        {{ (not loop.last) ? '<hr>' }}
+    {% else %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Aucun résulat</h4>
+            <p>
+                Il n&apos;y a actuellement aucun commentaire enregistr&eacute;.
+            </p>
+        </div>
+    {% endfor %}
+    <p>
+        <a class="btn" href="{{ path('pablo_commentaire_add', {'id': personne.id}) }}">ajouter un commentaire</a>
+    </p>
+</div>

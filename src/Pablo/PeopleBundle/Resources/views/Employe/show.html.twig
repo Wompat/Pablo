@@ -1,0 +1,104 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+   <div class="page-header">
+       <h2>Fiche Professeur</h2>
+   </div>
+    <div class="row">
+        <div class="span6">
+            <div class="well well-small">
+                <h4>{{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}</h4>
+                <p>
+                    Nationalit&eacute;&nbsp;&colon;&nbsp;<strong>{{ (personne.pays) ? personne.pays.nom }}</strong><br>
+                    Sexe&nbsp;&colon;&nbsp;<strong>{{ (personne.sexe =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
+                    Date de naissance&nbsp;&colon;&nbsp;<strong>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</strong><br>
+                    Lieu de naissance&nbsp;&colon;&nbsp;<strong>{{ personne.lieunaissance }}</strong><br>
+                    Matricule : <strong>{{ personne.matricule }}</strong>
+                </p>
+                {% if (personne.user) %}
+                    <p>
+                        Nom&nbsp;&colon;&nbsp;<strong>{{ personne.user.username|lower }}</strong><br>
+                        Groupe{{ (personne.user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;
+                        <strong>{% for group in personne.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong><br>
+                        Activ&eacute;&nbsp;&colon;&nbsp;<strong>{{ (personne.user.enabled) ? 'oui' : 'non' }}</strong>
+                    </p>
+                {% endif %}
+                <div class="text-right">
+                    <a class="btn btn-mini" href="{{ path('pablo_employe_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            {% include('PabloPeopleBundle:Employe:_buttons.html.twig') %}
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}" style="margin-top: 20px;">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li><a href="#adresses" data-toggle="tab">Adresses</a></li>
+                <li><a href="#telephones" data-toggle="tab">T&eacute;l&eacute;phones</a></li>
+                <li><a href="#emails" data-toggle="tab">Emails</a></li>
+                <li><a href="#attributions" data-toggle="tab">Attributions</a></li>
+                <li><a href="#commentaires" data-toggle="tab">Commentaires&nbsp;<span class="badge badge-info">{{ (personne.commentaires|length > 0) ? personne.commentaires|length}}</span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="adresses">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Adresse:_adresses.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="telephones">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Telephone:_telephones.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="emails">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Email:_emails.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="attributions">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Employe:_attributions.html.twig') %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="commentaires">
+                    <div class="row">
+                        {% include('PabloPeopleBundle:Commentaire:_commentaires.html.twig') %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include('PabloPeopleBundle::_modal.html.twig') %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if ($(location).attr('hash')) {
+                $('.nav-tabs a[href="' + $(location).attr('hash') + '"]').tab('show');
+            } else {
+                $('.nav-tabs a[href="#adresses"]').tab('show');
+            }
+
+            $('a.danger, a.btn-danger').click(function(event) {
+                event.preventDefault();
+
+                $('.modal').modal('show');
+
+                url = $(this).attr('href');
+                $('div.modal-footer button.btn-primary').click(function() {
+                    $(location).attr('href', url);
+                })
+            });
+        })
+    </script>
+{% endblock javascripts %}

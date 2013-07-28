@@ -4,20 +4,20 @@ namespace Pablo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 //use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Pablo\PeopleBundle\Entity\Teacher;
+use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\UserBundle\Entity\User;
 use Pablo\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    public function addAction($id, Teacher $teacher)
+    public function addAction($id, Employe $employe)
     {
 //        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
 //            throw new AccessDeniedException();
 //        }
 
         $user = new User();
-        $user->setTeacher($teacher);
+        $user->setEmploye($employe);
 
         $form = $this->createForm(new UserType(), $user);
 
@@ -27,10 +27,10 @@ class UserController extends Controller
         ));
     }
 
-    public function createAction($id, Teacher $teacher)
+    public function createAction($id, Employe $employe)
     {
         $user = new User();
-        $user->setTeacher($teacher);
+        $user->setEmploye($employe);
 
         $form = $this->createForm(new UserType(), $user);
         $form->handleRequest($this->getRequest());
@@ -51,7 +51,7 @@ class UserController extends Controller
                 'content' => 'L\'utilisateur a été créé avec succès.',
             ));
 
-            $url = $this->generateUrl('pablo_teacher_show', array('id' => $user->getTeacher()->getId()));
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $user->getEmploye()->getId()));
             return $this->redirect($url);
         }
 
@@ -61,9 +61,9 @@ class UserController extends Controller
         ));
     }
 
-    public function editAction($id, Teacher $teacher)
+    public function editAction($id, Employe $employe)
     {
-        $user = $teacher->getUser();
+        $user = $employe->getUser();
 
         $form = $this->createForm(new UserType(), $user);
 
@@ -73,9 +73,9 @@ class UserController extends Controller
         ));
     }
 
-    public function updateAction($id, Teacher $teacher)
+    public function updateAction($id, Employe $employe)
     {
-        $user = $teacher->getUser();
+        $user = $employe->getUser();
 
         $form = $this->createForm(new UserType(), $user);
         $form->handleRequest($this->getRequest());
@@ -95,7 +95,7 @@ class UserController extends Controller
                 'content' => 'L\'utilisateur a été modifié.',
             ));
 
-            $url = $this->generateUrl('pablo_teacher_show', array('id' => $user->getTeacher()->getId()));
+            $url = $this->generateUrl('pablo_employe_show', array('id' => $user->getEmploye()->getId()));
             return $this->redirect($url);
         }
 
@@ -105,9 +105,9 @@ class UserController extends Controller
         ));
     }
 
-    public function enableAction($id, Teacher $teacher)
+    public function enableAction($id, Employe $employe)
     {
-        $user = $teacher->getUser();
+        $user = $employe->getUser();
         $user->setEnabled(!$user->getEnabled());
 
         $em = $this->getDoctrine()->getManager();
@@ -118,13 +118,13 @@ class UserController extends Controller
             'content' => 'L\'utilisateur a été modifié.',
         ));
 
-        $url = $this->generateUrl('pablo_teacher_show', array('id' => $user->getTeacher()->getId()));
+        $url = $this->generateUrl('pablo_employe_show', array('id' => $user->getEmploye()->getId()));
         return $this->redirect($url);
     }
 
-    public function deleteAction($id, Teacher $teacher)
+    public function deleteAction($id, Employe $employe)
     {
-        $user = $teacher->getUser();
+        $user = $employe->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
@@ -135,7 +135,7 @@ class UserController extends Controller
             'content' => 'L\'utilisateur a été supprimé.',
         ));
 
-        $url = $this->generateUrl('pablo_teacher_show', array('id' => $user->getTeacher()->getId()));
+        $url = $this->generateUrl('pablo_employe_show', array('id' => $user->getEmploye()->getId()));
         return $this->redirect($url);
     }
 }

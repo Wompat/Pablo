@@ -1,0 +1,21 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Ajouter un commentaire</h2>
+    </div>
+    <form action="{{ path('pablo_commentaire_create', {'id': commentaire.personne.id}) }}" method="post" enctype="{{ form_enctype(form) }}">
+        <div class="control-group {{ (form_errors(form.contenu) ? 'error') }}">
+            <label class="control-label">{{ form_label(form.contenu) }}</label>
+            <div class="controls">
+                {{ form_widget(form.contenu) }}
+                <span class="help-inline">{{ form_errors(form.contenu) }}</span>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="valider">
+            <a class="btn" href="{{ url }}">annuler</a>
+        </div>
+    </form>
+{% endblock content %}

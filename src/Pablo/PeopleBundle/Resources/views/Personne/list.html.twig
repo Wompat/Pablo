@@ -1,0 +1,70 @@
+{% extends('PabloPeopleBundle::layout.html.twig') %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Liste des &eacute;l&egrave;ves</h2>
+    </div>
+    <div class="row">
+        {% include('PabloPeopleBundle:Personne:_search.html.twig') %}
+    </div>
+    {% if (not personnes) %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">D&eacute;sol&eacute;</h4>
+            <p>
+                Aucun &eacute;l&egrave;ve trouv&eacute;.
+            </p>
+        </div>
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Pr&eacute;nom</th>
+                <th>Nationalit&eacute;</th>
+                <th>Sexe</th>
+                <th>Date de naissance</th>
+                <th>Lieu de naissance</th>
+                <th>Fiche</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.id }}</td>
+                <td>{{ personne.nom|upper }}</td>
+                <td>{{ personne.prenom|title }}</td>
+                <td>{{ (personne.pays) ? personne.pays.code }}</td>
+                <td>{{ personne.sexe }}</td>
+                <td>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</td>
+                <td>{{ personne.lieunaissance }}</td>
+                <td><a class="btn btn-mini" href="{{ path('pablo_personne_show', {'id': personne.id}) }}"><i class="icon-file"></i></a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pager">
+            <li class="previous {{ (page == 1) ? 'disabled' }}">
+                <a href="{{ (page == 1) ? '#' : path('pablo_personne_list', {'page': page - 1}) }}">&larr;&nbsp;Pr&eacute;c&eacute;dents</a>
+            </li>
+            <li class="next {{ (page == pages) ? 'disabled' }}">
+                <a href="{{ (page == pages) ? '#' : path('pablo_personne_list', {'page': page + 1}) }}">Suivants&nbsp;&rarr;</a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.date-selector').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-90:-6",
+                minDate: "-90y",
+                maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
+            });
+        })
+    </script>
+{% endblock javascripts %}

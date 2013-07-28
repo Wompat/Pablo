@@ -4,25 +4,27 @@
     <div class="page-header">
         <h2>Bienvenue !</h2>
     </div>
-    {#<div class="row">#}
-        {#<div class="span6">#}
-            {#<div class="media">#}
-                {#<img class="media-object pull-left" src="{{ asset('assets/img/custom-design/personal-information.png') }}" height="128px" width="128px">#}
-                {#<div class="media-body">#}
-                    {#<h3 class="media-heading">Mon profil</h3>#}
-                    {#<p>#}
-                        {#Nom d&apos;utilisateur&nbsp;&colon;&nbsp;<strong>{{ user.username|lower }}</strong><br>#}
-                        {#Groupe{{ (user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;#}
-                        {#<strong>{% for group in user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong><br>#}
-                    {#</p>#}
-                    {#<a class="btn btn-info" href="{{ path('pablo_profile_edit') }}"><i class="icon-white icon-pencil"></i>&nbsp;&eacute;diter mon profil</a>#}
-                {#</div>#}
-            {#</div>#}
-            {#{% for message in app.session.flashbag.get('profile') %}#}
-                {#<div class="alert {{ (message.type) ? 'alert-' ~ message.type }}" style="margin-top: 20px;">#}
-                    {#{{ message.content }}#}
-                {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
-    {#</div>#}
+    <div class="row">
+        <div class="span6">
+            <div class="media">
+                <img class="media-object pull-left" src="{{ asset('assets/img/custom-design/personal-information.png') }}" height="128px" width="128px">
+                <div class="media-body">
+                    <h3 class="media-heading">Mon profil</h3>
+                    <p>
+                        Nom d&apos;utilisateur&nbsp;&colon;&nbsp;<strong>{{ user.username|lower }}</strong><br>
+                        Groupe{{ (user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;
+                        <strong>{% for group in user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong><br>
+                    </p>
+                    <a class="btn btn-info" href="{{ path('pablo_profile_edit') }}"><i class="icon-white icon-pencil"></i>&nbsp;&eacute;diter mon profil</a>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            {% for message in app.session.flashbag.get('profile') %}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}" style="margin-top: 20px;">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

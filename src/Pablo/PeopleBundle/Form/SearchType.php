@@ -12,15 +12,15 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastName', null, array(
+            ->add('nom', null, array(
                 'required' => false,
                 'attr' => array('class' => 'span3', 'placeholder' => 'Nom')
             ))
-            ->add('firstName', null, array(
+            ->add('prenom', null, array(
                 'required' => false,
                 'attr' => array('class' => 'span3', 'placeholder' => 'Prénom')
             ))
-            ->add('dateOfBirth', null, array(
+            ->add('datenaissance', null, array(
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'input' => 'datetime',
@@ -32,7 +32,7 @@ class SearchType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Pablo\PeopleBundle\Entity\Student'
+            'data_class' => 'Pablo\PeopleBundle\Entity\Personne'
         ));
     }
 
