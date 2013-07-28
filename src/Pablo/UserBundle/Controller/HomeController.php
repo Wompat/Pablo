@@ -9,8 +9,10 @@ class HomeController extends Controller
 {
     public function welcomeAction()
     {
-
-        return $this->render('PabloUserBundle:Home:welcome.html.twig');
+        $user = $this->getUser();
+        return $this->render('PabloUserBundle:Home:welcome.html.twig', array(
+            'user' => $user,
+        ));
     }
 
 }

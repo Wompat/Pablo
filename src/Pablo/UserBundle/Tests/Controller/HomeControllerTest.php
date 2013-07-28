@@ -32,7 +32,7 @@ class HomeControllerTest extends WebTestCase
         $session = $this->client->getContainer()->get('session');
 
         $firewall = 'main';
-        $token = new UsernamePasswordToken('admin', null, $firewall, array('ROLE_ADMIN'));
+        $token = new UsernamePasswordToken('root', $firewall, array('ROLE_ADMIN'));
         $session->set('_security_'.$firewall, serialize($token));
         $session->save();
 
