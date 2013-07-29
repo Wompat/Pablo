@@ -6,29 +6,48 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
-    public function testLogin()
+    private $client = null;
+
+    public function setUp()
     {
-        $client = static::createClient();
-        $client->followRedirects();
-        $client->request('GET', '/login');
+        $this->client = static::createClient();
+    }
 
-        $crawler = $client->getCrawler();
-
-        $this->assertEquals(1, $crawler->filter('h2.form-signin-heading:contains("Pablo!")')->count(), 'Form signin heading should contains <Pablo!>');
-        $this->assertEquals(1, $crawler->filter('input[type=text][name=_username][required=required]')->count(), 'Form signin should contains <1 required text input with name _username>');
-        $this->assertEquals(1, $crawler->filter('input[type=password][name=_password][required=required]')->count(), 'Form signin should contains <1 required password input with name _password>');
-        $this->assertEquals(1, $crawler->filter('label.checkbox:contains("Se souvenir de moi")')->count(), 'Form signin should contains <label Se souvenir de moi>');
-        $this->assertEquals(1, $crawler->filter('input[type=checkbox][name=_remember_me]')->count(), 'Form signin should contains <1 checkbox with name _remember_me>');
-        $this->assertEquals(1, $crawler->filter('input[type=submit][value=Connexion]')->count(), 'Form signin should contains a <1 submit button with Connexion as value');
+    public function testLoginAction()
+    {
+        $crawler = $this->client->request('GET', '/login');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
+        $this->assertEquals(1, $crawler->filter('h2.form-signin-heading:contains("Pablo !")')->count(), 'Login devrait afficher <login form>');
 
         $button = $crawler->selectButton('Connexion');
         $form = $button->form();
 
-        $client->submit($form, array(
-            '_username' => 'noname',
-            '_password' => 'nopassword',
+        // Vérifie qu'un message d'erreur est affiché quand l'authentification échoue.
+        $this->client->submit($form, array(
+            '_username' => 'root',
+            '_password' => 'bonsoir'
         ));
 
-        $this->assertEquals(1, $crawler->filter('div:contains("Bad credentials")')->count());
+        $crawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
+        $this->assertEquals(1, $crawler->filter('div.alert-error:contains("Bad credentials")')->count(), 'Devrait être affiché <Bad credentials>.');
+
+        // Vérifie que l'utilisateur est bien redirigé vers la page d'accueil après s'être authentifié.
+        $this->client->submit($form, array(
+            '_username' => 'root',
+            '_password' => 'bonjour',
+        ));
+
+        $crawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers <welcome page>');
+    }
+
+    public function testLogoutAction()
+    {
+        $this->client->request('GET', '/logout');
+        $crawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
+        $this->assertEquals(1, $crawler->filter('h2.form-signin-heading:contains("Pablo !")')->count(), 'Logout devrait être rediriger vers <login form>');
     }
 }

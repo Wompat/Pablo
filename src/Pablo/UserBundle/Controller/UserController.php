@@ -3,7 +3,6 @@
 namespace Pablo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\UserBundle\Entity\User;
 use Pablo\UserBundle\Form\UserType;
@@ -12,9 +11,9 @@ class UserController extends Controller
 {
     public function addAction($id, Employe $employe)
     {
-//        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-//            throw new AccessDeniedException();
-//        }
+        if (null !== $employe->getUser()) {
+            throw new \InvalidArgumentException('Un utilisateur est déjà lié à cet employé.');
+        }
 
         $user = new User();
         $user->setEmploye($employe);
@@ -113,9 +112,11 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $result = ($user->getEnabled()) ? 'activé' : 'désactivé';
+
         $this->get('session')->getFlashBag()->add('notice', array(
             'type' => 'success',
-            'content' => 'L\'utilisateur a été modifié.',
+            'content' => 'L\'utilisateur a été ' . $result . '.',
         ));
 
         $url = $this->generateUrl('pablo_employe_show', array('id' => $user->getEmploye()->getId()));

@@ -14,5 +14,4 @@ class HomeController extends Controller
             'user' => $user,
         ));
     }
-
 }

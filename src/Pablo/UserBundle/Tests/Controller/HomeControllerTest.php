@@ -4,7 +4,6 @@ namespace Pablo\UserBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class HomeControllerTest extends WebTestCase
 {
@@ -13,30 +12,36 @@ class HomeControllerTest extends WebTestCase
     public function setUp()
     {
         $this->client = static::createClient();
+        $this->client->followRedirects();
+        $this->logIn();
     }
 
     public function testWelcome()
     {
-        $this->logIn();
-        $this->client->followRedirects();
-
         $crawler = $this->client->request('GET', '/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers <welcome page>');
+        $this->assertEquals(1, $crawler->filter('h3.media-heading:contains("Mon profil")')->count(), 'Devrait contenir <Mon profil>');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Header status should be <200>');
+        // Vérifie que le lien renvoie bien vers le formulaire d'éditon du profil et que le champ nom d'utilisateur est rempli.
+        $profileLink = $crawler->filter('a.btn-info')->first();
+        $username = $crawler->filter('p strong')->text();
 
-        $this->assertTrue($crawler->filter('div.page-header h2:contains("Bienvenue !")')->count() > 0, 'Should be redirected to the <welcome page>');
+        $crawler = $this->client->click($profileLink->link());
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Modifier mon profil")')->count(), 'Devrait rediriger vers <edit profile>');
+        $this->assertEquals(1, $crawler->filter('input[value=' . $username . ']')->count(), 'Le champ nom d\'utilisateur devrait contenir <' . $username . '>');
     }
 
     private function logIn()
     {
-        $session = $this->client->getContainer()->get('session');
+        $crawler = $this->client->request('GET', '/login');
 
-        $firewall = 'main';
-        $token = new UsernamePasswordToken('root', $firewall, array('ROLE_ADMIN'));
-        $session->set('_security_'.$firewall, serialize($token));
-        $session->save();
+        $button = $crawler->selectButton('Connexion');
+        $form = $button->form();
 
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
+        $this->client->submit($form, array(
+            '_username' => 'root',
+            '_password' => 'bonjour',
+        ));
     }
 }
