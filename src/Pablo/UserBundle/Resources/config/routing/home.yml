@@ -1,3 +1,7 @@
 pablo_user_welcome:
     path:     /
     defaults: { _controller: PabloUserBundle:Home:welcome }
+
+pablo_user_notready:
+    path:     /notready
+    defaults: { _controller: PabloUserBundle:Home:notReady }

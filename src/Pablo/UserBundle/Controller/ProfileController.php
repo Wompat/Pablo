@@ -30,7 +30,7 @@ class ProfileController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('profile', array(
+            $this->get('session')->getFlashBag()->add('notice', array(
                 'type' => 'success',
                 'content' => 'Le profil a été modifié.'
             ));

@@ -60,15 +60,8 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function() {
-            autosuggest('{{ path('pablo_pays_json') }}', '.country-selector');
-
-            $('.date-selector').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-90:-6",
-                minDate: "-90y",
-                maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
-            });
+            autocompletion('{{ path('pablo_pays_json') }}', '.country-selector');
+            calendrier('.date-selector');
         })
     </script>
 {% endblock %}

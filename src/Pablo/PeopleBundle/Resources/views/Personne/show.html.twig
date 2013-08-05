@@ -2,27 +2,32 @@
 
 {% block content %}
    <div class="page-header">
-       <h2>Fiche &eacute;l&egrave;ve</h2>
+       <h2>&Eacute;l&egrave;ve</h2>
    </div>
     <div class="row">
         <div class="span6">
             <div class="well well-small">
-                <h4>{{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}</h4>
-                <p>
-                    Nationalit&eacute;&nbsp;:&nbsp;<strong>{{ (personne.pays) ? personne.pays.nom }}</strong><br>
-                    Sexe&nbsp;:&nbsp;<strong>{{ (personne.sexe =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
-                    Date de naissance&nbsp;:&nbsp;<strong>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</strong><br>
-                    Lieu de naissance&nbsp;:&nbsp;<strong>{{ personne.lieunaissance }}</strong><br>
-                </p>
-                <div class="text-right">
-                    <a class="btn btn-mini" href="{{ path('pablo_personne_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
-                </div>
+                <dl class="dl-horizontal">
+                    <dt>Nom</dt>
+                    <dd>
+                        {{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}
+                        <a class="btn btn-mini pull-right" href="{{ path('pablo_employe_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
+                    </dd>
+                    <dt>Nationalit&eacute;</dt>
+                    <dd>{{ (personne.pays) ? personne.pays.nom }}</dd>
+                    <dt>Sexe</dt>
+                    <dd>{{ personne.sexe }}</dd>
+                    <dt>Date de naissance</dt>
+                    <dd>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</dd>
+                    <dt>Lieu de naissance</dt>
+                    <dd>{{ personne.lieunaissance }}</dd>
+                </dl>
             </div>
         </div>
         <div class="span6">
             {% for message in app.session.flashbag.get('notice') %}
                 <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
-                    {{ message.content }}
+                    <strong>{{ (message.type == 'error') ? 'Oups !' : 'OK !' }}</strong>&nbsp;{{ message.content }}
                 </div>
             {% endfor %}
         </div>
@@ -83,23 +88,8 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function() {
-            if ($(location).attr('hash')) {
-                $('.nav-tabs a[href="' + $(location).attr('hash') + '"]').tab('show');
-            } else {
-                $('.nav-tabs a[href="#adresses"]').tab('show');
-            }
-
-            $('a.btn-danger').click(function(event) {
-                event.preventDefault();
-
-                $('.modal').modal('show');
-
-                url = $(this).attr('href');
-                console.log(url);
-                $('div.modal-footer button.btn-primary').click(function() {
-                    $(location).attr('href', url);
-                })
-            });
+            onglets('#adresses');
+            confirmation('a.btn-danger');
         })
     </script>
 {% endblock javascripts %}

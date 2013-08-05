@@ -22,29 +22,29 @@ class UserControllerTest extends WebTestCase
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('admin', 'admin', array('ROLE_ADMIN'));
         $this->client->request('GET', '/user/add/1');
-        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <403>');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [403]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie qu'un seul utilisateur peut être lié à un employé
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('root', 'bonjour', array('ROLE_SUPER_ADMIN'));
         $this->client->request('GET', '/user/add/1');
-        $this->assertEquals(500, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <500>');
+        $this->assertEquals(500, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [500]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que le formulaire est bien affiché
         // -------------------------------------------------------------------------------------------------------------
         $crawler = $this->client->request('GET', '/user/add/3');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Ajouter un utilisateur")')->count(), 'Devrait afficher <user create>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Ajouter un utilisateur")')->count(), 'Devrait afficher [user create]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que le bouton annuler renvoie vers la fiche professeur
         // -------------------------------------------------------------------------------------------------------------
         $cancelLink = $crawler->filter('div.form-actions a.btn');
         $crawler = $this->client->click($cancelLink->link());
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers <employe show>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers [employe show]');
     }
 
     public function testCreateAction()
@@ -66,9 +66,9 @@ class UserControllerTest extends WebTestCase
         ));
 
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers <employe show>');
-        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("L\'utilisateur a été créé avec succès.")')->count(), 'Devrait afficher <utilisateur créé>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers [employe show]');
+        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("L\'utilisateur a été créé avec succès.")')->count(), 'Devrait afficher [utilisateur créé]');
     }
 
     public function testEditAction()
@@ -78,23 +78,23 @@ class UserControllerTest extends WebTestCase
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('admin', 'admin', array('ROLE_ADMIN'));
         $this->client->request('GET', '/user/edit/3');
-        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut <403>');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut [403]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que le formulaire est bien affiché
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('root', 'bonjour', array('ROLE_SUPER_ADMIN'));
         $crawler = $this->client->request('GET', '/user/edit/3');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Modifier un utilisateur")')->count(), 'Devrait afficher <user edit>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Modifier un utilisateur")')->count(), 'Devrait afficher [user edit]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que le bouton annuler renvoie vers la fiche professeur
         // -------------------------------------------------------------------------------------------------------------
         $cancelLink = $crawler->filter('div.form-actions a.btn');
         $crawler = $this->client->click($cancelLink->link());
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers <employe show>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers [employe show]');
     }
 
     public function testUpdateAction()
@@ -117,18 +117,18 @@ class UserControllerTest extends WebTestCase
 
         $crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers <employe show>');
-        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("L\'utilisateur a été modifié.")')->count(), 'Devrait afficher <utilisateur modifié>');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Fiche professeur")')->count(), 'Devrait rediriger vers [employe show]');
+        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("L\'utilisateur a été modifié.")')->count(), 'Devrait afficher [utilisateur modifié]');
     }
 
     public function testEnableAction()
     {
         // -------------------------------------------------------------------------------------------------------------
-        // Vérifie qu'il faut au moins le privilège SUPER_ADMIN pour supprimer un utilisateur.
+        // Vérifie qu'il faut au moins le privilège SUPER_ADMIN pour activer un utilisateur.
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('admin', 'admin', array('ROLE_ADMIN'));
         $this->client->request('GET', '/user/enable/3');
-        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut <403>');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut [403]');
 
         $this->logIn('root', 'bonjour', array('ROLE_SUPER_ADMIN'));
 
@@ -137,16 +137,16 @@ class UserControllerTest extends WebTestCase
         // -------------------------------------------------------------------------------------------------------------
         $this->client->request('GET', '/user/enable/3');
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été désactivé.")')->count(), 'Devrait afficher <utilisateur désactivé>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été désactivé.")')->count(), 'Devrait afficher [utilisateur désactivé]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que l'utilisateur est bien réactivé
         // -------------------------------------------------------------------------------------------------------------
         $this->client->request('GET', '/user/enable/3');
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été activé.")')->count(), 'Devrait afficher <utilisateur activé>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été activé.")')->count(), 'Devrait afficher [utilisateur activé]');
     }
 
     public function testDeleteAction()
@@ -156,7 +156,7 @@ class UserControllerTest extends WebTestCase
         // -------------------------------------------------------------------------------------------------------------
         $this->logIn('admin', 'admin', array('ROLE_ADMIN'));
         $this->client->request('GET', '/user/delete/3');
-        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut <403>');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode(), 'Admin devrait avoir le statut [403]');
 
         // -------------------------------------------------------------------------------------------------------------
         // Vérifie que l'utilisateur est bien supprimé
@@ -164,8 +164,8 @@ class UserControllerTest extends WebTestCase
         $this->logIn('root', 'bonjour', array('ROLE_SUPER_ADMIN'));
         $this->client->request('GET', '/user/delete/3');
         $crawler = $this->client->followRedirect();
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été supprimé.")')->count(), 'Devrait afficher <utilisateur supprimé>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Root devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.alert:contains("L\'utilisateur a été supprimé.")')->count(), 'Devrait afficher [utilisateur supprimé]');
     }
 
     private function logIn($username, $credentials, $role)

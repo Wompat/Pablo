@@ -2,37 +2,43 @@
 
 {% block content %}
    <div class="page-header">
-       <h2>Fiche professeur</h2>
+       <h2>Professeur</h2>
    </div>
     <div class="row">
         <div class="span6">
             <div class="well well-small">
-                <h4>{{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}</h4>
-                <p>
-                    Nationalit&eacute;&nbsp;&colon;&nbsp;<strong>{{ (personne.pays) ? personne.pays.nom }}</strong><br>
-                    Sexe&nbsp;&colon;&nbsp;<strong>{{ (personne.sexe =='F') ? 'Féminin' : 'Masculin' }}</strong><br>
-                    Date de naissance&nbsp;&colon;&nbsp;<strong>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</strong><br>
-                    Lieu de naissance&nbsp;&colon;&nbsp;<strong>{{ personne.lieunaissance }}</strong><br>
-                    Matricule : <strong>{{ personne.matricule }}</strong>
-                </p>
+                <dl class="dl-horizontal">
+                    <dt>Nom</dt>
+                    <dd>
+                        {{ personne.prenom|title ~ ' ' ~ personne.nom|upper }}
+                        <a class="btn btn-mini pull-right" href="{{ path('pablo_employe_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
+                    </dd>
+                    <dt>Nationalit&eacute;</dt>
+                    <dd>{{ (personne.pays) ? personne.pays.nom }}</dd>
+                    <dt>Sexe</dt>
+                    <dd>{{ personne.sexe }}</dd>
+                    <dt>Date de naissance</dt>
+                    <dd>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</dd>
+                    <dt>Lieu de naissance</dt>
+                    <dd>{{ personne.lieunaissance }}</dd>
+                    <dt>Matricule</dt>
+                    <dd>{{ personne.matricule }}</dd>
+                </dl>
                 {% if (personne.user) %}
-                    <p>
-                        Nom&nbsp;&colon;&nbsp;<strong>{{ personne.user.username|lower }}</strong><br>
-                        Groupe{{ (personne.user.groups|length > 1) ? 's' }}&nbsp;&colon;&nbsp;
-                        <strong>{% for group in personne.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</strong><br>
-                        Activ&eacute;&nbsp;&colon;&nbsp;<strong>{{ (personne.user.enabled) ? 'oui' : 'non' }}</strong>
-                    </p>
+                    <dl class="dl-horizontal">
+                        <dt>Utilisateur</dt>
+                        <dd>{{ personne.user.username|lower }}</dd>
+                        <dt>Groupe{{ (personne.user.groups|length > 1) ? 's' }}</dt>
+                        <dd>{% for group in personne.user.groups %}{{ (not loop.last) ? group.name|lower ~ ', ' : group.name|lower }}{% endfor %}</dd>
+                    </dl>
                 {% endif %}
-                <div class="text-right">
-                    <a class="btn btn-mini" href="{{ path('pablo_employe_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
-                </div>
             </div>
         </div>
         <div class="span6">
-            {% include('PabloPeopleBundle:Employe:_buttons.html.twig') %}
+            {% include('PabloPeopleBundle:Employe:_toolbar.html.twig') %}
             {% for message in app.session.flashbag.get('notice') %}
-                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}" style="margin-top: 20px;">
-                    {{ message.content }}
+                <div class="alert {{ (message.type) ? 'alert-' ~ message.type }}">
+                    <strong>{{ (message.type == 'error') ? 'Oups !' : 'OK !' }}</strong>&nbsp;{{ message.content }}
                 </div>
             {% endfor %}
         </div>
@@ -83,22 +89,8 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function() {
-            if ($(location).attr('hash')) {
-                $('.nav-tabs a[href="' + $(location).attr('hash') + '"]').tab('show');
-            } else {
-                $('.nav-tabs a[href="#adresses"]').tab('show');
-            }
-
-            $('a.danger, a.btn-danger').click(function(event) {
-                event.preventDefault();
-
-                $('.modal').modal('show');
-
-                url = $(this).attr('href');
-                $('div.modal-footer button.btn-primary').click(function() {
-                    $(location).attr('href', url);
-                })
-            });
+            onglets('#adresses');
+            confirmation('a.btn-danger');
         })
     </script>
 {% endblock javascripts %}

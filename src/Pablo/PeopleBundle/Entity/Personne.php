@@ -140,6 +140,7 @@ class Personne
      */
     public function setNom($nom)
     {
+//        $this->nom = mb_strtoupper($this->enleverAccents($nom), 'utf-8');
         $this->nom = $nom;
     
         return $this;
@@ -163,8 +164,9 @@ class Personne
      */
     public function setPrenom($prenom)
     {
+//        $this->prenom = mb_strtoupper($this->enleverAccents($prenom), 'utf-8');
         $this->prenom = $prenom;
-    
+
         return $this;
     }
 
@@ -400,5 +402,21 @@ class Personne
     public function getCommentaires()
     {
         return $this->commentaires;
+    }
+
+    private function enleverAccents($chaine)
+    {
+        return strtr(mb_strtolower($chaine, 'utf-8'), array(
+            'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a',
+            'ç'=>'c',
+            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
+            'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'i'=>'i',
+            'ñ'=>'n',
+            'ð'=>'o', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'œ'=>'o', 'ø'=>'o',
+            'š'=>'s',
+            'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
+            'ý'=>'y', 'ÿ'=>'y', 'y'=>'y',
+            'ž'=>'z',
+        ));
     }
 }

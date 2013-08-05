@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\Role;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -198,6 +197,25 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @param Group $group
+     * @return User
+     */
+    public function setGroups(Group $group)
+    {
+        return $this->addGroup($group);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
      * Set employe
      *
      * @param \Pablo\PeopleBundle\Entity\Employe $employe
@@ -317,7 +335,7 @@ class User implements AdvancedUserInterface, \Serializable
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return Role[] The user roles
+     * @return array The user roles
      */
     public function getRoles()
     {
@@ -413,21 +431,6 @@ class User implements AdvancedUserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-    public function setGroups(Group $group)
-    {
-        $this->addGroup($group);
     }
 
     public function __toString()

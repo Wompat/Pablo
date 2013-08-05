@@ -30,6 +30,7 @@ security:
             remember_me:
                 key:        %secret%
                 lifetime:   86400 #24 hours in seconds
+            switch_user: true
 #            anonymous:      true
 
     access_control:

@@ -19,17 +19,20 @@ class HomeControllerTest extends WebTestCase
     public function testWelcome()
     {
         $crawler = $this->client->request('GET', '/');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut <200>');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers <welcome page>');
-        $this->assertEquals(1, $crawler->filter('h3.media-heading:contains("Mon profil")')->count(), 'Devrait contenir <Mon profil>');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers [welcome page]');
+        $this->assertEquals(1, $crawler->filter('h3.media-heading:contains("Mon profil")')->count(), 'Devrait contenir [Mon profil]');
 
-        // Vérifie que le lien renvoie bien vers le formulaire d'éditon du profil et que le champ nom d'utilisateur est rempli.
+        // -------------------------------------------------------------------------------------------------------------
+        // Vérifie que le lien renvoie vers le formulaire d'édition du profil
+        // Vérifie que le champ nom d'utilisateur est rempli.
+        // -------------------------------------------------------------------------------------------------------------
         $profileLink = $crawler->filter('a.btn-info')->first();
         $username = $crawler->filter('p strong')->text();
 
         $crawler = $this->client->click($profileLink->link());
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Modifier mon profil")')->count(), 'Devrait rediriger vers <edit profile>');
-        $this->assertEquals(1, $crawler->filter('input[value=' . $username . ']')->count(), 'Le champ nom d\'utilisateur devrait contenir <' . $username . '>');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Modifier mon profil")')->count(), 'Devrait rediriger vers [edit profile]');
+        $this->assertEquals(1, $crawler->filter('input[value=' . $username . ']')->count(), 'Le champ nom d\'utilisateur devrait contenir [' . $username . ']');
     }
 
     private function logIn()

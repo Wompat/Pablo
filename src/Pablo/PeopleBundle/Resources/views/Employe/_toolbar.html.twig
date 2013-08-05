@@ -1,0 +1,22 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> utilisateur
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if personne.user %}
+                        <li><a href="{{ path('pablo_user_edit', {'id': personne.id }) }}">&eacute;diter le compte</a></li>
+                        <li><a href="{{ path('pablo_user_enable', {'id': personne.id }) }}">{{ (personne.user.enabled) ? 'd&eacute;sactiver' : 'activer' }}&nbsp;le compte</a></li>
+                        <li class="divider"></li>
+                        <li><a class="danger" href="{{ path('pablo_user_delete', {'id': personne.id }) }}">supprimer le compte</a></li>
+                    {% else %}
+                        <li><a href="{{ path('pablo_user_add', {'id': personne.id }) }}">cr&eacute;er un compte</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

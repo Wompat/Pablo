@@ -52,7 +52,7 @@ class Commentaire
      * @var \Pablo\PeopleBundle\Entity\Personne
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="commentaires")
-     * @ORM\JoinColumn(name="idpersonne", referencedColumnName="idpersonne")
+     * @ORM\JoinColumn(name="idpersonne", referencedColumnName="idpersonne", nullable=false)
      */
     private $personne;
 
@@ -60,7 +60,7 @@ class Commentaire
      * @var \Pablo\UserBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="Pablo\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="iduser", referencedColumnName="iduser")
+     * @ORM\JoinColumn(name="iduser", referencedColumnName="iduser", nullable=false)
      */
     private $user;
 
