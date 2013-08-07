@@ -29,19 +29,19 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-    <div class="container">
-        <div class="hero-unit center">
-            <h1>{{ status_text }} <small style="font: Tahoma; color: red;">Error {{ status_code }}</small></h1>
-            <br/>
-            <p>
-                La page que vous avez demand&eacute;e n&apos;a pas pu &ecirc;tre charg&eacute;e. Essayez &agrave; nouveau ou contactez un administrateur de l&apos;application.<br/>
-                Utilisez le bouton <strong>Retour</strong> de votre navigateur pour revenir &agrave; la page consult&eacute;e pr&eacute;c&eacute;demment
-            </p>
-            <p>
-                <strong>ou cliquez sur le bouton ci-dessous &colon;</strong>
-            </p>
-            <a href="{{ path('pablo_user_welcome') }}" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Retour &agrave; l&apos;Accueil</a>
-        </div>
+<div class="container">
+    <div class="hero-unit center">
+        <h1>{{ status_text }} <small style="font: Tahoma; color: red;">Error {{ status_code }}</small></h1>
+        <br/>
+        <p>
+            Vous ne poss&eacute;dez pas les privil&egrave;ges n&eacute;cessaires pour effectuer cette action !<br/>
+            Utilisez le bouton <strong>Retour</strong> de votre navigateur pour revenir &agrave; la page consult&eacute;e pr&eacute;c&eacute;demment
+        </p>
+        <p>
+            <strong>ou cliquez sur le bouton ci-dessous &colon;</strong>
+        </p>
+        <a href="{{ path('pablo_user_welcome') }}" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Retour &agrave; l&apos;Accueil</a>
     </div>
+</div>
 </body>
 </html>
