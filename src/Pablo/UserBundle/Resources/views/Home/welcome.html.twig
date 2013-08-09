@@ -20,7 +20,7 @@
                 <strong>{{ (message.type == 'success') ? 'OK !' : 'Oups !' }}</strong>&nbsp;{{ message.content }}
             </div>
         {% endfor %}
-        <h2>Bienvenue !</h2>
+        <h2>Bonjour {{ app.user.employe.prenom|title }}</h2>
     </div>
     <div class="row"> <!-- Profil - Configuration - Logout -->
         <div class="span4">

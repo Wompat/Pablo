@@ -16,64 +16,51 @@ class PersonneTest extends \PHPUnit_Framework_TestCase
 
     public function testGetNom()
     {
-        // Vérifie que les "a" accentués sont remplacés par A.
+        // 1. Vérifie que les "a" accentués sont remplacés par A.
         $this->personne->setNom('aàáâãäAÀÁÂÃÄ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('AAAAAAAAAAAA', $actualPrenom, 'Devrait remplacer les "a" accentués par [A]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('AÀÁÂÃÄAÀÁÂÃÄ', $actualNom, 'Devrait remplacer tous les "a" par [A]');
 
-        // Vérifie que les "ç" sont remplacés par C.
+        // 2. Vérifie que les "ç" sont remplacés par C.
         $this->personne->setNom('cçCÇ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('CCCC', $actualPrenom, 'Devrait remplacer les "ç" par [C]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('CÇCÇ', $actualNom, 'Devrait remplacer tous les "c" par [C]');
 
-        // Vérifie que les "e" accentués sont remplacés par E.
+        // 3. Vérifie que les "e" accentués sont remplacés par E.
         $this->personne->setNom('eèéêëEÈÉÊË');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('EEEEEEEEEE', $actualPrenom, 'Devrait remplacer les "e" accentués par [E]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('EÈÉÊËEÈÉÊË', $actualNom, 'Devrait remplacer tous les "e" par [E]');
 
-        // Vérifie que les "i" accentués sont remplacés par I.
+        // 4. Vérifie que les "i" accentués sont remplacés par I.
         $this->personne->setNom('iìíîïIÌÍÎÏ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('IIIIIIIIII', $actualPrenom, 'Devrait remplacer les "i" accentués par [I]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('IÌÍÎÏIÌÍÎÏ', $actualNom, 'Devrait remplacer tous les "i" par [I]');
 
-        // Vérifie que les "n" accentués sont remplacés par "N".
+        // 5. Vérifie que les "n" accentués sont remplacés par "N".
         $this->personne->setNom('nñNÑ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('NNNN', $actualPrenom, 'Devrait remplacer les "n" accentués par [N]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('NÑNÑ', $actualNom, 'Devrait remplacer tous les "n" par [N]');
 
-        // Vérifie que les "o" accentués sont remplacés par "O".
+        // 6. Vérifie que les "o" accentués sont remplacés par "O".
         $this->personne->setNom('oòóôõöOÒÓÔÕÖ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('OOOOOOOOOOOO', $actualPrenom, 'Devrait remplacer les "o" accentués par [O]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('OÒÓÔÕÖOÒÓÔÕÖ', $actualNom, 'Devrait remplacer tous les "o" par [O]');
 
-        // Vérifie que les "u" accentués sont remplacés par "U".
+        // 7. Vérifie que les "u" accentués sont remplacés par "U".
         $this->personne->setNom('uùúûüUÙÚÛÜ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('UUUUUUUUUU', $actualPrenom, 'Devrait remplacer les "u" accentués par [U]');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('UÙÚÛÜUÙÚÛÜ', $actualNom, 'Devrait remplacer tous les "u" par [U]');
 
-        // Vérifie que les "y" accentués sont remplacés par "Y".
-        $this->personne->setNom('yýÿYÝ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('YYYYY', $actualPrenom, 'Devrait remplacer les "y" accentués par [Y]');
+        // 8. Vérifie que les "y" accentués sont remplacés par "Y".
+        $this->personne->setNom('yýÿYÝŸ');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('YÝŸYÝŸ', $actualNom, 'Devrait remplacer tous les "y" par [Y]');
 
         // Vérifie que toutes les lettres accentuées sont transfomées en majuscules non accentuées.
-        $this->personne->setNom('aàáâãäAÀÁÂÃÄcçCÇeèéêëEÈÉÊËiìíîïIÌÍÎÏnñNÑoòóôõöOÒÓÔÕÖuùúûüUÙÚÛÜyýÿYÝ');
-        $actualPrenom = $this->personne->getNom();
-        $this->assertEquals('AAAAAAAAAAAACCCCEEEEEEEEEEIIIIIIIIIINNNNOOOOOOOOOOOOUUUUUUUUUUYYYYY', $actualPrenom,
-            'Les lettres accentuées devrait être remplacées par une [majuscule non accentuée]'
-        );
-    }
-
-    /**
-     * @depends testGetNom
-     */
-    public function testGetPrenom()
-    {
-        // Vérifie que toutes les lettres accentuées sont transfomées en majuscules non accentuées.
-        $this->personne->setPreNom('aàáâãäAÀÁÂÃÄcçCÇeèéêëEÈÉÊËiìíîïIÌÍÎÏnñNÑoòóôõöOÒÓÔÕÖuùúûüUÙÚÛÜyýÿYÝ');
-        $actualNom = $this->personne->getPrenom();
-        $this->assertEquals('AAAAAAAAAAAACCCCEEEEEEEEEEIIIIIIIIIINNNNOOOOOOOOOOOOUUUUUUUUUUYYYYY', $actualNom,
-            'Les lettres accentuées devrait être remplacées par une [majuscule non accentuée]'
+        $this->personne->setNom('aàáâãäAÀÁÂÃÄcçCÇeèéêëEÈÉÊËiìíîïIÌÍÎÏnñNÑoòóôõöOÒÓÔÕÖuùúûüUÙÚÛÜyýÿYÝŸ');
+        $actualNom = $this->personne->getNom();
+        $this->assertEquals('AÀÁÂÃÄAÀÁÂÃÄCÇCÇEÈÉÊËEÈÉÊËIÌÍÎÏIÌÍÎÏNÑNÑOÒÓÔÕÖOÒÓÔÕÖUÙÚÛÜUÙÚÛÜYÝŸYÝŸ', $actualNom,
+            'Devrait mettre tous les caractères en [majuscules]'
         );
     }
 }

@@ -30,9 +30,9 @@ function calendrier(target) {
     $(target).datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: "-90:-6",
-        minDate: "-90y",
-        maxDate: new Date(new Date().getFullYear() - 6, 11, 31)
+        yearRange: "-100:-5",
+        minDate: new Date(new Date().getFullYear() - 100, 0, 0),
+        maxDate: new Date(new Date().getFullYear() - 5, 0, 31)
     });
 }
 

@@ -4,6 +4,7 @@ namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Pablo\PeopleBundle\Validator as PAssert;
 
 /**
  * Class PhoneNumber
@@ -26,10 +27,10 @@ class Telephone
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=18)
+     * @ORM\Column(name="numero", type="string", length=20)
      *
      * @Assert\NotBlank
-     * @Assert\Length(min=9)
+     * @PAssert\PhoneNumber(min=9, max=18)
      */
     private $numero;
 
@@ -80,7 +81,7 @@ class Telephone
      */
     public function setNumero($numero)
     {
-        $this->numero = $numero;
+        $this->numero = preg_replace('`[^0-9]`', '', $numero);
     
         return $this;
     }

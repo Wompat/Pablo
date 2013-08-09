@@ -5,6 +5,7 @@ namespace Pablo\PeopleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Pablo\PeopleBundle\Validator as PAssert;
 
 /**
  * Class Personne
@@ -67,7 +68,7 @@ class Personne
      *
      * @ORM\Column(name="datenaissance", type="date", nullable=true)
      *
-     * @Assert\Date()
+     * @PAssert\DateRange()
      */
     private $datenaissance;
 
@@ -134,14 +135,15 @@ class Personne
 
     /**
      * Set nom
+     * Convertit le nom en majuscules
+     * Y compris les lettres accentuées
      *
      * @param string $nom
      * @return Personne
      */
     public function setNom($nom)
     {
-//        $this->nom = mb_strtoupper($this->enleverAccents($nom), 'utf-8');
-        $this->nom = $nom;
+        $this->nom = mb_strtoupper($nom, 'utf-8');
     
         return $this;
     }
@@ -158,14 +160,15 @@ class Personne
 
     /**
      * Set prenom
+     * Met en majuscule la première lettre de chaque mot
+     * Y compris les lettres accentuées
      *
      * @param string $prenom
      * @return Personne
      */
     public function setPrenom($prenom)
     {
-//        $this->prenom = mb_strtoupper($this->enleverAccents($prenom), 'utf-8');
-        $this->prenom = $prenom;
+        $this->prenom = mb_convert_case($prenom, MB_CASE_TITLE, 'utf-8');
 
         return $this;
     }
@@ -402,21 +405,5 @@ class Personne
     public function getCommentaires()
     {
         return $this->commentaires;
-    }
-
-    private function enleverAccents($chaine)
-    {
-        return strtr(mb_strtolower($chaine, 'utf-8'), array(
-            'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a',
-            'ç'=>'c',
-            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
-            'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'i'=>'i',
-            'ñ'=>'n',
-            'ð'=>'o', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'œ'=>'o', 'ø'=>'o',
-            'š'=>'s',
-            'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
-            'ý'=>'y', 'ÿ'=>'y', 'y'=>'y',
-            'ž'=>'z',
-        ));
     }
 }

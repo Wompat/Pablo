@@ -39,7 +39,10 @@ class EmployeRepository extends EntityRepository
         $query = $qb
             ->where($qb->expr()->like('e.nom', ':nom'))
             ->andWhere($qb->expr()->like('e.prenom', ':prenom'))
-            ->andWhere($qb->expr()->gte('e.datenaissance', ':datenaissance'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->gte('e.datenaissance', ':datenaissance'),
+                $qb->expr()->isNull('e.datenaissance')
+            ))
             ->orderBy('e.nom')
             ->addOrderBy('e.prenom')
             ->setParameters($parameters)

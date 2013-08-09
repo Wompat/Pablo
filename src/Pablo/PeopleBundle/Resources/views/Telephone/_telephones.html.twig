@@ -1,12 +1,10 @@
 <div class="span6">
     <h4>T&eacute;l&eacute;phones</h4>
     {% if (personne.telephones|length == 0) %}
-    <div class="alert alert-info">
-        <h4 class="alert-heading">Aucun résulat</h4>
-        <p>
+        <div class="alert alert-info">
+            <h4>Aucun résulat</h4>
             Il n&apos;y a actuellement aucune num&eacute;ro enregistr&eacute;.
-        </p>
-    </div>
+        </div>
     {% else %}
         <table class="table">
             <thead>

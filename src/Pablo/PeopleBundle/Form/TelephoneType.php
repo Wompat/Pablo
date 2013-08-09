@@ -13,7 +13,7 @@ class TelephoneType extends AbstractType
         $builder
             ->add('numero', null, array('label' => 'Numéro'))
             ->add('mobile', null, array(
-                'label' => 'GSM',
+                'label' => 'SMS',
                 'required' => false,
                 'attr' => array('value' => false),
             ))

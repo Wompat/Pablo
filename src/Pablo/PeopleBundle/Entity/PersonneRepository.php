@@ -37,7 +37,10 @@ class PersonneRepository extends EntityRepository
         $query = $qb
             ->where($qb->expr()->like('p.nom', ':nom'))
             ->andWhere($qb->expr()->like('p.prenom', ':prenom'))
-            ->andWhere($qb->expr()->gte('p.datenaissance', ':datenaissance'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->gte('p.datenaissance', ':datenaissance'),
+                $qb->expr()->isNull('p.datenaissance')
+            ))
             ->orderBy('p.nom')
             ->addOrderBy('p.prenom')
             ->setParameters($parameters)

@@ -15,8 +15,10 @@
         <div class="control-group {{ (form_errors(form.mobile)) ? 'error' }}">
             <label class="control-label">{{ form_label(form.mobile) }}</label>
             <div class="controls">
-                {{ form_widget(form.mobile) }}
-                <span class="help-inline">{{ form_errors(form.mobile) }}</span>
+                <label class="checkbox">
+                    {{ form_widget(form.mobile) }} envoyer des sms &agrave; ce num&eacute;ro.
+                    <span class="help-inline">{{ form_errors(form.mobile) }}</span>
+                </label>
             </div>
         </div>
         <div class="control-group {{ (form_errors(form.info)) ? 'error' }}">

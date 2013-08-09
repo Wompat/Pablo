@@ -3,6 +3,7 @@
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Email
@@ -26,6 +27,8 @@ class Email
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=60)
+     *
+     * @Assert\Email(checkMX=true, checkHost=true)
      */
     private $adresse;
 
