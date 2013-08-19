@@ -17,22 +17,22 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-white icon-user"></i> {{ app.user.employe.prenom|title ~ ' ' ~ app.user.employe.nom|upper }}
                             <b class="caret"></b>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('pablo_profile_edit') }}">&eacute;diter mon profil</a></li>
-                                {% if (is_granted('ROLE_ALLOWED_TO_SWITCH')) %}
-                                    <li class="divider"></li>
-                                    <li><a href="{{ path('pablo_user_welcome',{'_switch_user': 'admin'}) }}">usurper "admin"</a><li>
-                                    <li><a href="{{ path('pablo_user_welcome',{'_switch_user': 'user'}) }}">usurper "user"</a></li>
-                                    <li class="divider"></li>
-                                {% endif %}
-                                {% if (is_granted('ROLE_PREVIOUS_ADMIN')) %}
-                                    <li class="divider"></li>
-                                    <li><a href="{{ path('pablo_user_welcome', {'_switch_user': '_exit'}) }}">...redevenir root</a></li>
-                                    <li class="divider"></li>
-                                {% endif %}
-                                <li><a href="{{ path('pablo_user_logout') }}">se d&eacute;connecter</a></li>
-                            </ul>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('pablo_profile_edit') }}">&eacute;diter mon profil</a></li>
+                            {% if (is_granted('ROLE_ALLOWED_TO_SWITCH')) %}
+                                <li class="divider"></li>
+                                <li><a href="{{ path('pablo_user_welcome',{'_switch_user': 'admin'}) }}">usurper "admin"</a><li>
+                                <li><a href="{{ path('pablo_user_welcome',{'_switch_user': 'user'}) }}">usurper "user"</a></li>
+                                <li class="divider"></li>
+                            {% endif %}
+                            {% if (is_granted('ROLE_PREVIOUS_ADMIN')) %}
+                                <li class="divider"></li>
+                                <li><a href="{{ path('pablo_user_welcome', {'_switch_user': '_exit'}) }}">...redevenir root</a></li>
+                                <li class="divider"></li>
+                            {% endif %}
+                            <li><a href="{{ path('pablo_user_logout') }}">d&eacute;connexionr</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

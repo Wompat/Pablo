@@ -1,7 +1,3 @@
-pablo_org:
-    resource: "@PabloOrgBundle/Resources/config/routing.yml"
-    prefix:   /
-
 pablo_people:
     resource: "@PabloPeopleBundle/Resources/config/routing.yml"
     prefix:   /

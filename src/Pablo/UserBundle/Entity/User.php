@@ -9,7 +9,13 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
+ * Class User
+ *
+ * Utilisateur de l'application
+ *
+ * @package Pablo\UserBundle\Entity
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version 1.0
  *
  * @ORM\Table(name="puser")
  * @ORM\Entity(repositoryClass="Pablo\UserBundle\Entity\UserRepository")
@@ -19,6 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
+     * Identifiant de l'utilisateur
+     *
      * @var integer
      *
      * @ORM\Column(name="iduser", type="integer")
@@ -28,6 +36,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
+     * Nom de l'utilisateur
+     *
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=90, unique=true)
@@ -38,6 +48,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $username;
 
     /**
+     * Mot de passe de l'utilisateur (crypté et salé)
+     *
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=90)
@@ -45,6 +57,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
+     * Sel pour le mot de passe
+     *
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=90)
@@ -52,6 +66,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $salt;
 
     /**
+     * Statut de l'utilisateur
+     *
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
@@ -59,6 +75,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $enabled;
 
     /**
+     * Groupes auxquels appartient l'utilisateur
+     *
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
@@ -70,6 +88,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $groups;
 
     /**
+     * Employé lié à l'utilisateur
+     *
      * @var \Pablo\PeopleBundle\Entity\Employe
      *
      * @ORM\OneToOne(targetEntity="Pablo\PeopleBundle\Entity\Employe", inversedBy="user")
@@ -78,7 +98,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $employe;
 
     /**
-     * Plain password. Must not be persisted.
+     * Mot de passe en clair.
+     * Ne doit pas être enregistré.
      *
      * @var string
      *
@@ -87,6 +108,12 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $plainPassword;
 
+
+    /**
+     * Constructeur
+     *
+     * Initialise le sel, les groupes et le statut de l'utilisateur
+     */
     public function __construct()
     {
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -197,6 +224,8 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * Set Group
+     *
      * @param Group $group
      * @return User
      */
@@ -433,6 +462,11 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * Retourne le nom d'utilisateur en tant que chaîne de caractères
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->username;

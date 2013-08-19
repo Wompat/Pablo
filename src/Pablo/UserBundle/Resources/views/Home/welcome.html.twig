@@ -20,7 +20,7 @@
                 <strong>{{ (message.type == 'success') ? 'OK !' : 'Oups !' }}</strong>&nbsp;{{ message.content }}
             </div>
         {% endfor %}
-        <h2>Bonjour {{ app.user.employe.prenom|title }}</h2>
+        <h2>Bonjour {{ app.user.employe.prenom|title }} !</h2>
     </div>
     <div class="row"> <!-- Profil - Configuration - Logout -->
         <div class="span4">
@@ -56,7 +56,7 @@
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a href="{{ path('pablo_user_logout') }}">Quitter</a>
+                        <a href="{{ path('pablo_user_logout') }}">D&eacute;connexion</a>
                     </h4>
                 </div>
             </div>

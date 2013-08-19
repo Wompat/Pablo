@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Ce fichier est une partie du package Pablo.
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +13,8 @@ use Pablo\PeopleBundle\Validator as PAssert;
 
 /**
  * Class Personne
- * @package Pablo\PeopleBundle\Entity
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.4>
  *
  * @ORM\Table(name="personne")
  * @ORM\Entity(repositoryClass="Pablo\PeopleBundle\Entity\PersonneRepository")
@@ -20,6 +25,7 @@ use Pablo\PeopleBundle\Validator as PAssert;
 class Personne
 {
     /**
+     * Clé primaire auto-incrémentée et gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idpersonne", type="integer")
@@ -29,6 +35,7 @@ class Personne
     private $id;
 
     /**
+     * Nom
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=120)
@@ -39,6 +46,7 @@ class Personne
     private $nom;
 
     /**
+     * Prénom
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=120)
@@ -49,6 +57,7 @@ class Personne
     private $prenom;
 
     /**
+     * Nationalité
      * @var \Pablo\PeopleBundle\Entity\Pays
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Pays")
@@ -57,6 +66,7 @@ class Personne
     private $pays;
 
     /**
+     * Sexe
      * @var string
      *
      * @ORM\Column(name="sexe", type="string", length=1)
@@ -64,6 +74,7 @@ class Personne
     private $sexe;
 
     /**
+     * Date de naissance
      * @var \DateTime
      *
      * @ORM\Column(name="datenaissance", type="date", nullable=true)
@@ -73,6 +84,7 @@ class Personne
     private $datenaissance;
 
     /**
+     * Lieu de naissance
      * @var string
      *
      * @ORM\Column(name="lieunaissance", type="string", length=120, nullable=true)
@@ -82,6 +94,7 @@ class Personne
     private $lieunaissance;
 
     /**
+     * Adresses
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Adresse", mappedBy="personne")
@@ -89,6 +102,7 @@ class Personne
     private $adresses;
 
     /**
+     * Numéros de téléphone
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Telephone", mappedBy="personne")
@@ -96,6 +110,7 @@ class Personne
     private $telephones;
 
     /**
+     * Adresses e-mail
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Email", mappedBy="personne")
@@ -103,12 +118,16 @@ class Personne
     private $emails;
 
     /**
+     * Commentaires des utilisateurs
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Pablo\PeopleBundle\Entity\Commentaire", mappedBy="personne")
      */
     private $commentaires;
 
+    /**
+     * Constructeur : initialise le sexe à 'F' et crée les instances de la classe ArrayCollection.
+     */
     public function __construct()
     {
         $this->sexe = 'F';
@@ -116,11 +135,6 @@ class Personne
         $this->commentaires = new ArrayCollection();
         $this->Telephone = new ArrayCollection();
         $this->emails = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->nom . ' ' . $this->prenom;
     }
 
     /**
@@ -135,8 +149,7 @@ class Personne
 
     /**
      * Set nom
-     * Convertit le nom en majuscules
-     * Y compris les lettres accentuées
+     * Convertit le nom en majuscules (y compris les lettres accentuées)
      *
      * @param string $nom
      * @return Personne
@@ -160,8 +173,7 @@ class Personne
 
     /**
      * Set prenom
-     * Met en majuscule la première lettre de chaque mot
-     * Y compris les lettres accentuées
+     * Met en majuscule la première lettre du prénom (y compris les lettres accentuées)
      *
      * @param string $prenom
      * @return Personne

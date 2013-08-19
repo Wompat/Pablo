@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+    <parser>
+        <default-package-name>Pablo</default-package-name>
+        <encoding>utf-8</encoding>
+        <target>doc/build</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+            <extension>php3</extension>
+            <extension>phtml</extension>
+        </extensions>
+        <visibility></visibility>
+    </parser>
+    <files>
+        <directory>src</directory>
+        <ignore-hidden>on</ignore-hidden>
+        <ignore-symlinks>on</ignore-symlinks>
+    </files>
+    <transformer>
+        <target>doc</target>
+    </transformer>
+    <logging>
+        <level>err</level>
+        <paths>
+            <default>doc/logs/phpdoc-{DATE}.log</default>
+            <errors>doc/logs/phpdoc-{DATE}.errors.log</errors>
+        </paths>
+    </logging>
+    <transformations>
+        <template name="clean"/>
+    </transformations>
+</phpdocumentor>

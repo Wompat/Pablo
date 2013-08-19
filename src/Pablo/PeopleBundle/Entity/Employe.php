@@ -30,13 +30,6 @@ class Employe extends Personne
      */
     private $user;
 
-    /**
-     * @var \Pablo\OrgBundle\Entity\Attribution
-     *
-     * @ORM\OneToMany(targetEntity="Pablo\OrgBundle\Entity\Attribution", mappedBy="employe")
-     */
-    private $attributions;
-
     public function __construct()
     {
         parent::__construct();
@@ -87,38 +80,5 @@ class Employe extends Personne
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Add attributions
-     *
-     * @param \Pablo\OrgBundle\Entity\Attribution $attributions
-     * @return Employe
-     */
-    public function addAttribution(\Pablo\OrgBundle\Entity\Attribution $attributions)
-    {
-        $this->attributions[] = $attributions;
-    
-        return $this;
-    }
-
-    /**
-     * Remove attributions
-     *
-     * @param \Pablo\OrgBundle\Entity\Attribution $attributions
-     */
-    public function removeAttribution(\Pablo\OrgBundle\Entity\Attribution $attributions)
-    {
-        $this->attributions->removeElement($attributions);
-    }
-
-    /**
-     * Get attributions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAttributions()
-    {
-        return $this->attributions;
     }
 }
