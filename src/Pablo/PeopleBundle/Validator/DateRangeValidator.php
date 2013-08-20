@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Michaël Perrin
+ * @link http://blog.michaelperrin.fr/2013/03/19/range-date-validator-for-symfony2/
+ */
+
 namespace Pablo\PeopleBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
@@ -8,17 +15,14 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * Class DateRangeValidator
  * @package Pablo\PeopleBundle\Validator
- *
- * @author Michaël Perrin
- * @see http://blog.michaelperrin.fr/2013/03/19/range-date-validator-for-symfony2/
  */
 class DateRangeValidator extends ConstraintValidator
 {
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed $value      The value that should be validated
-     * @param Constraint $constraint The constraint for the validation
+     * @param mixed $value The value that should be validated
+     * @param Constraint $constraint  The constraint for the validation
      *
      * @api
      */

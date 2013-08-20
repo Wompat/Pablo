@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Personne;
@@ -7,8 +14,18 @@ use Pablo\PeopleBundle\Form\SearchType;
 use Pablo\PeopleBundle\Form\PersonneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class PersonneController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class PersonneController extends Controller
 {
+    /**
+     * Affiche la liste paginée des personnes (50 éléments par page)
+     *
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction($page)
     {
         $em = $this->getDoctrine()->getManager();
@@ -24,6 +41,11 @@ class PersonneController extends Controller
         ));
     }
 
+    /**
+     * Récupère les critères de recherche et affiche les résultats correspondants
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function searchAction()
     {
         $personne = new Personne();
@@ -39,6 +61,13 @@ class PersonneController extends Controller
         ));
     }
 
+    /**
+     * Affiche la fiche d'une personne
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction($id, Personne $personne)
     {
         return $this->render('PabloPeopleBundle:Personne:show.html.twig', array(
@@ -46,6 +75,13 @@ class PersonneController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition des données personnelles
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Personne $personne)
     {
         $form = $this->createForm(new PersonneType(), $personne);
@@ -57,6 +93,14 @@ class PersonneController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre les données personnelles modifiées.
+     * Réaffiche la fiche de la personne.
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Personne $personne)
     {
         $form = $this->createForm(new PersonneType(), $personne);

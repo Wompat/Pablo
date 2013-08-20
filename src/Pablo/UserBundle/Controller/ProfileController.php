@@ -1,12 +1,28 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pablo\UserBundle\Form\ProfileType;
 
+/**
+ * Class ProfileController
+ * @package Pablo\UserBundle\Controller
+ */
 class ProfileController extends Controller
 {
+    /**
+     * Affiche le formulaire d'édition du profil de l'utilisateur
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction()
     {
         $user = $this->getUser();
@@ -19,6 +35,12 @@ class ProfileController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le profil modifié
+     * Redirige vers la page d'accueil
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction()
     {
         $user = $this->getUser();

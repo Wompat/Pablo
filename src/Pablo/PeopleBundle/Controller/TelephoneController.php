@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Telephone;
@@ -8,8 +15,19 @@ use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\PeopleBundle\Form\TelephoneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class TelephoneController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class TelephoneController extends Controller
 {
+    /**
+     * Affiche le formulaire d'ajout d'un nouveau numéro de téléphone
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction($id, Personne $personne)
     {
         $telephone = new Telephone();
@@ -30,6 +48,14 @@ class TelephoneController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le nouveau numéro de téléphone.
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction($id, Personne $personne)
     {
         $telephone = new Telephone();
@@ -64,6 +90,13 @@ class TelephoneController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition d'un numéro de téléphone existant
+     *
+     * @param $id
+     * @param Telephone $telephone
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Telephone $telephone)
     {
         $form = $this->createForm(new TelephoneType(), $telephone);
@@ -81,6 +114,14 @@ class TelephoneController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le numéro de téléphone modifié.
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Telephone $telephone
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Telephone $telephone)
     {
         $form = $this->createForm(new TelephoneType(), $telephone);
@@ -111,6 +152,14 @@ class TelephoneController extends Controller
         ));
     }
 
+    /**
+     * Efface un numéro de téléphone
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Telephone $telephone
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id, Telephone $telephone)
     {
         $em = $this->getDoctrine()->getManager();

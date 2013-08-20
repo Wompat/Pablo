@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Adresse
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idadresse", type="integer")
@@ -24,6 +32,7 @@ class Adresse
     private $id;
 
     /**
+     * Voie
      * @var string
      *
      * @ORM\Column(name="voie", type="string", length=120)
@@ -34,6 +43,7 @@ class Adresse
     private $voie;
 
     /**
+     * Numéro
      * @var integer
      *
      * @ORM\Column(name="numero", type="smallint")
@@ -41,6 +51,7 @@ class Adresse
     private $numero;
 
     /**
+     * Boîte
      * @var string
      *
      * @ORM\Column(name="boite", type="string", length=8, nullable=true)
@@ -48,6 +59,7 @@ class Adresse
     private $boite;
 
     /**
+     * Localité
      * @var string
      *
      * @ORM\Column(name="localite", type="string", length=120)
@@ -58,6 +70,7 @@ class Adresse
     private $localite;
 
     /**
+     * Personne
      * @var \Pablo\PeopleBundle\Entity\Personne
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="adresses")

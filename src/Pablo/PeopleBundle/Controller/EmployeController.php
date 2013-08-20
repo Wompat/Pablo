@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Employe;
@@ -7,8 +14,18 @@ use Pablo\PeopleBundle\Form\SearchType;
 use Pablo\PeopleBundle\Form\EmployeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class EmployeController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class EmployeController extends Controller
 {
+    /**
+     * Affiche la liste paginée des employés (50 éléments par page)
+     *
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction($page)
     {
         $em = $this->getDoctrine()->getManager();
@@ -24,6 +41,11 @@ class EmployeController extends Controller
         ));
     }
 
+    /**
+     * Récupère les critères de recherche et affiche les résultats correspondants
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function searchAction()
     {
         $employe = new Employe();
@@ -39,6 +61,13 @@ class EmployeController extends Controller
             ));
     }
 
+    /**
+     * Affiche la fiche d'un employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction($id, Employe $employe)
     {
         return $this->render('PabloPeopleBundle:Employe:show.html.twig', array(
@@ -46,6 +75,13 @@ class EmployeController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition des données personnelles de l'employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Employe $employe)
     {
         $form = $this->createForm(new EmployeType(), $employe);
@@ -57,6 +93,14 @@ class EmployeController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et met à jour les données personnelles de l'employé.
+     * Réaffiche la fiche de l'employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Employe $employe)
     {
         $form = $this->createForm(new EmployeType(), $employe);

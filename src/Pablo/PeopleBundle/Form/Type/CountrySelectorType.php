@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -8,13 +15,22 @@ use Pablo\PeopleBundle\Form\DataTransformer\CountryToCodeTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class CountrySelectorType
+ * @package Pablo\PeopleBundle\Form\Type
+ */
 class CountrySelectorType extends AbstractType
 {
     /**
+     * Doctrine Object Manager
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
     private $om;
 
+    /**
+     * Constructeur : intialise l'attribut Object Manager
+     * @param ObjectManager $om
+     */
     public function __construct(ObjectManager $om)
     {
         $this->om = $om;

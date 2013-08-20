@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -8,8 +15,19 @@ use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\PeopleBundle\Entity\Commentaire;
 use Pablo\PeopleBundle\Form\CommentaireType;
 
+/**
+ * Class CommentaireController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class CommentaireController extends Controller
 {
+    /**
+     * Affiche le formulaire d'ajout d'un nouveau commentaire
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction($id, Personne $personne)
     {
         $commentaire = new Commentaire();
@@ -31,6 +49,14 @@ class CommentaireController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le nouveau commentaire
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction($id, Personne $personne)
     {
         $commentaire = new Commentaire();
@@ -66,6 +92,13 @@ class CommentaireController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition d'un commentaire existant
+     *
+     * @param $id
+     * @param Commentaire $commentaire
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Commentaire $commentaire)
     {
         $form = $this->createForm(new CommentaireType(), $commentaire);
@@ -83,6 +116,14 @@ class CommentaireController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le commentaire modifié
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Commentaire $commentaire
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Commentaire $commentaire)
     {
         $form = $this->createForm(new CommentaireType(), $commentaire);
@@ -113,6 +154,14 @@ class CommentaireController extends Controller
         ));
     }
 
+    /**
+     * Efface un commentaire
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Commentaire $commentaire
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id, Commentaire $commentaire)
     {
         $em = $this->getDoctrine()->getManager();

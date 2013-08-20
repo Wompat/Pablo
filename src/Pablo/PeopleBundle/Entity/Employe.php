@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Employe extends Personne
 {
     /**
+     * Numéro matricule de l'employé
      * @var string
      *
      * @ORM\Column(name="matricule", type="string", length=11, nullable=true)
@@ -24,17 +32,12 @@ class Employe extends Personne
     private $matricule;
 
     /**
+     * Utilisateur lié à l'employé
      * @var \Pablo\UserBundle\Entity\User
      *
      * @ORM\OneToOne(targetEntity="Pablo\UserBundle\Entity\User", mappedBy="employe")
      */
     private $user;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->attributions = new ArrayCollection();
-    }
 
     /**
      * Set matricule

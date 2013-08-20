@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Role\Role;
 
 /**
- * Group
+ * Class Group
  *
  * @ORM\Table(name="pgroup")
  * @ORM\Entity()
@@ -19,6 +26,8 @@ use Symfony\Component\Security\Core\Role\Role;
 class Group extends Role
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
+     *
      * @ORM\Column(name="idgroup", type="integer")
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,20 +35,29 @@ class Group extends Role
     private $id;
 
     /**
+     * Nom du groupe
+     *
      * @ORM\Column(name="name", type="string", length=30, unique=true)
      */
     private $name;
 
     /**
+     * Rôle associé au groupe
+     *
      * @ORM\Column(name="role", type="string", length=20, unique=true)
      */
     private $role;
 
     /**
+     * Utilisateurs appartenant au groupe
+     *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
      */
     private $users;
 
+    /**
+     * Constructeur : crée une instance de la classe ArrayCollection.
+     */
     public function __construct()
     {
         $this->users = new ArrayCollection();

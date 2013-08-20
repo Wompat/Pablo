@@ -1,15 +1,34 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class CountryToCodeTransformer
+ * @package Pablo\PeopleBundle\Form\DataTransformer
+ */
 class CountryToCodeTransformer implements DataTransformerInterface
 {
+    /**
+     * Doctrine Object Manager
+     * @var \Doctrine\Common\Persistence\ObjectManager
+     */
     private $om;
 
+    /**
+     * Constructeur : intialise l'attribut Object Manager
+     * @param ObjectManager $om
+     */
     public function __construct(ObjectManager $om)
     {
         $this->om = $om;

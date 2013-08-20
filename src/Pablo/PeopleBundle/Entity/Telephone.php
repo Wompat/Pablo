@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +23,7 @@ use Pablo\PeopleBundle\Validator as PAssert;
 class Telephone
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idtelephone", type="integer")
@@ -25,6 +33,7 @@ class Telephone
     private $id;
 
     /**
+     * Numéro de téléphone
      * @var string
      *
      * @ORM\Column(name="numero", type="string", length=20)
@@ -35,6 +44,7 @@ class Telephone
     private $numero;
 
     /**
+     * Utiliser comme destinataire des sms
      * @var boolean
      *
      * @ORM\Column(name="mobile", type="boolean")
@@ -42,6 +52,7 @@ class Telephone
     private $mobile;
 
     /**
+     * Infos complémentaires
      * @var string
      *
      * @ORM\Column(name="info", type="string", length=24, nullable=true)
@@ -51,6 +62,7 @@ class Telephone
     private $info;
 
     /**
+     * Personne
      * @var \Pablo\PeopleBundle\Entity\Personne
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="telephones")
@@ -58,6 +70,9 @@ class Telephone
      */
     private $personne;
 
+    /**
+     * Constructeur : par défaut, les numéros ne sont pas utilisés destinataires des sms.
+     */
     public function __construct()
     {
         $this->isMobile = false;

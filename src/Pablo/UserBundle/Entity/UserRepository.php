@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
@@ -9,8 +16,16 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * Class UserRepository
+ * @package Pablo\UserBundle\Entity
+ */
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
+    /**
+     * Renvoie la liste des utilisateurs
+     * @return array
+     */
     public function fetchAll()
     {
         $q = $this

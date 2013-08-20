@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -11,12 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  *
- * Utilisateur de l'application
- *
- * @package Pablo\UserBundle\Entity
- * @author Thomas Decraux <thomasdecraux@gmail.com>
- * @version 1.0
- *
  * @ORM\Table(name="puser")
  * @ORM\Entity(repositoryClass="Pablo\UserBundle\Entity\UserRepository")
  *
@@ -25,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
-     * Identifiant de l'utilisateur
+     * Clé primaire auto-incrémentée gérée par Doctrine
      *
      * @var integer
      *
@@ -99,7 +100,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * Mot de passe en clair.
-     * Ne doit pas être enregistré.
+     * Ne doit pas être enregistré !
      *
      * @var string
      *
@@ -110,9 +111,7 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * Constructeur
-     *
-     * Initialise le sel, les groupes et le statut de l'utilisateur
+     * Constructeur : initialise le sel, les groupes et le statut de l'utilisateur
      */
     public function __construct()
     {

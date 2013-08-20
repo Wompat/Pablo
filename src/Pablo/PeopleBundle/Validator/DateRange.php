@@ -1,16 +1,19 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Michaël Perrin
+ * @link http://blog.michaelperrin.fr/2013/03/19/range-date-validator-for-symfony2/
+ */
+
 namespace Pablo\PeopleBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
-//use Symfony\Component\Validator\Exception\MissingOptionsException;
 
 /**
  * Class DateRange
  * @package Pablo\PeopleBundle\Validator
- *
- * @author Michaël Perrin
- * @see http://blog.michaelperrin.fr/2013/03/19/range-date-validator-for-symfony2/
  *
  * @Annotation
  */
@@ -25,10 +28,6 @@ class DateRange extends Constraint
     public function __construct($options = null)
     {
         parent::__construct($options);
-
-//        if (null === $this->min && null === $this->max) {
-//            throw new MissingOptionsException('Au moins une des options "min" et "max" doit avoir une valeur pour la contrainte ' . __CLASS__, array('min', 'max'));
-//        }
 
         if (null !== $this->min) {
             $this->min = new \DateTime($this->min);

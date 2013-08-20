@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Adresse;
@@ -8,8 +15,17 @@ use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\PeopleBundle\Form\AdresseType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class AdresseController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class AdresseController extends Controller
 {
+    /**
+     * Affiche la liste des personnes et employés avec leur(s) adresse(s)
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -20,6 +36,13 @@ class AdresseController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'une nouvelle adresse
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction($id, Personne $personne)
     {
         $adresse = new Adresse();
@@ -40,6 +63,14 @@ class AdresseController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre la nouvelle adresse
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction($id, Personne $personne)
     {
         $adresse = new Adresse();
@@ -75,7 +106,7 @@ class AdresseController extends Controller
     }
 
     /**
-     * Affiche le formulaire d'édition d'une adresse
+     * Affiche le formulaire d'édition d'une adresse exitante
      *
      * @param $id
      * @param Adresse $adresse
@@ -99,7 +130,8 @@ class AdresseController extends Controller
     }
 
     /**
-     * Valide le formulaire et met l'adresse à jour
+     * Valide le formulaire et enregistre l'adresse modifiée
+     * Redirige vers la fiche de la personne ou de l'employé.
      *
      * @param $id
      * @param \Pablo\PeopleBundle\Entity\Adresse $adresse
@@ -135,6 +167,14 @@ class AdresseController extends Controller
         ));
     }
 
+    /**
+     * Efface une adresse
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Adresse $adresse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id, Adresse $adresse)
     {
         $em = $this->getDoctrine()->getManager();

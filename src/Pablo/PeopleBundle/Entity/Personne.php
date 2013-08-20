@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Ce fichier est une partie du package Pablo.
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
  */
 
 namespace Pablo\PeopleBundle\Entity;
@@ -13,8 +16,6 @@ use Pablo\PeopleBundle\Validator as PAssert;
 
 /**
  * Class Personne
- * @author Thomas Decraux <thomasdecraux@gmail.com>
- * @version <0.1.4>
  *
  * @ORM\Table(name="personne")
  * @ORM\Entity(repositoryClass="Pablo\PeopleBundle\Entity\PersonneRepository")
@@ -25,7 +26,7 @@ use Pablo\PeopleBundle\Validator as PAssert;
 class Personne
 {
     /**
-     * Clé primaire auto-incrémentée et gérée par Doctrine
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idpersonne", type="integer")

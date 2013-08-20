@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Controller;
 
 use Pablo\PeopleBundle\Entity\Email;
@@ -8,8 +15,19 @@ use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\PeopleBundle\Form\EmailType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class EmailController
+ * @package Pablo\PeopleBundle\Controller
+ */
 class EmailController extends Controller
 {
+    /**
+     * Affiche le formulaire d'ajout d'une nouvelle adresse e-mail
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction($id, Personne $personne)
     {
         $email = new Email();
@@ -30,6 +48,14 @@ class EmailController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre la nouvelle adresse e-mail
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Personne $personne
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction($id, Personne $personne)
     {
         $email = new Email();
@@ -64,6 +90,13 @@ class EmailController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition d'une adresse e-mail existante
+     *
+     * @param $id
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Email $email)
     {
         $form = $this->createForm(new EmailType(), $email);
@@ -81,6 +114,14 @@ class EmailController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre l'adresse e-mail modifiée
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Email $email)
     {
         $form = $this->createForm(new EmailType(), $email);
@@ -111,6 +152,14 @@ class EmailController extends Controller
         ));
     }
 
+    /**
+     * Supprime une adresse e-mail
+     * Redirige vers la fiche de la personne ou de l'employé.
+     *
+     * @param $id
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id, Email $email)
     {
         $em = $this->getDoctrine()->getManager();

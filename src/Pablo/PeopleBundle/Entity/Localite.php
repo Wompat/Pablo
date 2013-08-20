@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Localite
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idlocalite", type="integer")
@@ -23,6 +31,7 @@ class Localite
     private $id;
 
     /**
+     * Nom
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=80)
@@ -30,6 +39,7 @@ class Localite
     private $nom;
 
     /**
+     * Code postal
      * @var string
      *
      * @ORM\Column(name="codepostal", type="string", length=6)
@@ -37,6 +47,7 @@ class Localite
     private $codepostal;
 
     /**
+     * Province
      * @var string
      *
      * @ORM\Column(name="province", type="string", length=80, nullable=true)
@@ -44,6 +55,7 @@ class Localite
     private $province;
 
     /**
+     * Pays
      * @var \Pablo\PeopleBundle\Entity\Pays
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Pays")

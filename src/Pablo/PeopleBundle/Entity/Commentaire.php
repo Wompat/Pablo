@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Commentaire
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idcommentaire", type="integer")
@@ -25,6 +33,7 @@ class Commentaire
     private $id;
 
     /**
+     * Contenu
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
@@ -35,6 +44,7 @@ class Commentaire
     private $contenu;
 
     /**
+     * Date de création
      * @var \DateTime
      *
      * @ORM\Column(name="datecreation", type="datetime")
@@ -42,6 +52,7 @@ class Commentaire
     private $datecreation;
 
     /**
+     * Date de la dernière modification
      * @var \DateTime
      *
      * @ORM\Column(name="datemodification", type="datetime")
@@ -49,6 +60,7 @@ class Commentaire
     private $datemodification;
 
     /**
+     * Personne
      * @var \Pablo\PeopleBundle\Entity\Personne
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="commentaires")
@@ -57,6 +69,7 @@ class Commentaire
     private $personne;
 
     /**
+     * Utilisateur
      * @var \Pablo\UserBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="Pablo\UserBundle\Entity\User")
@@ -64,6 +77,9 @@ class Commentaire
      */
     private $user;
 
+    /**
+     * Constructeur : crée les instances de la classe ArrayCollection.
+     */
     public function __construct()
     {
         $this->datecreation = new \DateTime();
@@ -71,6 +87,8 @@ class Commentaire
     }
 
     /**
+     * Méthode appelée par Doctrine avant de mettre à jour l'entité
+     * Enregistre la date et l'heure courantes dans le champ datemodification
      * @ORM\PreUpdate
      */
     public function setModification() {

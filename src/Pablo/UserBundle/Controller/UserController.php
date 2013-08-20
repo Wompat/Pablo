@@ -1,5 +1,13 @@
 <?php
 
+
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -7,8 +15,20 @@ use Pablo\PeopleBundle\Entity\Employe;
 use Pablo\UserBundle\Entity\User;
 use Pablo\UserBundle\Form\UserType;
 
+/**
+ * Class UserController
+ * @package Pablo\UserBundle\Controller
+ */
 class UserController extends Controller
 {
+    /**
+     * Affiche le formulaire de création d'un nouvel utilisateur
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \InvalidArgumentException
+     */
     public function addAction($id, Employe $employe)
     {
         if (null !== $employe->getUser()) {
@@ -26,6 +46,14 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre le nouvel utilisateur
+     * Redirige vers la fiche de l'employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction($id, Employe $employe)
     {
         $user = new User();
@@ -60,6 +88,13 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Affiche le formulaire d'édition d'un utilisateur existant
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function editAction($id, Employe $employe)
     {
         $user = $employe->getUser();
@@ -72,6 +107,14 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Valide le formulaire et enregistre l'utilisateur modifiée
+     * Redirige vers la fiche de l'employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction($id, Employe $employe)
     {
         $user = $employe->getUser();
@@ -104,6 +147,13 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Active ou désactive un utilisateur
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function enableAction($id, Employe $employe)
     {
         $user = $employe->getUser();
@@ -123,6 +173,14 @@ class UserController extends Controller
         return $this->redirect($url);
     }
 
+    /**
+     * Supprime l'utilisateur
+     * Redirige vers la fiche de l'employé
+     *
+     * @param $id
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id, Employe $employe)
     {
         $user = $employe->getUser();

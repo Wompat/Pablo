@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Pays
 {
     /**
+     * Clé primaire : code 2-lettres du pays
      * @var string
      *
      * @ORM\Column(name="codepays", type="string", length=2)
@@ -22,6 +30,7 @@ class Pays
     private $code;
 
     /**
+     * Nom
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=120)
@@ -29,6 +38,7 @@ class Pays
     private $nom;
 
     /**
+     * Code du pays attribué par la Communauté française
      * @var integer
      *
      * @ORM\Column(name="codefwb", type="integer")
@@ -36,6 +46,7 @@ class Pays
     private $codeFWB;
 
     /**
+     * Continent
      * @var \Pablo\PeopleBundle\Entity\Pays
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Pays")

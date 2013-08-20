@@ -1,12 +1,28 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * Class SecurityController
+ * @package Pablo\UserBundle\Controller
+ */
 class SecurityController extends Controller
 {
+    /**
+     * Affiche et valide le formulaire d'authentification
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction()
     {
         $request = $this->getRequest();
