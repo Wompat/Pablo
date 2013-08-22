@@ -1,19 +1,40 @@
 <?php
 
-namespace Pablo\PeopleBundle\Tests\Unit;
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
 
+namespace Pablo\PeopleBundle\Tests\Unit;
 
 use Pablo\PeopleBundle\Entity\Personne;
 
+/**
+ * Class PersonneTest
+ * @package Pablo\PeopleBundle\Tests\Unit
+ */
 class PersonneTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Pablo\PeopleBundle\Entity\Personne
+     */
     private $personne;
 
+    /**
+     * Crée une nouvelle instance de la classe Personne
+     */
     public function setUp()
     {
         $this->personne = new Personne();
     }
 
+    /**
+     * Test getNom :
+     * 1. Vérifie que toutes les lettres accentuées sont mises en majuscules
+     *
+     */
     public function testGetNom()
     {
         // 1. Vérifie que les "a" accentués sont remplacés par A.

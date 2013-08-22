@@ -127,8 +127,10 @@ class Group extends Role
      */
     public function addUser(User $users)
     {
-        $this->users[] = $users;
-    
+        if(!$this->users->contains($users)) {
+            $this->users->add($users);
+        }
+
         return $this;
     }
 

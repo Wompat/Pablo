@@ -139,7 +139,7 @@ class EmailController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', array(
                 'type' => 'success',
-                'content' => 'L\'adresse e-mail a été modifiée.',
+                'content' => 'L\'adresse e-mail a été modifiée !',
             ));
 
             return $this->redirect($url);
@@ -168,7 +168,7 @@ class EmailController extends Controller
 
         $this->get('session')->getFlashBag()->add('notice', array(
             'type' => null,
-            'content' => 'L\'adresse e-mail a été supprimée.',
+            'content' => 'L\'adresse e-mail a été supprimée !',
         ));
 
         if ($email->getPersonne() instanceof Employe) {

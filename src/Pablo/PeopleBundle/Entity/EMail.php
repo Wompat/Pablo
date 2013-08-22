@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Email
 {
     /**
+     * Clé primaire auto-incrémentée gérée par Doctrine
      * @var integer
      *
      * @ORM\Column(name="idemail", type="integer")
@@ -24,6 +32,7 @@ class Email
     private $id;
 
     /**
+     * Adresse électronique
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=60)
@@ -33,6 +42,7 @@ class Email
     private $adresse;
 
     /**
+     * Infos complémentaires
      * @var string
      *
      * @ORM\Column(name="info", type="string", length=24, nullable=true)
@@ -40,6 +50,7 @@ class Email
     private $info;
 
     /**
+     * Personne
      * @var \Pablo\PeopleBundle\Entity\Personne
      *
      * @ORM\ManyToOne(targetEntity="Pablo\PeopleBundle\Entity\Personne", inversedBy="emails")

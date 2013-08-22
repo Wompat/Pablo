@@ -1,18 +1,41 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class SecurityControllerTest
+ * @package Pablo\UserBundle\Tests\Controller
+ */
 class SecurityControllerTest extends WebTestCase
 {
+    /**
+     * Client
+     */
     private $client = null;
 
+    /**
+     * Initialise le client
+     */
     public function setUp()
     {
         $this->client = static::createClient();
     }
 
+    /**
+     * Teste le formulaire d'authentification :
+     * 1. Redirection vers le formulaire
+     * 2. Affichage d'un message d'erreur en cas d'échec de l'authentification
+     * 3. Redirection vers la page d'accueil en cas d'authentification réussie
+     */
     public function testLoginAction()
     {
         // -------------------------------------------------------------------------------------------------------------
@@ -48,9 +71,12 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers [welcome page]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bonjour Pablo !")')->count(), 'Devrait rediriger vers [welcome page]');
     }
 
+    /**
+     * Teste la déconnexion de l'utilisateur et la redirection vers le formulaire d'authentification.
+     */
     public function testLogoutAction()
     {
         // -------------------------------------------------------------------------------------------------------------

@@ -1,19 +1,42 @@
 <?php
 
+/**
+ * Ce fichier est une partie de l'application Pablo.
+ *
+ * @author Thomas Decraux <thomasdecraux@gmail.com>
+ * @version <0.1.0>
+ */
+
 namespace Pablo\UserBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class ProfileControllerTest
+ * @package Pablo\UserBundle\Tests\Controller
+ */
 class ProfileControllerTest extends WebTestCase
 {
+    /**
+     * Client
+     */
     private $client = null;
 
+    /**
+     * Initialise le client
+     * Authentifie l'utilisateur "root"
+     */
     public function setUp()
     {
         $this->client = static::createClient();
         $this->logIn();
     }
 
+    /**
+     * Teste le formulaire d'édition du profil :
+     * 1. Vérifie que le formulaire est affiché.
+     * 2. Vérifie que le bouton [annuler] renvoie vers la page d'accueil
+     */
     public function testEditAction()
     {
         // -------------------------------------------------------------------------------------------------------------
@@ -32,10 +55,14 @@ class ProfileControllerTest extends WebTestCase
         $this->client->request('GET', '/profile/edit');
         $crawler = $this->client->click($cancelLink->link());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers [welcome page]');
-        $this->assertEquals($username, $crawler->filter('p strong')->text(), 'Le nom d\'utilisateur devrait être [' . $username . ']');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bonjour Pablo !")')->count(), 'Devrait rediriger vers [welcome page]');
     }
 
+    /**
+     * Teste la mise à jour du profil de l'utilisateur :
+     * 1. Vérifie que la redirection vers la page d'accueil
+     * 2. Vérifie la présence d'un message flash.
+     */
     public function testUpdateAction()
     {
         $crawler = $this->client->request('GET', '/profile/edit');
@@ -54,11 +81,13 @@ class ProfileControllerTest extends WebTestCase
 
         $crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Devrait avoir le statut [200]');
-        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bienvenue !")')->count(), 'Devrait rediriger vers [welcome page]');
+        $this->assertEquals(1, $crawler->filter('div.page-header h2:contains("Bonjour Pablo !")')->count(), 'Devrait rediriger vers [welcome page]');
         $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Le profil a été modifié.")')->count(), 'Devrait afficher [profil modifié]');
-        $this->assertEquals('root', $crawler->filter('p strong')->text(), 'Le nom d\'utilisateur devrait être [root]');
     }
 
+    /**
+     * Authentifie l'utilisateur "root".
+     */
     private function logIn()
     {
         $crawler = $this->client->request('GET', '/login');
