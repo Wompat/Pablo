@@ -37,19 +37,20 @@ Project setup
 
 ### Quick start
 - décompresser l'archive à la racine du serveur web
-- vérifier les exigences localhost/Pablo/web/config.php
+- vérifier les exigences :
+  - [localhost/Pablo/web/config.php][1]
 - accéder à l'application en mode dev :
-  - http://localhost/Pablo/web/app_dev.php
+  - [http://localhost/Pablo/web/app_dev.php][2]
 - accéder à l'application en mode prod :
   - supprimer le contenu du répertoire Pablo/app/cache
-  - http://localhost/Pablo/web/app.php
+  - [http://localhost/Pablo/web/app.php][3]
 
 Development tools
 -----------------
 
 ### Testing
 
-Pour pouvoir lancer les suites de tests, [phpunit][1] doit être installé sur votre système.
+Pour pouvoir lancer les suites de tests, [phpunit][4] doit être installé sur votre système.
 
 Lancer toute la suite de test
 
@@ -58,7 +59,7 @@ $ phpunit -c app
 ```
 Lancer les tests dans un seul répertoire
 ```sh
-$ phpunit -c app src/core/Claroline/CoreBundle
+$ phpunit -c app src/Pablo/UserBundle
 ```
 
 Documentation
@@ -66,8 +67,10 @@ Documentation
 
 Pour la documention de développement : http://localhost/Pablo/doc
 
-Pour générer la documentation, [phpdocumentor][2] doit être installé sur votre système.
+Pour générer la documentation, [phpdocumentor][5] doit être installé sur votre système.
 
-
-[1]: http://www.phpunit.de/manual/current/en/index.html
-[2]: http://www.phpdoc.org/docs/latest/for-users/installation.html
+[1]: http://localhost/Pablo/web/config.php
+[2]: http://localhost/Pablo/web/app_dev.php
+[3]: http://localhost/Pablo/web/app.php
+[4]: http://www.phpunit.de/manual/current/en/index.html
+[5]: http://www.phpdoc.org/docs/latest/for-users/installation.html
