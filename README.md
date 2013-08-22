@@ -62,8 +62,8 @@ Lancer les tests dans un seul répertoire :
 $ phpunit -c app src/Pablo/UserBundle
 ```
 
-Documentation
--------------
+### Documentation
+
 ***Warning***: la documentation n'est pas disponible depuis le dépôt GitHub !
 
 Pour la documention de développement :[http://localhost/Pablo/doc][5]
