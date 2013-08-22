@@ -38,7 +38,7 @@ Project setup
 ### Quick start
 - décompresser l'archive à la racine du serveur web
 - vérifier les exigences :
-  - [localhost/Pablo/web/config.php][1]
+  - [http://localhost/Pablo/web/config.php][1]
 - accéder à l'application en mode dev :
   - [http://localhost/Pablo/web/app_dev.php][2]
 - accéder à l'application en mode prod :
@@ -52,25 +52,29 @@ Development tools
 
 Pour pouvoir lancer les suites de tests, [phpunit][4] doit être installé sur votre système.
 
-Lancer toute la suite de test
+Lancer toute la suite de test :
 
 ```sh
 $ phpunit -c app
 ```
-Lancer les tests dans un seul répertoire
+Lancer les tests dans un seul répertoire :
 ```sh
 $ phpunit -c app src/Pablo/UserBundle
 ```
 
 Documentation
 -------------
+***Warning***: la documentation n'est pas disponible depuis le dépôt GitHub !
 
-Pour la documention de développement : http://localhost/Pablo/doc
-
+Pour la documention de développement :[http://localhost/Pablo/doc][5]
 Pour générer la documentation, [phpdocumentor][5] doit être installé sur votre système.
 
+```sh
+$ phpdoc
+```
 [1]: http://localhost/Pablo/web/config.php
 [2]: http://localhost/Pablo/web/app_dev.php
 [3]: http://localhost/Pablo/web/app.php
 [4]: http://www.phpunit.de/manual/current/en/index.html
-[5]: http://www.phpdoc.org/docs/latest/for-users/installation.html
+[5]: http://localhost/Pablo/doc
+[6]: http://www.phpdoc.org/docs/latest/for-users/installation.html
