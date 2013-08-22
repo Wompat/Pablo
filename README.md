@@ -67,6 +67,7 @@ Documentation
 ***Warning***: la documentation n'est pas disponible depuis le dépôt GitHub !
 
 Pour la documention de développement :[http://localhost/Pablo/doc][5]
+
 Pour générer la documentation, [phpdocumentor][5] doit être installé sur votre système.
 
 ```sh
