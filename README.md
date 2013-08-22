@@ -17,11 +17,11 @@ Project setup
 - PHP >= 5.3.3
 - JSON doit être activé
 - ctype doit être activé
-- le paramètre date.timezone doit être configuré dans votre PHP.ini
+- le paramètre date.timezone doit être configuré dans le fichier PHP.ini
 - pour utiliser Doctrine, PDO doit être installé. Le driver PDO doit être installé pour le serveur de bases de données que vous voulez utiliser.
 
 ### Optional
-- le PHP-XML module doit être installé
+- le module PHP-XML doit être installé
 - Au moins la version 2.6.21 de libxml
 - PHP tokenizer doit être activé
 - les fonctions mbstring functions doivent être activées
@@ -29,14 +29,15 @@ Project setup
 - POSIX doit être activé (seulement sur les systèmes *nix)
 - Intl doit être installé avec ICU 4+
 - APC 3.0.17+ (ou un autre cache d'opcode cache needs doit être installé)
-- paramètres de PHP.ini recommandés
+- paramètres du fichier PHP.ini recommandés
   - short_open_tag = Off
   - magic_quotes_gpc = Off
   - register_globals = Off
   - session.auto_start = Off
 
 ### Quick start
-- décompresser l'archive à la racine du serveur web
+- décompresser l'archive à la racine du serveur web (DocumentRoot)
+- créer la base de données à partir du script Pablo.sql
 - vérifier les exigences :
   - [http://localhost/Pablo/web/config.php][1]
 - accéder à l'application en mode dev :
@@ -50,7 +51,7 @@ Development tools
 
 ### Testing
 
-Pour pouvoir lancer les suites de tests, [phpunit][4] doit être installé sur votre système.
+Pour pouvoir lancer les suites de tests, [phpunit][4] doit être installé sur le système.
 
 Lancer toute la suite de test :
 
@@ -68,7 +69,7 @@ $ phpunit -c app src/Pablo/UserBundle
 
 Pour la documention de développement :[http://localhost/Pablo/doc][5]
 
-Pour générer la documentation, [phpdocumentor][5] doit être installé sur votre système.
+Pour générer la documentation, [phpdocumentor][5] doit être installé sur le système.
 
 ```sh
 $ phpdoc
