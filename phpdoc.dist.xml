@@ -24,7 +24,7 @@
         <target>doc</target>
     </transformer>
     <logging>
-        <level>err</level>
+        <level>emerg</level>
         <paths>
             <default>doc/logs/phpdoc-{DATE}.log</default>
             <errors>doc/logs/phpdoc-{DATE}.errors.log</errors>

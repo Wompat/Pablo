@@ -17,10 +17,27 @@ use Pablo\UserBundle\Entity\Group;
  */
 class GroupTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * User
+     * @var \Pablo\UserBundle\Entity\User
+     */
     private $user;
+
+    /**
+     * Root
+     * @var \Pablo\UserBundle\Entity\User
+     */
     private $root;
+
+    /**
+     * Groupe
+     * @var \Pablo\UserBundle\Entity\Group
+     */
     private $group;
 
+    /**
+     * Set Up : initialise les instances des classes User et Group partagées par les différents tests.
+     */
     public function setUp()
     {
         $this->user = new User();
@@ -43,6 +60,9 @@ class GroupTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('name', $actualName, 'Le nom du groupe devrait être [name]');
     }
 
+    /**
+     * test getRole : vérifie que le groupe correspond au rôle [ROLE_TEST]
+     */
     public function testGetRole()
     {
         $actualRole = $this->group->getRole();
