@@ -24,7 +24,7 @@ Project setup
 - le module PHP-XML doit être installé
 - Au moins la version 2.6.21 de libxml
 - PHP tokenizer doit être activé
-- les fonctions mbstring functions doivent être activées
+- les fonctions mbstring doivent être activées
 - iconv doit être activé
 - POSIX doit être activé (seulement sur les systèmes *nix)
 - Intl doit être installé avec ICU 4+
@@ -51,7 +51,7 @@ Development tools
 
 ### Testing
 
-Pour pouvoir lancer les suites de tests, [phpunit][4] doit être installé sur le système.
+Pour pouvoir lancer les suites de tests, [PHPUnit][4] doit être installé sur le système.
 
 Lancer toute la suite de test :
 
@@ -69,7 +69,7 @@ $ phpunit -c app src/Pablo/UserBundle
 
 Pour la documention de développement :[http://localhost/Pablo/doc][5]
 
-Pour générer la documentation, [phpdocumentor][5] doit être installé sur le système.
+Pour générer la documentation, [phpDocumentor][6] doit être installé sur le système.
 
 ```sh
 $ phpdoc
