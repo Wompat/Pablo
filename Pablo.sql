@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `pablo`;
 CREATE DATABASE  IF NOT EXISTS `pablo` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `pablo`;
 -- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)

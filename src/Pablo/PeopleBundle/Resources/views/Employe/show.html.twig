@@ -90,7 +90,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             onglets('#adresses');
-            confirmation('a.btn-danger');
+            confirmation($('a[class*="danger"]'));
         })
     </script>
 {% endblock javascripts %}

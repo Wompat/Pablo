@@ -49,7 +49,6 @@ function confirmation (source) {
         $('.modal').modal('show');
 
         var url = source.attr('href');
-        console.log(url);
         $('div.modal-footer button.btn-primary').click(function() {
             $(location).attr('href', url);
         })
