@@ -14,13 +14,13 @@
                         <a class="btn btn-mini pull-right" href="{{ path('pablo_employe_edit', {'id': personne.id}) }}"><i class="icon-pencil"></i></a>
                     </dd>
                     <dt>Nationalit&eacute;</dt>
-                    <dd>{{ (personne.pays) ? personne.pays.nom }}</dd>
+                    <dd>{{ (personne.pays) ? personne.pays.nom : 'NC' }}</dd>
                     <dt>Sexe</dt>
                     <dd>{{ personne.sexe }}</dd>
                     <dt>Date de naissance</dt>
-                    <dd>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') }}</dd>
+                    <dd>{{ (personne.datenaissance) ? personne.datenaissance|date('d/m/Y') : 'NC' }}</dd>
                     <dt>Lieu de naissance</dt>
-                    <dd>{{ personne.lieunaissance }}</dd>
+                    <dd>{{ (personne.lieunaissance) ? personne.lieunaissance : 'NC' }}</dd>
                     <dt>Matricule</dt>
                     <dd>{{ personne.matricule }}</dd>
                 </dl>
